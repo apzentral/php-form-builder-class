@@ -2,7 +2,7 @@
 namespace PFBC\View;
 
 class Vertical extends \PFBC\View {
-	public function render() {
+	public function render($options = array()) {
 		echo '<form', $this->_form->getAttributes(), '>';
 		$this->_form->getErrorView()->render();
 
@@ -38,8 +38,8 @@ class Vertical extends \PFBC\View {
         if(!empty($label)) {
 			if($element->isRequired())
 				echo '<span class="required">* </span>';
-			echo $label;	
+			echo $label;
         }
-		echo '</label>'; 
+		echo '</label>';
     }
-}	
+}

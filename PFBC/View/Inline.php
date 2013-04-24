@@ -4,7 +4,7 @@ namespace PFBC\View;
 class Inline extends \PFBC\View {
 	protected $class = "form-inline";
 
-	public function render() {
+	public function render($options = array()) {
 		$this->_form->appendAttribute("class", $this->class);
 
 		echo '<form', $this->_form->getAttributes(), '>';
@@ -30,8 +30,8 @@ class Inline extends \PFBC\View {
 			echo '<label for="', $element->getAttribute("id"), '">';
 			if($element->isRequired())
 				echo '<span class="required">* </span>';
-			echo $label;	
-			echo '</label>'; 
+			echo $label;
+			echo '</label>';
         }
     }
-}	
+}
