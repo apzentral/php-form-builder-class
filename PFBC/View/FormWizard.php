@@ -3,6 +3,7 @@ namespace PFBC\View;
 
 class FormWizard extends \PFBC\View {
 	protected $class = "form-horizontal";
+	public $js = "rhinoslider";
 
 	public function render($options = array()) {
 

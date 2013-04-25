@@ -19,7 +19,7 @@ abstract class Base {
             $method_reference = array();
             foreach($available as $method)
                 $method_reference[strtolower($method)] = $method;
-			
+
             foreach($properties as $property => $value) {
 				$property = strtolower($property);
 				/*Properties beginning with "_" cannot be set directly.*/
@@ -44,6 +44,10 @@ abstract class Base {
 	/*This method can be used to view a class' state.*/
 	public function debug() {
 		echo "<pre>", print_r($this, true), "</pre>";
+	}
+
+	public function debug_data($data) {
+		echo "<pre>", print_r($data, true), "</pre>";
 	}
 
 	/*This method prevents double/single quotes in html attributes from breaking the markup.*/
@@ -74,8 +78,8 @@ abstract class Base {
 				$str .= ' ' . $attribute;
 				if($this->_attributes[$attribute] !== "")
 					$str .= '="' . $this->filter($this->_attributes[$attribute]) . '"';
-			}	
-		}	
+			}
+		}
         return $str;
     }
 
@@ -83,7 +87,7 @@ abstract class Base {
 		if(isset($this->_attributes)) {
 			if(!empty($this->_attributes[$attribute]))
 				$this->_attributes[$attribute] .= " " . $value;
-			else	
+			else
 				$this->_attributes[$attribute] = $value;
 		}
 	}

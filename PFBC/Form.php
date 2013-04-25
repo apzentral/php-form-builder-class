@@ -393,11 +393,30 @@ JS;
 			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js"
 		);
 
+		//$this->debug($this->_elements);
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getJSFiles();
 			if(is_array($elementUrls))
 				$urls = array_merge($urls, $elementUrls);
 		}
+
+		// Check the view for JS folder
+		//$this->debug_data($this->view->js);
+		if(isset($this->view->js))
+		{
+			switch($this->view->js)
+			{
+				case 'rhinoslider':
+					$elementUrls = array(
+						$this->resourcesPath . "/rhinoslider/js/rhinoslider-1.05.min.js",
+						$this->resourcesPath . "/rhinoslider/js/mousewheel.js",
+						$this->resourcesPath . "/rhinoslider/js/easing.js"
+					);
+					break;
+			}
+			$urls = array_merge($urls, $elementUrls);
+		}
+		//$this->debug_data($urls);
 
 		/*This section prevents duplicate js files from being loaded.*/
 		if(!empty($urls)) {
