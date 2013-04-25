@@ -2,7 +2,7 @@
 namespace PFBC\View;
 
 class Vertical extends \PFBC\View {
-	public function render($options = array()) {
+	public function render() {
 		echo '<form', $this->_form->getAttributes(), '>';
 		$this->_form->getErrorView()->render();
 

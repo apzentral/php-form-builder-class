@@ -4,18 +4,13 @@ namespace PFBC\View;
 class SideBySide extends \PFBC\View {
 	protected $class = "form-horizontal";
 
-	public function render($options = array()) {
+	public function render() {
 
 		// Adding Default Parameter
 		$params = array(
 			'fieldset' => TRUE,
 			'form-actions' => FALSE
 		);
-
-		foreach($options as $k => $v)
-		{
-			$params[$k] = $v;
-		}
 
 		$this->_form->appendAttribute("class", $this->class);
 

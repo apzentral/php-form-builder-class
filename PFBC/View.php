@@ -3,6 +3,7 @@ namespace PFBC;
 
 abstract class View extends Base {
 	protected $_form;
+	protected $params;
 
 	public function __construct(array $properties = null) {
 		$this->configure($properties);
@@ -13,14 +14,14 @@ abstract class View extends Base {
 	}
 
 	/*jQuery is used to apply css entries to the last element.*/
-	public function jQueryDocumentReady() {}	
+	public function jQueryDocumentReady() {}
 
 	public function render() {}
 
 	public function renderCSS() {
 		echo 'label span.required { color: #B94A48; }';
 		echo 'span.help-inline, span.help-block { color: #888; font-size: .9em; font-style: italic; }';
-	}	
+	}
 
 	protected function renderDescriptions($element) {
 		$shortDesc = $element->getShortDesc();
@@ -35,4 +36,12 @@ abstract class View extends Base {
 	public function renderJS() {}
 
 	protected function renderLabel(Element $element) {}
+
+	public function setParams($option = array())
+	{
+		foreach($option as $k => $v)
+		{
+			$this->params[$k] = $v;
+		}
+	}
 }

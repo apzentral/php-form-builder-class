@@ -1,0 +1,101 @@
+.slider {
+  padding: 0;
+  margin: 20px 0;
+  width: auto;
+  overflow: hidden; }
+
+/*==== Override Rhino =====*/
+.rhino-btn, .form-submit {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  -moz-user-select: none;
+  background: none repeat scroll 0 0 #6f95dc;
+  border-radius: 5px 5px 5px 5px;
+  color: #FFFFFF;
+  display: block;
+  margin: 0 20px 20px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+  height: 20px;
+  z-index: 10;
+  font-weight: bold;
+  text-decoration: none;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#94b9e9), to(#4870d2));
+  background-image: -moz-linear-gradient(#94b9e9, #4870d2);
+  background-image: -webkit-linear-gradient(#94b9e9, #4870d2);
+  background-image: -o-linear-gradient(#94b9e9, #4870d2);
+  filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#94b9e9, endColorstr=#4870d2)";
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#94b9e9, endColorstr=#4870d2)";
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  text-indent: 0; }
+
+.rhino-bullets li a.rhino-bullet {
+  display: block;
+  width: 100%;
+  height: 70px;
+  cursor: pointer;
+  background: none repeat scroll 0 0 #f8fdff;
+  border: 1px solid #eeeeee;
+  font-size: 10px;
+  text-align: center;
+  padding: 10px 0 5px 0;
+  color: #000;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 13px; }
+  .rhino-bullets li a.rhino-bullet:hover {
+    cursor: default; }
+  .rhino-bullets li a.rhino-bullet:focus {
+    cursor: default;
+    background-color: #FFF; }
+
+.rhino-bullets {
+  position: relative;
+  z-index: 10;
+  background: #fff;
+  padding: 0;
+  float: left;
+  left: 0;
+  margin: 0; }
+  .rhino-bullets .title {
+    margin: 0;
+    font-size: 11px;
+    font-weight: bold; }
+
+.rhino-bullets:before, .rhino-bullets:after {
+  position: absolute;
+  display: block;
+  left: 0;
+  content: ' ';
+  width: auto;
+  height: 26px;
+  background: none; }
+
+.rhino-bullets li {
+  float: left;
+  display: inline;
+  margin: 0; }
+
+.rhino-bullets li a.rhino-bullet.rhino-active-bullet {
+  color: #000;
+  background: #fff;
+  border-bottom: none; }
+
+.rhino-next:hover, .rhino-prev:hover {
+  color: #FFF;
+  background-position: inherit; }
+
+.step-error {
+  background: #f5715f !important;
+  color: white !important; }
+
+.step-success {
+  background: #72e487 !important;
+  color: white !important; }

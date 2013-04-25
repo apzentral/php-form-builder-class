@@ -4,7 +4,7 @@ namespace PFBC\View;
 class RightLabel extends \PFBC\View {
 	protected $class = "form-horizontal";
 
-	public function render($options = array()) {
+	public function render() {
 		$this->_form->appendAttribute("class", $this->class);
 
 		echo '<form', $this->_form->getAttributes(), '><fieldset>';

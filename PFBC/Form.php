@@ -255,8 +255,10 @@ class Form extends Base {
 		//For usability, the prevent array is treated case insensitively.
 		$this->prevent = array_map("strtolower", $this->prevent);
 
+		// Load View Options Parameters
+		$this->view->setParams($options);
 		$this->renderCSS();
-		$this->view->render($options);
+		$this->view->render();
 		$this->renderJS();
 
 		/*The form's instance is serialized and saved in a session variable for use during validation.*/
@@ -307,6 +309,7 @@ class Form extends Base {
 				case 'rhinoslider':
 					$elementUrls = array(
 						$this->resourcesPath . "/rhinoslider/css/rhinoslider-1.05.css",
+						$this->resourcesPath . "/rhinoslider/css/rhinoslider-override.css",
 					);
 					break;
 			}

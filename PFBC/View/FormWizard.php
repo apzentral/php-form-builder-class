@@ -5,22 +5,29 @@ class FormWizard extends \PFBC\View {
 	protected $class = "form-horizontal";
 	public $js = "rhinoslider";
 
-	public function render($options = array()) {
+	function __construct()
+	{
+		parent::__construct();
 
 		// Adding Default Parameter
-		$params = array(
+		$this->params = array(
+			'base_url' => './',
 			'fieldset' => TRUE,
-			'form-actions' => FALSE
+			'form-actions' => FALSE,
+			'slides-name' => array(),
+			'slides-img' => array(),
+			'css-properties' => array(
+				'form-height' => '500px',
+				'form-width' => '725px',
+			)
 		);
+	}
 
-		foreach($options as $k => $v)
-		{
-			$params[$k] = $v;
-		}
+	public function render() {
 
 		$this->_form->appendAttribute("class", $this->class);
 
-		if( $params['fieldset'] )
+		if( $this->params['fieldset'] )
 		{
 			echo '<form', $this->_form->getAttributes(), '><fieldset>';
 		}
@@ -44,7 +51,7 @@ class FormWizard extends \PFBC\View {
 				$element->render();
             elseif($element instanceof \PFBC\Element\Button) {
 
-				if($params['form-actions'])
+				if($this->params['form-actions'])
 				{
 					if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
 						echo '<div class="form-actions">';
@@ -54,7 +61,7 @@ class FormWizard extends \PFBC\View {
 
 				$element->render();
 
-				if($params['form-actions'])
+				if($this->params['form-actions'])
 				{
 					if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
 						echo '</div>';
@@ -69,7 +76,7 @@ class FormWizard extends \PFBC\View {
 		// Close the Rhino Form Div
 		echo '</div>';
 
-		if( $params['fieldset'] )
+		if( $this->params['fieldset'] )
 		{
 			echo '</fieldset></form>';
 		}
@@ -89,4 +96,114 @@ class FormWizard extends \PFBC\View {
 			echo $label, '</label>';
         }
     }
+
+	// Set Up Init Variables
+	public function renderJS()
+	{
+		$html = 'var form_wizard = {';
+		$object_array = array();
+		if( isset($this->params['slides-name'][0]))
+		{
+			$html_tmp = 'name:[';
+			for($i =0, $j = count($this->params['slides-name']); $i < $j; $i++)
+			{
+				$html_tmp .= '"'.$this->params['slides-name'][$i].'"';
+				if($i < ($j-1))
+				{
+					$html_tmp .= ',';
+				}
+			}
+			$html_tmp .= ']';
+
+			array_push($object_array, $html_tmp);
+		}
+
+		if( isset($this->params['slides-img'][0]))
+		{
+			$html_tmp = 'img:[';
+			for($i =0, $j = count($this->params['slides-img']); $i < $j; $i++)
+			{
+				$html_tmp .= '"'.$this->params['slides-img'][$i].'"';
+				if($i < ($j-1))
+				{
+					$html_tmp .= ',';
+				}
+			}
+			$html_tmp .= ']';
+
+			array_push($object_array, $html_tmp);
+		}
+
+		$html .= implode(',', $object_array);
+		$html .= "};\n";
+
+		echo $html;
+	}
+
+
+	// Set Up the Rhino Slider Wizard
+	public function jQueryDocumentReady()
+	{
+		// Setup the FormWizard
+		echo <<< JS
+$('.slider').rhinoslider({
+	controlsMousewheel: false,
+	controlsPlayPause: false,
+	controlsKeyboard: false,
+	cycled: false,
+	showBullets: 'always',
+	showControls: 'always',
+	slidePrevDirection: 'toRight',
+	slideNextDirection: 'toLeft',
+	prevText: 'Back',
+	nextText: 'Next',
+	bulletsClick: false
+});
+
+// Setup the Steps
+$('.rhino-bullet').each(function(index){
+	var link_text = $(this).html();
+	var description = $("#rhino-item"+(link_text-1)).attr("data");
+	$(this).html('<p><img src="{$this->params['base_url']}/assets/img/pfbc/view/formwizard/'+form_wizard.img[index]+'"></p><p class="title">'+form_wizard.name[index]+'</p></a>');
+});
+
+// Hide Button
+$(".rhino-prev").hide();
+$(".rhino-next").hide();
+
+JS;
+	}
+
+	// Render CSS
+	public function renderCSS()
+	{
+		parent::renderCSS();
+
+		$bullets_top =  (- 10) - (int)$this->params['css-properties']['form-height'];
+		$bullets_top .= 'px';
+
+		$total_name = count($this->params['slides-name']);
+		if( $total_name > 0)
+		{
+			$bullet_width = (int)$this->params['css-properties']['form-width'] / (float)$total_name;
+			$bullet_width .= 'px';
+		}
+		else
+		{
+			$bullet_width = '100px';
+		}
+
+		echo "\n".
+".slider {
+	height: {$this->params['css-properties']['form-height']}
+}
+.rhino-bullets {
+	top: $bullets_top
+}
+.rhino-bullets li {
+	width: $bullet_width
+}
+";
+	}
+
 }
