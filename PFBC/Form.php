@@ -300,6 +300,19 @@ class Form extends Base {
 				$urls = array_merge($urls, $elementUrls);
 		}
 
+		if(isset($this->view->js))
+		{
+			switch($this->view->js)
+			{
+				case 'rhinoslider':
+					$elementUrls = array(
+						$this->resourcesPath . "/rhinoslider/css/rhinoslider-1.05.css",
+					);
+					break;
+			}
+			$urls = array_merge($urls, $elementUrls);
+		}
+
 		/*This section prevents duplicate css files from being loaded.*/
 		if(!empty($urls)) {
 			$urls = array_values(array_unique($urls));
