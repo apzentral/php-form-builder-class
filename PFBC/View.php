@@ -41,7 +41,17 @@ abstract class View extends Base {
 	{
 		foreach($option as $k => $v)
 		{
-			$this->params[$k] = $v;
+			if(is_array($v))
+			{
+				foreach($v as $k2 => $v2)
+				{
+					$this->params[$k][$k2] = $v2;
+				}
+			}
+			else
+			{
+				$this->params[$k] = $v;
+			}
 		}
 	}
 }

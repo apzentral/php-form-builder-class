@@ -18,7 +18,7 @@ class FormWizard extends \PFBC\View {
 			'slides-img' => array(),
 			'css-properties' => array(
 				'form-height' => '500px',
-				'form-width' => '725px',
+				'form-width' => '750px',
 			)
 		);
 	}
@@ -67,6 +67,10 @@ class FormWizard extends \PFBC\View {
 						echo '</div>';
 				}
             }
+			elseif($element instanceof \PFBC\Element\CheckboxOnly) {
+				echo '<div class="control-group" id="element_', $element->getAttribute('id'), '">', $element->render(), $this->renderDescriptions($element), '</div>';
+				++$elementCount;
+			}
             else {
 				echo '<div class="control-group" id="element_', $element->getAttribute('id'), '">', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
 				++$elementCount;
@@ -166,10 +170,6 @@ $('.rhino-bullet').each(function(index){
 	var description = $("#rhino-item"+(link_text-1)).attr("data");
 	$(this).html('<p><img src="{$this->params['base_url']}/assets/img/pfbc/view/formwizard/'+form_wizard.img[index]+'"></p><p class="title">'+form_wizard.name[index]+'</p></a>');
 });
-
-// Hide Button
-$(".rhino-prev").hide();
-$(".rhino-next").hide();
 
 JS;
 	}

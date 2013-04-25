@@ -2,7 +2,15 @@
   padding: 0;
   margin: 20px 0;
   width: auto;
-  overflow: hidden; }
+  overflow: hidden;
+  background: #F4F4F4; }
+  .slider fieldset {
+    padding: 16% 0; }
+    .slider fieldset > div {
+      width: 95%;
+      margin: auto; }
+    .slider fieldset h4 {
+      margin: 0 auto 20px; }
 
 /*==== Override Rhino =====*/
 .rhino-btn, .form-submit {
@@ -82,6 +90,8 @@
   float: left;
   display: inline;
   margin: 0; }
+  .rhino-bullets li:first-child {
+    margin-left: 1px; }
 
 .rhino-bullets li a.rhino-bullet.rhino-active-bullet {
   color: #000;

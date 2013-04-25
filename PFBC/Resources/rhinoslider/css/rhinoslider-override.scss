@@ -5,6 +5,20 @@
 	margin: 20px 0;
 	width: auto;
 	overflow: hidden;
+	background: #F4F4F4;
+
+	fieldset {
+		padding: 16% 0;
+
+		> div {
+			width: 95%;
+			margin: auto;
+		}
+
+		h4 {
+			margin: 0 auto 20px;
+		}
+	}
 }
 
 /*==== Override Rhino =====*/
@@ -94,6 +108,9 @@
     float:left;
     display:inline;
     margin:0;
+	&:first-child {
+		margin-left: 1px;
+	}
 }
 
 .rhino-bullets li a.rhino-bullet.rhino-active-bullet {
