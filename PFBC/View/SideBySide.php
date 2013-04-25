@@ -8,7 +8,8 @@ class SideBySide extends \PFBC\View {
 
 		// Adding Default Parameter
 		$params = array(
-			'fieldset' => TRUE
+			'fieldset' => TRUE,
+			'form-actions' => FALSE
 		);
 
 		foreach($options as $k => $v)
@@ -38,15 +39,22 @@ class SideBySide extends \PFBC\View {
 			if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTML)
 				$element->render();
             elseif($element instanceof \PFBC\Element\Button) {
-                if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
-					echo '<div class="form-actions">';
-				else
-					echo ' ';
+
+				if($params['form-actions'])
+				{
+					if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+						echo '<div class="form-actions">';
+					else
+						echo ' ';
+				}
 
 				$element->render();
 
-                if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
-                    echo '</div>';
+				if($params['form-actions'])
+				{
+					if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+						echo '</div>';
+				}
             }
             else {
 				echo '<div class="control-group" id="element_', $element->getAttribute('id'), '">', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
