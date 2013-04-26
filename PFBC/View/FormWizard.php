@@ -72,7 +72,13 @@ class FormWizard extends \PFBC\View {
 				++$elementCount;
 			}
             else {
-				echo '<div class="control-group" id="element_', $element->getAttribute('id'), '">', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
+				$class = $element->getAttribute("container_class");
+				if( ! empty($class))
+				{
+					$class = ' ' . $class;
+				}
+
+				echo '<div class="control-group'.$class.'" id="element_', $element->getAttribute('id'), '">', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
 				++$elementCount;
 			}
 		}
@@ -94,13 +100,7 @@ class FormWizard extends \PFBC\View {
 	protected function renderLabel(\PFBC\Element $element) {
         $label = $element->getLabel();
         if(!empty($label)) {
-			$class = $element->getAttribute("class");
-			if( ! empty($class))
-			{
-				$class = ' ' . $class;
-			}
-			//$this->debug_data($class);
-			echo '<label class="control-label'.$class.'" for="', $element->getAttribute("id"), '">';
+			echo '<label class="control-label" for="', $element->getAttribute("id"), '">';
 			if($element->isRequired())
 				echo '<span class="required">* </span>';
 			echo $label, '</label>';
