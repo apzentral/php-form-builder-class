@@ -410,7 +410,8 @@ JS;
 			$this->resourcesPath . "/jquery.min.js",
 			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js",
 			$this->resourcesPath . "/jquery-placeholder/jquery.placeholder.min.js",
-			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'
+			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js',
+			$this->resourcesPath . "/knockout.mapping/knockout.mapping-2.4.1.js",
 		);
 
 		//$this->debug($this->_elements);
