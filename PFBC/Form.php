@@ -283,6 +283,7 @@ class Form extends Base {
 		$this->renderCSSFiles();
 
 		echo '<style type="text/css">';
+		echo '.placeholder { color: #aaa; }';
 		$this->view->renderCSS();
 		$this->errorView->renderCSS();
 		foreach($this->_elements as $element)
@@ -346,6 +347,7 @@ class Form extends Base {
 		jQuery("#$id").bind("submit", function() {
 			jQuery(this).find("input[type=submit]").attr("disabled", "disabled");
 		});
+		jQuery('input, textarea').placeholder();
 JS;
 
 		/*jQuery is used to set the focus of the form's initial element.*/
@@ -407,7 +409,8 @@ JS;
 		$urls = array(
 			$this->resourcesPath . "/jquery.min.js",
 			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js",
-			$this->resourcesPath . "/jquery-placeholder/jquery.placeholder.min.js"
+			$this->resourcesPath . "/jquery-placeholder/jquery.placeholder.min.js",
+			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'
 		);
 
 		//$this->debug($this->_elements);
