@@ -406,7 +406,8 @@ JS;
 	protected function renderJSFiles() {
 		$urls = array(
 			$this->resourcesPath . "/jquery.min.js",
-			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js"
+			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js",
+			$this->resourcesPath . "/jquery-placeholder/jquery.placeholder.min.js"
 		);
 
 		//$this->debug($this->_elements);
