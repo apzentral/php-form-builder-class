@@ -68,7 +68,7 @@ class FormWizard extends \PFBC\View {
 				}
             }
 			elseif($element instanceof \PFBC\Element\CheckboxOnly) {
-				echo '<div class="control-group" id="element_', $element->getAttribute('id'), '">', $element->render(), $this->renderDescriptions($element), '</div>';
+				echo '<div class="control-group options-only" id="element_', $element->getAttribute('id'), '">', $element->render(), $this->renderDescriptions($element), '</div>';
 				++$elementCount;
 			}
             else {

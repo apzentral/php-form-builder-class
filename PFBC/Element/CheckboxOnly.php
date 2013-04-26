@@ -35,15 +35,45 @@ class CheckboxOnly extends Checkbox {
 
 		$count = 0;
 		$total_options = count($this->options);
+		$options_col = $total_options / $this->columns;
+		$options_left = $total_options % $this->columns;
+		$bootstrap_col = 12 / $this->columns;
+		$count_col = 0;
+		$close_div = FALSE;
+
+		if($options_left > 0)
+		{
+			$options_col++;
+		}
 
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);
+
+			if($count % $options_col === 0 && $count_col < ($bootstrap_col-1))
+			{
+				echo '<div class="span'.$bootstrap_col.'">';
+				echo '<div class="controls">';
+				$count_col++;
+				$close_div = TRUE;
+			}
 
 			echo '<label class="', $labelClass, '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "required")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->_attributes["value"]))
 				echo ' checked="checked"';
 			echo '/> ', $text, ' </label> ';
+
 			++$count;
+
+			if($count % $options_col === 0 && $count_col < $bootstrap_col)
+			{
+				echo '</div></div>';
+				$close_div = FALSE;
+			}
+		}
+
+		if($close_div)
+		{
+			echo '</div></div>';
 		}
 	}
 }
