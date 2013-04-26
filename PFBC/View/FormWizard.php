@@ -72,13 +72,18 @@ class FormWizard extends \PFBC\View {
 				++$elementCount;
 			}
             else {
-				$class = $element->getAttribute("container_class");
+				$class = $element->getAttribute("container_class");	// Adding Class to the container div
+				$data_bind = $element->getAttribute("data-bind");	// Adding data-bind to the container div
 				if( ! empty($class))
 				{
 					$class = ' ' . $class;
 				}
+				if( ! empty($data_bind))
+				{
+					$data_bind = ' ' . $data_bind;
+				}
 
-				echo '<div class="control-group'.$class.'" id="element_', $element->getAttribute('id'), '">', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
+				echo '<div class="control-group'.$class.'" id="element_', $element->getAttribute('id'), '"'.$data_bind.'>', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
 				++$elementCount;
 			}
 		}
