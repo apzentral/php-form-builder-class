@@ -39,6 +39,7 @@ class CheckboxOnly extends Checkbox {
 		$options_left = $total_options % $this->columns;
 		$bootstrap_col = 12 / $this->columns;
 		$count_col = 0;
+
 		$close_div = FALSE;
 
 		if($options_left > 0)
@@ -49,7 +50,7 @@ class CheckboxOnly extends Checkbox {
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);
 
-			if($count % $options_col === 0 && $count_col < ($bootstrap_col-1))
+			if($count % $options_col === 0 && $count_col < $this->columns)
 			{
 				echo '<div class="span'.$bootstrap_col.'">';
 				echo '<div class="controls">';
@@ -64,7 +65,7 @@ class CheckboxOnly extends Checkbox {
 
 			++$count;
 
-			if($count % $options_col === 0 && $count_col < $bootstrap_col)
+			if($count % $options_col === 0 && $count_col < ($this->columns + 1))
 			{
 				echo '</div></div>';
 				$close_div = FALSE;
