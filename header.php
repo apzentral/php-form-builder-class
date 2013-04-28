@@ -14,7 +14,7 @@ $version = file_get_contents($pathPrefix . "version");
 function prettyprint($code) {
 	echo '<pre class="prettyprint linenums">', str_replace("\t", str_repeat("&nbsp", 4), htmlspecialchars($code)), '</pre>';
 }
-?>	
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +79,8 @@ function prettyprint($code) {
 							<li<?php if($script == "views.php") echo ' class="active"';?>><a href="<?php echo $examplePathPrefix; ?>views.php">Views</a></li>
 							<li<?php if($script == "validation.php") echo ' class="active"';?>><a href="<?php echo $examplePathPrefix; ?>validation.php">Validation</a></li>
 							<li<?php if($script == "ajax.php") echo ' class="active"';?>><a href="<?php echo $examplePathPrefix; ?>ajax.php">Ajax</a></li>
+							<li class="nav-header">Form Builder</li>
+							<li<?php if($script == "form-builder.php") echo ' class="active"';?>><a href="<?php echo $examplePathPrefix; ?>form-builder.php">Form Builder from JSON data</a></li>
 						</ul>
 					</div>
 				</div>
