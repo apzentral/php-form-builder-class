@@ -196,6 +196,7 @@ JS;
 		if( $total_name > 0)
 		{
 			$bullet_width = (int)$this->params['css-properties']['form-width'] / (float)$total_name;
+			$bullet_width -= 2;	// Subtract margin
 			$bullet_width .= 'px';
 		}
 		else
@@ -205,7 +206,8 @@ JS;
 
 		echo "\n".
 ".slider {
-	height: {$this->params['css-properties']['form-height']}
+	height: {$this->params['css-properties']['form-height']};
+	width: {$this->params['css-properties']['form-width']}
 }
 .rhino-bullets {
 	top: $bullets_top

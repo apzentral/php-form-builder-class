@@ -1,0 +1,23 @@
+.form-horizontal .row-fluid label {
+  width: 120px;
+  font-size: 13px; }
+  .form-horizontal .row-fluid label.checkbox, .form-horizontal .row-fluid label.radio {
+    width: 80%; }
+    .form-horizontal .row-fluid label.checkbox.yes-no, .form-horizontal .row-fluid label.radio.yes-no {
+      width: 25px; }
+.form-horizontal .row-fluid .controls {
+  margin-left: 130px; }
+.form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid select, .form-horizontal .row-fluid textarea {
+  width: 80%; }
+.form-horizontal .row-fluid .element-block label {
+  float: none;
+  width: auto;
+  text-align: left; }
+.form-horizontal .row-fluid .element-block .controls {
+  margin-left: 20px; }
+.form-horizontal .row-fluid .element-block input[type="text"], .form-horizontal .row-fluid .element-block select, .form-horizontal .row-fluid .element-block textarea {
+  float: none; }
+.form-horizontal .options-only .controls {
+  margin-left: 30px; }
+.form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {
+  width: 90%; }

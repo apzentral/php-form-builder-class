@@ -1,0 +1,51 @@
+//===== Override BootStrap =====//
+.form-horizontal {
+	.row-fluid {
+		label {
+			width: 120px;
+			font-size: 13px;
+
+			&.checkbox, &.radio {
+				width: 80%;
+
+				&.yes-no {
+					width: 25px;
+				}
+			}
+		}
+
+		.controls {
+			margin-left: 130px;
+		}
+
+		input[type="text"], select, textarea {
+			width: 80%;
+		}
+
+		.element-block {
+			label {
+				float: none;
+				width: auto;
+				text-align: left;
+			}
+
+			.controls {
+				margin-left: 20px;
+			}
+
+			input[type="text"], select, textarea {
+				float: none;
+			}
+		}
+	}
+	.options-only {
+		.controls {
+			margin-left: 30px;
+		}
+		label {
+			&.checkbox, &.radio {
+				width: 90%;
+			}
+		}
+	}
+}

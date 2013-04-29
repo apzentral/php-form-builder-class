@@ -312,6 +312,7 @@ class Form extends Base {
 					$elementUrls = array(
 						$this->resourcesPath . "rhinoslider/css/rhinoslider-1.05.css",
 						$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css",
+						$this->resourcesPath . "rhinoslider/css/form-override.css"
 					);
 					break;
 			}
