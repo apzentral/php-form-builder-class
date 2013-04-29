@@ -11,12 +11,11 @@ class FormWizard extends \PFBC\View {
 
 		// Adding Default Parameter
 		$this->params = array(
-			'base_url' => './',
-			'fieldset' => TRUE,
-			'form-actions' => FALSE,
+			'fieldset' => FALSE,	// Auto Include fieldset after the form
+			'form-actions' => FALSE,	// Auto wrap button with form-actions div
 			'slides-name' => array(),
-			'slides-img' => array(),
-			'css-properties' => array(
+			'slides-ico-class' => array(),
+			'css-properties' => array(	// Set up default form width and height
 				'form-height' => '500px',
 				'form-width' => '750px',
 			)
@@ -133,12 +132,12 @@ class FormWizard extends \PFBC\View {
 			array_push($object_array, $html_tmp);
 		}
 
-		if( isset($this->params['slides-img'][0]))
+		if( isset($this->params['slides-ico-class'][0]))
 		{
-			$html_tmp = 'img:[';
-			for($i =0, $j = count($this->params['slides-img']); $i < $j; $i++)
+			$html_tmp = 'ico_class:[';
+			for($i =0, $j = count($this->params['slides-ico-class']); $i < $j; $i++)
 			{
-				$html_tmp .= '"'.$this->params['slides-img'][$i].'"';
+				$html_tmp .= '"'.$this->params['slides-ico-class'][$i].'"';
 				if($i < ($j-1))
 				{
 					$html_tmp .= ',';
@@ -179,7 +178,7 @@ $('.slider').rhinoslider({
 $('.rhino-bullet').each(function(index){
 	var link_text = $(this).html();
 	var description = $("#rhino-item"+(link_text-1)).attr("data");
-	$(this).html('<p><img src="{$this->params['base_url']}/assets/img/pfbc/view/formwizard/'+form_wizard.img[index]+'"></p><p class="title">'+form_wizard.name[index]+'</p></a>');
+	$(this).html('<p><i class="'+form_wizard.ico_class[index]+'"></i></p><p class="title">'+form_wizard.name[index]+'</p></a>');
 });
 
 JS;

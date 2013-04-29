@@ -44,7 +44,7 @@ class FormBuilder
 		// Order Matter, Need to order from Column, Row, and Fieldset.
 		// Depending on the precedance of the tag
 		$this->open_tags = array(
-			'Col' => array( FALSE ),
+			'Col' => FALSE,
 			'Row' => FALSE,
 			'Fieldset' => FALSE
 		);
@@ -204,10 +204,10 @@ class FormBuilder
 			case 'Clear':
 				$html = '';
 
-				if(isset($this->open_tags['Col'][0]) && $this->open_tags['Col'][0])
+				if(isset($this->open_tags['Col']) && $this->open_tags['Col'])
 				{
 					$html .= '</div>';
-					$this->open_tags['Col'] = array( FALSE );
+					$this->open_tags['Col'] = FALSE;
 				}
 				if($this->open_tags['Row'])
 				{
@@ -227,10 +227,10 @@ class FormBuilder
 
 					// Check to see if the Col Still Open
 					//var_dump($this->open_tags['Col']);
-					if(isset($this->open_tags['Col'][0]) && $this->open_tags['Col'][0])
+					if(isset($this->open_tags['Col']) && $this->open_tags['Col'])
 					{
 						$html .= '</div>';
-						$this->open_tags['Col'] = array( FALSE );
+						$this->open_tags['Col'] = FALSE;
 					}
 
 					// Close the div for Row
@@ -247,15 +247,14 @@ class FormBuilder
 				break;
 
 			case 'Col':
-				$last_col_status = array_shift($this->open_tags['Col']);
 
 				$data_bind = ( ! empty($field->options['data-bind'])) ? ' data-bind="'.$field->options['data-bind'].'"' : '';
 
-				if($last_col_status)
+				if($this->open_tags['Col'])
 				{
 					// Close the div for Col
 					$html = '</div><div class="'.$field->class.'"'.$data_bind.'>';
-					$last_col_status = FALSE;
+					$this->open_tags['Col'] = FALSE;
 				}
 				else
 				{
@@ -263,8 +262,7 @@ class FormBuilder
 					$html = '<div class="'.$field->class.'"'.$data_bind.'>';
 				}
 
-				$last_col_status = ! $last_col_status;
-				array_push($this->open_tags['Col'], $last_col_status);
+				$this->open_tags['Col'] = ! $this->open_tags['Col'];
 				break;
 
 			case 'Fieldset':
@@ -274,10 +272,10 @@ class FormBuilder
 				{
 					// Check to see if the Col Still Open
 					//var_dump($this->open_tags['Col']);
-					if(isset($this->open_tags['Col'][0]) && $this->open_tags['Col'][0])
+					if(isset($this->open_tags['Col']) && $this->open_tags['Col'])
 					{
 						$html .= '</div>';
-						$this->open_tags['Col'] = array( FALSE );
+						$this->open_tags['Col'] = FALSE;
 					}
 
 					// Close the div for Row

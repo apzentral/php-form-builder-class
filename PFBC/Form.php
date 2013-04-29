@@ -294,7 +294,8 @@ class Form extends Base {
 	protected function renderCSSFiles() {
 		$urls = array(
 			$this->resourcesPath . "bootstrap/css/bootstrap.min.css",
-			$this->resourcesPath . "bootstrap/css/bootstrap-responsive.min.css"
+			$this->resourcesPath . "bootstrap/css/bootstrap-responsive.min.css",
+			$this->resourcesPath . "font-awesome/css/font-awesome.min.css",
 		);
 
 		foreach($this->_elements as $element) {
