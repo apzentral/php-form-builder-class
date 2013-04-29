@@ -124,6 +124,16 @@ class FormBuilder
 				$v = new FormField($v);
 			}
 
+			if(is_object($v->options))
+			{
+				$tmp = array();
+				foreach($v->options as $opt_k => $opt_v)
+				{
+					$tmp[$opt_k] = $opt_v;
+				}
+				$v->options = $tmp;
+			}
+
 			if ( file_exists(dirname(__FILE__).'/../PFBC/Element/'.ucfirst($v->type).'.php') )
 			{
 				if($v->type === 'HTML')
