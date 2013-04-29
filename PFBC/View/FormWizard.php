@@ -26,6 +26,8 @@ class FormWizard extends \PFBC\View {
 
 		$this->_form->appendAttribute("class", $this->class);
 
+		echo '<div class="rhino-form-wrapper">';
+
 		if( $this->params['fieldset'] )
 		{
 			echo '<form', $this->_form->getAttributes(), '><fieldset>';
@@ -99,6 +101,7 @@ class FormWizard extends \PFBC\View {
 			echo '</form>';
 		}
 
+		echo '</div>';
     }
 
 	protected function renderLabel(\PFBC\Element $element) {
@@ -189,8 +192,8 @@ JS;
 	{
 		parent::renderCSS();
 
-		$bullets_top =  (- 10) - (int)$this->params['css-properties']['form-height'];
-		$bullets_top .= 'px';
+		$form_height =  (int)$this->params['css-properties']['form-height'] + 200;
+		$form_height .= 'px';
 
 		$total_name = count($this->params['slides-name']);
 		if( $total_name > 0)
@@ -205,7 +208,11 @@ JS;
 		}
 
 		echo "\n".
-".slider {
+"
+.rhino-form-wrapper {
+	height: $form_height
+}
+.slider {
 	height: {$this->params['css-properties']['form-height']};
 	width: {$this->params['css-properties']['form-width']}
 }
