@@ -69,7 +69,7 @@ class FormBuilder
 		{
 			foreach($options as $k => $v)
 			{
-				$this->config[$k] = $v;
+				$this->options[$k] = $v;
 			}
 		}
 	}
