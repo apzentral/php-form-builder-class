@@ -50,9 +50,28 @@ class FormBuilder
 		);
 
 		// Override the internal variables
-		$this->config = array_merge($this->config, $form_config);
-		$this->options = array_merge($this->options, $options);
-
+		if(is_array($form_config))
+		{
+			$this->config = array_merge($this->config, $form_config);
+		}
+		else
+		{
+			foreach($form_config as $k => $v)
+			{
+				$this->config[$k] = $v;
+			}
+		}
+		if(is_array($options))
+		{
+			$this->options = array_merge($this->options, $options);
+		}
+		else
+		{
+			foreach($options as $k => $v)
+			{
+				$this->config[$k] = $v;
+			}
+		}
 	}
 
 	/**
@@ -86,11 +105,25 @@ class FormBuilder
 			'fieldset' => FALSE
 		);
 
-		$params = array_merge($params, $option_params);
+		if(is_array($option_params))
+		{
+			$params = array_merge($params, $option_params);
+		}
+		else
+		{
+			foreach($option_params as $k => $v)
+			{
+				$params[$k] = $v;
+			}
+		}
 
 		foreach($data->fields as $v)
 		{
-			if ( file_exists(LIBPATH . 'PFBC/Element/'.ucfirst($v->type).'.php') )
+			if(get_class($v) !== 'FormField')
+			{
+				$v = new FormField($v);
+			}
+			if ( file_exists('../PFBC/Element/'.ucfirst($v->type).'.php') )
 			{
 				if($v->type === 'HTML')
 				{

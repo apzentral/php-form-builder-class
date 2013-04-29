@@ -256,6 +256,15 @@ class Form extends Base {
 		$this->prevent = array_map("strtolower", $this->prevent);
 
 		// Load View Options Parameters
+		if( isset($options['css-properties']) && ! is_array($options['css-properties']))
+		{
+			$array = array();
+			foreach($options['css-properties'] as $k => $v)
+			{
+				$array[$k] = $v;
+			}
+			$options['css-properties'] = $array;
+		}
 		$this->view->setParams($options);
 		$this->renderCSS();
 		$this->view->render();

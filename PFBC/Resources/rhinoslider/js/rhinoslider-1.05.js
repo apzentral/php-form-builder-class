@@ -73,6 +73,7 @@
 				tmpParts = settings.parts;
 				settings.shiftValue = [];
 				settings.parts = [];
+				settings.bulletsClick = String(settings.bulletsClick) == 'true' ? true : false;
 				return settings;
 			},
 
@@ -225,24 +226,27 @@
 					vars.buttons.bullets = vars.navigation.find('.' + vars.prefix + 'bullet');
 					vars.buttons.bullets.first().addClass(vars.prefix + 'active-bullet ' + vars.prefix + 'first-bullet');
 					vars.buttons.bullets.last().addClass(vars.prefix + 'last-bullet');
-					vars.buttons.bullets.click(function () {
-						var itemID = $(this).attr('id').replace('-bullet', '');
-						var $next = vars.container.find('#' + itemID);
-						var curID = parseInt(vars.navigation.find('.' + vars.prefix + 'active-bullet').attr('id').replace('-bullet', '').replace(vars.prefix + 'item', ''), 10);
-						var nextID = parseInt(itemID.replace(vars.prefix + 'item', ''), 10);
-						if (curID < nextID) {
-							next($slider, settings, $next);
-						} else if (curID > nextID) {
-							prev($slider, settings, $next);
-						} else {
-							return false;
-						}
 
-						//stop autoplay, if set
-						if (settings.autoPlay) {
-							pause();
-						}
-					});
+					if (settings.bulletsClick) {
+						vars.buttons.bullets.click(function () {
+							var itemID = $(this).attr('id').replace('-bullet', '');
+							var $next = vars.container.find('#' + itemID);
+							var curID = parseInt(vars.navigation.find('.' + vars.prefix + 'active-bullet').attr('id').replace('-bullet', '').replace(vars.prefix + 'item', ''), 10);
+							var nextID = parseInt(itemID.replace(vars.prefix + 'item', ''), 10);
+							if (curID < nextID) {
+								next($slider, settings, $next);
+							} else if (curID > nextID) {
+								prev($slider, settings, $next);
+							} else {
+								return false;
+							}
+
+							//stop autoplay, if set
+							if (settings.autoPlay) {
+								pause();
+							}
+						});
+					}
 				}
 				//hide/show bullets on hover or never
 				if (settings.showBullets === 'hover') {

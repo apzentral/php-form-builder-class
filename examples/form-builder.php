@@ -16,185 +16,151 @@ include("../header.php");
 
 <?php
 
-$vars = array(
-		'title' => 'Form Wizard with Bootstrap',
-		'js' => array()
-	);
-
-	// Create a Form Here
-	$form_object = new FormObject( array(
-		'name' => 'php_form_builder',
-		'title' => 'Example Form Wizard'
-	) );
-
-	$options_array = array(
-		'option 1', 'option 2', 'option 3'
-	);
-
-	// Adding Fields
-	$fields = array();
-
-	// Start Building the Form
-
-	//===== User Info Fieldset =====//
-	$fields[] = new FormField( array(
-		'type' => 'Fieldset',
-		'description' => 'User Information'
-	));
-
-	//===== ROW ====//
-	$fields[] = new FormField( array(
-		'type' => 'Row',
-		'class' => 'row-fluid'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span12'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'full_name',
-		'type' => 'FullName',
-		'description' => 'Name'
-	));
-
-	//===== ROW ====//
-	$fields[] = new FormField( array(
-		'type' => 'Row',
-		'class' => 'row-fluid'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span12'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'street_address',
-		'type' => 'Textbox',
-		'description' => 'Street Address'
-	));
-
-	//===== ROW ====//
-	$fields[] = new FormField( array(
-		'type' => 'Row',
-		'class' => 'row-fluid'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span6'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'city',
-		'type' => 'Textbox',
-		'description' => 'City'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span6'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'state',
-		'type' => 'State',
-		'description' => 'State'
-	));
-
-	//===== ROW ====//
-	$fields[] = new FormField( array(
-		'type' => 'Row',
-		'class' => 'row-fluid'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span6'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'country',
-		'type' => 'Textbox',
-		'description' => 'Country'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span6'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'phone',
-		'type' => 'Phone',
-		'description' => 'Phone'
-	));
-
-	//===== Second Info Fieldset =====//
-	$fields[] = new FormField( array(
-		'type' => 'Fieldset',
-		'description' => 'Second Step'
-	));
-
-	//===== ROW ====//
-	$fields[] = new FormField( array(
-		'type' => 'Row',
-		'class' => 'row-fluid'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span6'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'dob',
-		'type' => 'Date',
-		'description' => 'Date of Birth'
-	));
-
-	$fields[] = new FormField( array(
-		'type' => 'Col',
-		'class' => 'span6'
-	));
-
-	$fields[] = new FormField( array(
-		'name' => 'gender',
-		'type' => 'Gender',
-		'description' => 'Gender'
-	));
-
-	//===== Assign Fields to the form object =====//
-	$form_object->fields = $fields;
-
-	$form_builder_options = array(
-		'view' => 'FormWizard',
-		'data-model-name' => 'FormViewModel'
-	);
-
-	$form_builder_setup = array(
-		'title_class' => 'text-info',
-		'fieldset_div' => TRUE
-	);
-
-	$view_options = array(
-		'slides-name' => array(
+$json = '
+{
+	"form_setup" : {
+		"view" : "FormWizard",
+		"data-model-name" : "FormViewModel"
+	},
+	"form_options" : {
+		"title_class" : "text-info",
+		"fieldset_div" : "TRUE"
+	},
+	"view_options" : {
+		"slides-name" : [
 			"USER",
 			"SECOND"
-		),
-		'slides-ico-class' => array(
-			'icon-user icon-3x',
-			'icon-envelope icon-3x'
-		),
-		'css-properties' => array(
-			'form-height' => '280px'
-		)
-	);
+		],
+		"slides-ico-class" : [
+			"icon-user icon-3x",
+			"icon-envelope icon-3x"
+		],
+		"css-properties": {
+			"form-height" : "280px"
+		}
+	},
+	"form_object" : {
+		"name" : "php_form_builder",
+		"title" : "Example Form Wizard (Bootstrap)",
+		"fields" : [
+		{
+			"type" : "Fieldset",
+			"description" : "User Information"
+		},
 
-	$formbuilder = new FormBuilder($form_builder_options, $form_builder_setup);
-	$form = $formbuilder->parseFormSchema($form_object, $view_options);
+		{
+			"type" : "Row",
+			"class" : "row-fluid"
+		},
+		{
+			"type" : "Col",
+			"class" : "span12"
+		},
+		{
+			"name" : "full_name",
+			"type" : "FullName",
+			"description" : "Name"
+		},
+
+		{
+			"type" : "Row",
+			"class" : "row-fluid"
+		},
+		{
+			"type" : "Col",
+			"class" : "span12"
+		},
+		{
+			"name" : "street_address",
+			"type" : "Textbox",
+			"description" : "Street Address"
+		},
+
+		{
+			"type" : "Row",
+			"class" : "row-fluid"
+		},
+		{
+			"type" : "Col",
+			"class" : "span6"
+		},
+		{
+			"name" : "city",
+			"type" : "Textbox",
+			"description" : "City"
+		},
+		{
+			"type" : "Col",
+			"class" : "span6"
+		},
+		{
+			"name" : "state",
+			"type" : "State",
+			"description" : "State"
+		},
+
+		{
+			"type" : "Row",
+			"class" : "row-fluid"
+		},
+		{
+			"type" : "Col",
+			"class" : "span6"
+		},
+		{
+			"name" : "country",
+			"type" : "Textbox",
+			"description" : "Country"
+		},
+		{
+			"type" : "Col",
+			"class" : "span6"
+		},
+		{
+			"name" : "phone",
+			"type" : "Phone",
+			"description" : "Phone"
+		},
+
+		{
+			"type" : "Fieldset",
+			"description" : "Second Step"
+		},
+
+		{
+			"type" : "Row",
+			"class" : "row-fluid"
+		},
+		{
+			"type" : "Col",
+			"class" : "span6"
+		},
+		{
+			"name" : "dob",
+			"type" : "Date",
+			"description" : "Date of Birth"
+		},
+		{
+			"type" : "Col",
+			"class" : "span6"
+		},
+		{
+			"name" : "gender",
+			"type" : "Gender",
+			"description" : "Gender"
+		}
+		]
+	}
+}
+';
+
+$decoded_json = json_decode($json);
+//echo var_dump($decoded_json);
+
+	$formbuilder = new FormBuilder($decoded_json->form_setup, $decoded_json->form_options);
+
+	$form_object = new FormObject($decoded_json->form_object);
+	$form = $formbuilder->parseFormSchema($form_object, $decoded_json->view_options);
 
 ?>
 
