@@ -13,6 +13,9 @@ $(function(){
 			if (currentFieldset === 1) {
 				obj.hide({duration:500});
 			}
+			if (currentFieldset === (form_wizard.name.length-1)) {
+				obj.next().next().text('Next');
+			}
 			obj.one("click", function() {
 				RHINO_FORM.setBackButton(obj);
 			});
