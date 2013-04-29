@@ -6,7 +6,7 @@ use PFBC\Form;
 use PFBC\Element;
 use PFBC\View;
 
-require_once('../PFBC/Form.php');
+require_once(dirname(__FILE__).'/../PFBC/Form.php');
 
 function Load($class) {
 	$file = __DIR__ . "/../" . str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
@@ -123,7 +123,8 @@ class FormBuilder
 			{
 				$v = new FormField($v);
 			}
-			if ( file_exists('../PFBC/Element/'.ucfirst($v->type).'.php') )
+
+			if ( file_exists(dirname(__FILE__).'/../PFBC/Element/'.ucfirst($v->type).'.php') )
 			{
 				if($v->type === 'HTML')
 				{
