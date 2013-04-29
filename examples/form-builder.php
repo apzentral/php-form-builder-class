@@ -8,6 +8,11 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include("../FBUILDER/FormBuilder.php");
 
+if(isset($_SESSION["form_token"]) && isset($_POST[$_SESSION["form_token"]])) {
+	var_dump($_POST);
+	exit();
+}
+
 include("../header.php");
 ?>
 <div class="page-header">

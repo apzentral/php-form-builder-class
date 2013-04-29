@@ -37,6 +37,9 @@ class FormWizard extends \PFBC\View {
 			echo '<form', $this->_form->getAttributes(), '>';
 		}
 
+		// Generate CSRF
+		echo '<input type="hidden" name="'.$_SESSION["form_token"].'" value="1"/>';
+
 		// Declare the Rhino Form
 		echo '<div class="slider">';
 
@@ -102,6 +105,9 @@ class FormWizard extends \PFBC\View {
 		}
 
 		echo '</div>';
+
+		// Respond Output
+		echo '<div id="respond-output"></div>';
     }
 
 	protected function renderLabel(\PFBC\Element $element) {

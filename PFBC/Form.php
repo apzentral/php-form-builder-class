@@ -56,6 +56,12 @@ class Form extends Base {
 			$this->resourcesPath = substr($path, strlen($_SERVER["DOCUMENT_ROOT"]));
 		else
 			$this->resourcesPath = "/PFBC/Resources";
+
+		if( ! isset($_SESSION))
+		{
+			session_start();
+		}
+		$_SESSION["form_token"] = md5(uniqid(mt_rand(), true));
 	}
 
 	/*When a form is serialized and stored in the session, this function prevents any non-essential
@@ -423,6 +429,7 @@ JS;
 			$this->resourcesPath . "jquery-placeholder/jquery.placeholder.min.js",
 			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js',
 			$this->resourcesPath . "knockout.mapping/knockout.mapping-2.4.1.js",
+			$this->resourcesPath . "jquery.form.js"
 		);
 
 		//$this->debug($this->_elements);
@@ -444,7 +451,7 @@ JS;
 						$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.js",
 						$this->resourcesPath . "rhinoslider/js/mousewheel.js",
 						$this->resourcesPath . "rhinoslider/js/easing.js",
-						$this->resourcesPath . "rhinoslider/js/rhinoslider-ko.js",
+						$this->resourcesPath . "rhinoslider/js/rhinoslider-ko.js"
 					);
 					break;
 			}
