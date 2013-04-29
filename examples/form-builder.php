@@ -189,7 +189,7 @@ $vars = array(
 			'icon-envelope icon-3x'
 		),
 		'css-properties' => array(
-			'form-height' => '500px'
+			'form-height' => '280px'
 		)
 	);
 

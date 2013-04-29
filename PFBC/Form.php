@@ -311,7 +311,7 @@ class Form extends Base {
 				case 'rhinoslider':
 					$elementUrls = array(
 						$this->resourcesPath . "rhinoslider/css/rhinoslider-1.05.css",
-						$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css",
+						//$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css",
 						$this->resourcesPath . "rhinoslider/css/form-override.css"
 					);
 					break;
@@ -431,7 +431,8 @@ JS;
 			{
 				case 'rhinoslider':
 					$elementUrls = array(
-						$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.min.js",
+						//$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.min.js",
+						$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.js",
 						$this->resourcesPath . "rhinoslider/js/mousewheel.js",
 						$this->resourcesPath . "rhinoslider/js/easing.js"
 					);

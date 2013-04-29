@@ -1,11 +1,16 @@
 /**
-  * Rhinoslider 1.05
-  * http://rhinoslider.com/
-  *
-  * Copyright 2013: Sebastian Pontow, Rene Maas (http://renemaas.de/)
-  * Dual licensed under the MIT or GPL Version 2 licenses.
-  * http://rhinoslider.com/license/
-  */
+ * Rhinoslider 1.05
+ * rhinoslider.com/rhinoslider
+ *
+ * Copyright 2012: Sebastian Pontow, René Maas <renemaas.de>
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * rhinoslider.com/license
+ */
+
+/**
+ * Modified code to be used as a FormWizard
+ *
+ */
 (function ($, window, undefined) {
 
 	$.extend($.easing, {
@@ -70,12 +75,13 @@
 				settings.parts = [];
 				return settings;
 			},
-			
+
 			//init function
 			init = function ($slider, settings, vars) {
 				settings = setUpSettings(settings);
-				
+
 				$slider.wrap('<div class="' + vars.prefix + 'container">');
+
 				vars.container = $slider.parent('.' + vars.prefix + 'container');
 				vars.isPlaying = settings.autoPlay;
 
@@ -85,7 +91,7 @@
 				//add prev/next-buttons
 				if (settings.controlsPrevNext) {
 					vars.container.addClass(vars.prefix + 'controls-prev-next');
-					buttons = '<a class="' + vars.prefix + 'prev ' + vars.prefix + 'btn">' + settings.prevText + '</a><a class="' + vars.prefix + 'next ' + vars.prefix + 'btn">' + settings.nextText + '</a>';
+					buttons = '<div class="form-actions"><a class="' + vars.prefix + 'prev ' + vars.prefix + 'btn btn btn-primary">' + settings.prevText + '</a><a class="' + vars.prefix + 'next ' + vars.prefix + 'btn btn btn-primary">' + settings.nextText + '</a></div>';
 					vars.container.append(buttons);
 
 					vars.buttons.prev = vars.container.find('.' + vars.prefix + 'prev');
@@ -130,14 +136,15 @@
 						}
 					});
 				}
-				
+
 				//style
 				vars.container.find('.' + vars.prefix + 'btn').css({
 					position: 'absolute',
-					display: 'block',
-					cursor: 'pointer'
+					display: 'block'
+					//cursor: 'default'
+					//cursor: 'pointer'
 				});
-				
+
 				//hide/show controls on hover or never
 				if (settings.showControls !== 'always') {
 					var allControls = vars.container.find('.' + vars.prefix + 'btn');
@@ -153,7 +160,7 @@
 				if(settings.showControls !== 'never'){
 					vars.container.addClass(vars.prefix + 'show-controls');
 				}
-				
+
 
 				//get content-elements and set css-reset for positioning
 				vars.items = $slider.children();
@@ -201,6 +208,7 @@
 				});
 
 				//generate navigation
+				//load navigation on top of the form
 				if (settings.showBullets !== 'never') {
 					vars.container.addClass(vars.prefix + 'show-bullets');
 					var navi = '<ol class="' + vars.prefix + 'bullets">';
@@ -210,7 +218,8 @@
 						navi = navi + '<li><a id="' + id + '-bullet" class="' + vars.prefix + 'bullet">' + parseInt(i + 1, 10) + '</a></li>';
 					});
 					navi = navi + '</ol>';
-					vars.container.append(navi);
+					//vars.container.append(navi);
+					$slider.parent().prepend(navi);
 
 					vars.navigation = vars.container.find('.' + vars.prefix + 'bullets');
 					vars.buttons.bullets = vars.navigation.find('.' + vars.prefix + 'bullet');
@@ -244,7 +253,7 @@
 						vars.navigation.delay(200).fadeOut(settings.controlFadeTime);
 					});
 				}
-				
+
 				//add captions
 				if (settings.showCaptions !== 'never') {
 					vars.container.addClass(vars.prefix + 'show-captions');
@@ -276,7 +285,6 @@
 				vars.items.each(function () {
 					$(this).children('img').removeAttr('title');
 				});
-
 
 				//start autoplay if set
 				if (settings.autoPlay) {
@@ -375,7 +383,7 @@
 							$item.addClass(vars.prefix + 'lastItem');
 						}
 					});
-					
+
 					if(vars.active.is(':first-child') && settings.controlsPrevNext){
 						vars.buttons.prev.addClass('disabled');
 					}
@@ -385,13 +393,13 @@
 							pause();
 						}
 						if(settings.autoPlay){
-							vars.buttons.play.addClass('disabled');	
+							vars.buttons.play.addClass('disabled');
 						}
 					}
 				}
-				
+
 				if(preparations[settings.effect] == undefined){
-					console.log('Effect for ' + settings.effect + ' not found.');
+					console.log('Preparations for ' + settings.effect + ' not found.');
 				}else{
 					preparations[settings.effect]($slider, settings, vars);
 				}
@@ -401,12 +409,12 @@
 
 				settings.callBackInit();
 			},
-			
+
 			//check if item element is first-child
 			isFirst = function($item) {
 				return $item.is(':first-child');
 			},
-			
+
 			//check if item element is last-child
 			isLast = function($item) {
 				return $item.is(':last-child');
@@ -420,10 +428,10 @@
 				if (settings.controlsPlayPause) {
 					vars.buttons.play.text(settings.playText).removeClass(vars.prefix + 'pause').addClass(vars.prefix + 'play');
 				}
-	
+
 				settings.callBackPause();
 			},
-		
+
 			//start/resume the autoplay and change the bg-image of the button to "pause"
 			play = function () {
 				var vars = $slider.data('slider:vars');
@@ -434,7 +442,7 @@
 				if (settings.controlsPlayPause) {
 					vars.buttons.play.text(settings.pauseText).removeClass(vars.prefix + 'play').addClass(vars.prefix + 'pause');
 				}
-	
+
 				settings.callBackPlay();
 			},
 
@@ -443,9 +451,9 @@
 				if(!settings.cycled && isFirst(vars.active)){
 					return false;
 				}
-				
+
 				settings.callBeforePrev();
-				
+
 				//if some effect is already running, don't stack up another one
 				if (vars.container.hasClass('inProgress')) {
 					return false;
@@ -471,7 +479,7 @@
 				if (settings.showCaptions !== 'never') {
 					$('.' + vars.prefix + 'caption').stop(true, true).fadeOut(settings.captionsFadeTime);
 				}
-				
+
 				if (settings.showBullets !== 'never' && settings.changeBullets == 'before') {
 					vars.navigation.find('.' + vars.prefix + 'active-bullet').removeClass(vars.prefix + 'active-bullet');
 					vars.navigation.find('#' + vars.next.attr('id') + '-bullet').addClass(vars.prefix + 'active-bullet');
@@ -482,13 +490,13 @@
 					params.settings = settings;
 					params.animateActive = settings.animateActive;
 					params.direction = settings.slidePrevDirection;
-	
+
 					if(effects[settings.effect] == undefined){
 						console.log('Preparations for ' + settings.effect + ' not found.');
 					}else{
 						effects[settings.effect]($slider, params, resetElements);
 					}
-	
+
 					setTimeout(function () {
 						if (settings.showBullets !== 'never' && settings.changeBullets == 'after') {
 							vars.navigation.find('.' + vars.prefix + 'active-bullet').removeClass(vars.prefix + 'active-bullet');
@@ -497,7 +505,7 @@
 						settings.callBackPrev();
 					}, settings.effectTime);
 				}, settings.captionsFadeTime);
-				
+
 				if (settings.showBullets !== 'never' && settings.changeBullets == 'after') {
 					vars.navigation.find('.' + vars.prefix + 'active-bullet').removeClass(vars.prefix + 'active-bullet');
 					vars.navigation.find('#' + vars.next.attr('id') + '-bullet').addClass(vars.prefix + 'active-bullet');
@@ -509,9 +517,9 @@
 				if(!settings.cycled && isLast(vars.active)){
 					return false;
 				}
-				
+
 				settings.callBeforeNext();
-				
+
 				//if some effect is already running, don't stack up another one
 				if (vars.container.hasClass('inProgress')) {
 					return false;
@@ -537,7 +545,7 @@
 				if (settings.showCaptions !== 'never') {
 					$('.' + vars.prefix + 'caption').stop(true, true).fadeOut(settings.captionsFadeTime);
 				}
-								
+
 				if (settings.showBullets !== 'never' && settings.changeBullets == 'before') {
 					vars.navigation.find('.' + vars.prefix + 'active-bullet').removeClass(vars.prefix + 'active-bullet');
 					vars.navigation.find('#' + vars.next.attr('id') + '-bullet').addClass(vars.prefix + 'active-bullet');
@@ -548,14 +556,14 @@
 					params.settings = settings;
 					params.animateActive = settings.animateActive;
 					params.direction = settings.slideNextDirection;
-	
+
 					//run effect
 					if(effects[settings.effect] == undefined){
 						console.log('Preparations for ' + settings.effect + ' not found.');
 					}else{
 						effects[settings.effect]($slider, params, resetElements);
 					}
-	
+
 					setTimeout(function () {
 						if (settings.showBullets !== 'never' && settings.changeBullets == 'after') {
 							vars.navigation.find('.' + vars.prefix + 'active-bullet').removeClass(vars.prefix + 'active-bullet');
@@ -563,7 +571,7 @@
 						}
 						settings.callBackNext();
 					}, settings.effectTime);
-					
+
 				}, settings.captionsFadeTime);
 			},
 
@@ -613,9 +621,9 @@
 					})
 					//and remove its active class
 					.removeClass(vars.prefix + 'active');
-					
+
 				settings.additionalResets();
-				
+
 				//check if cycled is false and start or end is reached
 				if(!settings.cycled) {
 					if(settings.controlsPrevNext){
@@ -640,12 +648,6 @@
 						}
 					}
 				}
-				
-				if (settings.showBullets !== 'never') {
-					
-					vars.navigation.find('.' + vars.prefix + 'active-bullet').removeClass(vars.prefix + 'active-bullet');
-					vars.navigation.find('#' + vars.next.attr('id') + '-bullet').addClass(vars.prefix + 'active-bullet');
-				}
 
 				//make the "next"-element the new active-element
 				vars.active = vars.next;
@@ -654,7 +656,7 @@
 				if (settings.showCaptions !== 'never') {
 					vars.active.find('.' + vars.prefix + 'caption').stop(true, true).fadeTo(settings.captionsFadeTime, settings.captionsOpacity);
 				}
-				
+
 				vars.container.removeClass('inProgress');
 			};
 
@@ -679,7 +681,7 @@
 			if (element.data('rhinoslider')) {
 				return element.data('rhinoslider');
 			}
-			
+
 			element.data('slider:original', element.clone());
 			var rhinoslider = new rhinoSlider(this, opts);
 			element.data('rhinoslider', rhinoslider);
@@ -787,6 +789,39 @@
 	};
 
 	$.fn.rhinoslider.effects = {
+		none: function ($slider, params, callback) {
+			var vars = $slider.data('slider:vars');
+			var settings = params.settings;
+			//set next on top of the others and hide it
+			vars.next.css({
+				zIndex: 2,
+				display: 'block'
+			});
+			vars.active.hide(0, function () {
+				callback($slider, settings);
+			});
+		},
+		//options: easing, animateActive
+		fade: function ($slider, params, callback) {
+			var vars = $slider.data('slider:vars');
+			var settings = params.settings;
+			if(settings.animateActive){
+				vars.active.animate({
+					opacity: 0
+				}, settings.effectTime);
+			}
+			//set next on top of the others and hide it
+			vars.next.css({
+				zIndex: 2
+			})
+			//then fade it in - fade with animate-> fade didnt do it...
+			.animate({
+				opacity: 1
+			}, settings.effectTime, settings.easing, function () {
+				//and reset the rest
+				callback($slider, settings);
+			});
+		},
 		//options: direction, animateActive, easing
 		slide: function ($slider, params, callback) {
 			var vars = $slider.data('slider:vars');
@@ -858,13 +893,886 @@
 				//reset element-positions
 				callback($slider, settings);
 			});
+		},
+		//options: direction, animateActive, shiftValue
+		kick: function ($slider, params, callback) {
+			var vars = $slider.data('slider:vars');
+			var settings = params.settings;
+			var direction = params.direction;
+			var values = [];
+
+			values.delay = settings.effectTime / 2;
+			values.activeEffectTime = settings.effectTime / 2;
+			settings.shiftValue.x = settings.shiftValue.x < 0 ? settings.shiftValue.x * -1 : settings.shiftValue.x;
+
+
+			//check, in which direction the content will be moved
+			switch (direction) {
+				case 'toTop':
+					values.top = -settings.shiftValue.x;
+					values.left = 0;
+					values.nextTop = settings.shiftValue.x;
+					values.nextLeft = 0;
+					break;
+				case 'toBottom':
+					values.top = settings.shiftValue.x;
+					values.left = 0;
+					values.nextTop = -settings.shiftValue.x;
+					values.nextLeft = 0;
+					break;
+				case 'toRight':
+					values.top = 0;
+					values.left = settings.shiftValue.x;
+					values.nextTop = 0;
+					values.nextLeft = -settings.shiftValue.x;
+					break;
+				case 'toLeft':
+					values.top = 0;
+					values.left = -settings.shiftValue.x;
+					values.nextTop = 0;
+					values.nextLeft = settings.shiftValue.x;
+					break;
+			}
+
+			//put the "next"-element on top of the others and show/hide it, depending on the effect
+			vars.next.css({
+				zIndex: 2,
+				opacity: 0
+			});
+
+			vars.active.css({
+				top: 0,
+				left: 0
+			});
+			if (settings.animateActive) {
+				//delay is for kick, so it seems as if the "next"-element kicks the activ-element away
+				vars.active.delay(values.delay).animate({
+					top: values.top,
+					left: values.left,
+					opacity: 0
+				}, values.activeEffectTime, 'out'); //easing is variable because kick seems more "realistic" if it's not too linear
+			}
+
+			vars.next
+			//position "next"-element depending on the direction
+			.css({
+				top: values.nextTop,
+				left: values.nextLeft
+			}).animate({
+				top: 0,
+				left: 0,
+				opacity: 1
+			}, settings.effectTime, 'kick', function () {
+				//reset element-positions
+				callback($slider, settings);
+			});
+		},
+		//options: direction, animateActive, easing, shiftValue
+		transfer: function ($slider, params, callback) {
+			var settings = params.settings;
+			var direction = params.direction;
+			var vars = $slider.data('slider:vars');
+			var values = [];
+			values.width = $slider.width();
+			values.height = $slider.height();
+
+			//set values for effect
+			switch (direction) {
+				case 'toTop':
+					values.top = -settings.shiftValue.y;
+					values.left = values.width / 2;
+					values.nextTop = values.height + settings.shiftValue.y;
+					values.nextLeft = values.width / 2;
+					break;
+				case 'toBottom':
+					values.top = values.height + settings.shiftValue.y;
+					values.left = values.width / 2;
+					values.nextTop = -settings.shiftValue.y;
+					values.nextLeft = values.width / 2;
+					break;
+				case 'toRight':
+					values.top = values.height / 2;
+					values.left = values.width + settings.shiftValue.x;
+					values.nextTop = values.height / 2;
+					values.nextLeft = -settings.shiftValue.x;
+					break;
+				case 'toLeft':
+					values.top = values.height / 2;
+					values.left = -settings.shiftValue.x;
+					values.nextTop = values.height / 2;
+					values.nextLeft = values.width + settings.shiftValue.x;
+					break;
+			}
+			vars.next.children().wrapAll('<div id="' + vars.prefix + 'nextContainer" class="' + vars.prefix + 'tmpContainer"></div>');
+			vars.active.children().wrapAll('<div id="' + vars.prefix + 'activeContainer" class="' + vars.prefix + 'tmpContainer"></div>');
+			var
+				$nextContainer = vars.next.find('#' + vars.prefix + 'nextContainer'),
+				$activeContainer = vars.active.find('#' + vars.prefix + 'activeContainer'),
+				$tmpContainer = vars.container.find('.' + vars.prefix + 'tmpContainer');
+
+			$activeContainer.css({
+				width: values.width,
+				height: values.height,
+				position: 'absolute',
+				top: '50%',
+				left: '50%',
+				margin: '-' + parseInt(values.height * 0.5, 10) + 'px 0 0 -' + parseInt(values.width * 0.5, 10) + 'px'
+			});
+
+			$nextContainer.css({
+				width: values.width,
+				height: values.height,
+				position: 'absolute',
+				top: '50%',
+				left: '50%',
+				margin: '-' + parseInt(values.height * 0.5, 10) + 'px 0 0 -' + parseInt(values.width * 0.5, 10) + 'px'
+			});
+
+			if(settings.animateActive){
+
+				vars.active.css({
+					width: '100%',
+					height: '100%',
+					top: 0,
+					left: 0
+				}).animate({
+					width: 0,
+					height: 0,
+					top: values.top,
+					left: values.left,
+					opacity: 0
+				}, settings.effectTime);
+			}
+
+			vars.next.css({
+				opacity: 0,
+				zIndex: 2,
+				width: 0,
+				height: 0,
+				top: values.nextTop,
+				left: values.nextLeft
+			}).animate({
+				width: '100%',
+				height: '100%',
+				top: 0,
+				left: 0,
+				opacity: 1
+			}, settings.effectTime, settings.easing, function () {
+				$tmpContainer.children().unwrap();
+				callback($slider, settings);
+			});
+
+		},
+		//options: animateActive, easing, shiftValue, parts
+		shuffle: function ($slider, params, callback) {
+			var
+			vars = $slider.data('slider:vars'),
+				settings = params.settings,
+				values = [],
+				preShuffle = function ($slider, settings, $li) {
+					var vars = $slider.data('slider:vars');
+					$li.html('<div class="' + vars.prefix + 'partContainer">' + $li.html() + '</div>');
+
+					var part = $li.html();
+					var width = $slider.width();
+					var height = $slider.height();
+					for (i = 1; i < (settings.parts.x * settings.parts.y); i++) {
+						$li.html($li.html() + part);
+					}
+					var $parts = $li.children('.' + vars.prefix + 'partContainer');
+					var partValues = [];
+					partValues.width = $li.width() / settings.parts.x;
+					partValues.height = $li.height() / settings.parts.y;
+					$parts.each(function (i) {
+						var $this = $(this);
+						partValues.top = ((i - (i % settings.parts.x)) / settings.parts.x) * partValues.height;
+						partValues.left = (i % settings.parts.x) * partValues.width;
+						partValues.marginTop = -partValues.top;
+						partValues.marginLeft = -partValues.left;
+						$this.css({
+							top: partValues.top,
+							left: partValues.left,
+							width: partValues.width,
+							height: partValues.height,
+							position: 'absolute',
+							overflow: 'hidden'
+						}).html('<div class="' + vars.prefix + 'part">' + $this.html() + '</div>');
+						$this.children('.' + vars.prefix + 'part').css({
+							marginTop: partValues.marginTop,
+							marginLeft: partValues.marginLeft,
+							width: width,
+							height: height,
+							background: $li.css('background-image') + ' ' + $li.parent().css('background-color')
+						});
+					});
+					return $parts;
+				},
+				//calc amount of parts
+				calcParts = function (parts, c) {
+					if (parts.x * parts.y > 36) {
+						if (c) {
+							if (parts.x > 1) {
+								parts.x--;
+							} else {
+								parts.y--;
+							}
+							c = false;
+						} else {
+							if (parts.y > 1) {
+								parts.y--;
+							} else {
+								parts.x--;
+							}
+							c = true;
+						}
+						return calcParts(parts, c);
+					}
+					return parts;
+				},
+				//effect "shuffle"
+				shuffle = function ($slider, settings) {
+					settings.parts.x = settings.parts.x < 1 ? 1 : settings.parts.x;
+					settings.parts.y = settings.parts.y < 1 ? 1 : settings.parts.y;
+					settings.parts = calcParts(settings.parts, true);
+					settings.shiftValue.x = settings.shiftValue.x < 0 ? settings.shiftValue.x * -1 : settings.shiftValue.x;
+					settings.shiftValue.y = settings.shiftValue.y < 0 ? settings.shiftValue.y * -1 : settings.shiftValue.y;
+					var vars = $slider.data('slider:vars');
+					var activeContent = vars.active.html();
+					var nextContent = vars.next.html();
+					var width = $slider.width();
+					var height = $slider.height();
+					var $activeParts = preShuffle($slider, settings, vars.active);
+					var $nextParts = preShuffle($slider, settings, vars.next);
+					var activeBackgroundImage = vars.active.css('background-image');
+					var activeBackgroundColor = vars.active.css('background-color');
+					var nextBackgroundImage = vars.next.css('background-image');
+					var nextBackgroundColor = vars.next.css('background-color');
+					vars.active.css({
+						backgroundImage: 'none',
+						backgroundColor: 'none',
+						opacity: 1
+					});
+					vars.next.css({
+						backgroundImage: 'none',
+						backgroundColor: 'none',
+						opacity: 1,
+						zIndex: 2
+					});
+					var partValues = [];
+					partValues.width = vars.next.width() / settings.parts.x;
+					partValues.height = vars.next.height() / settings.parts.y;
+					if (settings.animateActive) {
+						$activeParts.each(function (i) {
+							$this = $(this);
+							var newLeft, newTop;
+							newLeft = (Math.random() * (settings.shiftValue.x * 2) - settings.shiftValue.x);
+							newTop = (Math.random() * (settings.shiftValue.y * 2) - settings.shiftValue.y);
+							$this.animate({
+								opacity: 0,
+								top: '+=' + newTop,
+								left: '+=' + newLeft
+							}, settings.effectTime, settings.easing);
+						});
+					}
+					$nextParts.each(function (i) {
+						$this = $(this);
+						partValues.top = ((i - (i % settings.parts.x)) / settings.parts.x) * partValues.height;
+						partValues.left = (i % settings.parts.x) * partValues.width;
+						var newLeft, newTop;
+						newLeft = partValues.left + (Math.random() * (settings.shiftValue.x * 2) - settings.shiftValue.x);
+						newTop = partValues.top + (Math.random() * (settings.shiftValue.y * 2) - settings.shiftValue.y);
+
+						$this.css({
+							top: newTop,
+							left: newLeft,
+							opacity: 0
+						}).animate({
+							top: partValues.top,
+							left: partValues.left,
+							opacity: 1
+						}, settings.effectTime, settings.easing, function () {
+							if (i == $activeParts.length - 1) {
+								vars.active.html(activeContent);
+								vars.next.html(nextContent);
+								vars.active.css({
+									backgroundImage: activeBackgroundImage,
+									backgroundColor: activeBackgroundColor,
+									opacity: 0
+								});
+								vars.next.css({
+									backgroundImage: nextBackgroundImage,
+									backgroundColor: nextBackgroundColor,
+									opacity: 1
+								});
+								callback($slider, settings);
+							}
+						});
+					});
+				}
+
+			shuffle($slider, settings);
+		},
+		//options: animateActive, easing, shiftValue, parts
+		explode: function ($slider, params, callback) {
+			var
+			vars = $slider.data('slider:vars'),
+				settings = params.settings,
+				values = [],
+				preShuffle = function ($slider, settings, $li) {
+					var vars = $slider.data('slider:vars');
+					$li.html('<div class="' + vars.prefix + 'partContainer">' + $li.html() + '</div>');
+					var part = $li.html();
+					var width = $slider.width();
+					var height = $slider.height();
+					for (i = 1; i < (settings.parts.x * settings.parts.y); i++) {
+						$li.html($li.html() + part);
+					}
+					var $parts = $li.children('.' + vars.prefix + 'partContainer');
+					var partValues = [];
+					partValues.width = $li.width() / settings.parts.x;
+					partValues.height = $li.height() / settings.parts.y;
+					$parts.each(function (i) {
+						var $this = $(this);
+						partValues.top = ((i - (i % settings.parts.x)) / settings.parts.x) * partValues.height;
+						partValues.left = (i % settings.parts.x) * partValues.width;
+						partValues.marginTop = -partValues.top;
+						partValues.marginLeft = -partValues.left;
+						$this.css({
+							top: partValues.top,
+							left: partValues.left,
+							width: partValues.width,
+							height: partValues.height,
+							position: 'absolute',
+							overflow: 'hidden'
+						}).html('<div class="' + vars.prefix + 'part">' + $this.html() + '</div>');
+						$this.children('.' + vars.prefix + 'part').css({
+							marginTop: partValues.marginTop,
+							marginLeft: partValues.marginLeft,
+							width: width,
+							height: height,
+							background: $li.css('background-image') + ' ' + $li.parent().css('background-color')
+						});
+					});
+					return $parts;
+				},
+				//calc amount of parts
+				calcParts = function (parts, c) {
+					if (parts.x * parts.y > 36) {
+						if (c) {
+							if (parts.x > 1) {
+								parts.x--;
+							} else {
+								parts.y--;
+							}
+							c = false;
+						} else {
+							if (parts.y > 1) {
+								parts.y--;
+							} else {
+								parts.x--;
+							}
+							c = true;
+						}
+						return calcParts(parts, c);
+					}
+					return parts;
+				},
+				//effect "shuffle"
+				explode = function ($slider, settings) {
+					settings.parts.x = settings.parts.x < 1 ? 1 : settings.parts.x;
+					settings.parts.y = settings.parts.y < 1 ? 1 : settings.parts.y;
+					settings.parts = calcParts(settings.parts, true);
+					settings.shiftValue.x = settings.shiftValue.x < 0 ? settings.shiftValue.x * -1 : settings.shiftValue.x;
+					settings.shiftValue.y = settings.shiftValue.y < 0 ? settings.shiftValue.y * -1 : settings.shiftValue.y;
+					var vars = $slider.data('slider:vars');
+					var activeContent = vars.active.html();
+					var nextContent = vars.next.html();
+					var width = $slider.width();
+					var height = $slider.height();
+					var $activeParts = preShuffle($slider, settings, vars.active);
+					var $nextParts = preShuffle($slider, settings, vars.next);
+					var activeBackgroundImage = vars.active.css('background-image');
+					var activeBackgroundColor = vars.active.css('background-color');
+					var nextBackgroundImage = vars.next.css('background-image');
+					var nextBackgroundColor = vars.next.css('background-color');
+					vars.active.css({
+						backgroundImage: 'none',
+						backgroundColor: 'none',
+						opacity: 1
+					});
+					vars.next.css({
+						backgroundImage: 'none',
+						backgroundColor: 'none',
+						opacity: 1,
+						zIndex: 2
+					});
+					var partValues = [];
+					partValues.width = vars.next.width() / settings.parts.x;
+					partValues.height = vars.next.height() / settings.parts.y;
+					if (settings.animateActive) {
+						$activeParts.each(function (i) {
+							$this = $(this);
+							var newLeft, newTop;
+							var position = [];
+							position.top = $this.position().top;
+							position.bottom = $this.parent().height() - $this.position().top - $this.height();
+							position.left = $this.position().left;
+							position.right = $this.parent().width() - $this.position().left - $this.width();
+
+							var rndX = parseInt(Math.random() * settings.shiftValue.x, 10);
+							var rndY = parseInt(Math.random() * settings.shiftValue.y, 10);
+							newLeft = position.right <= position.left ? (position.right == position.left ? rndX / 2 : rndX) : -rndX;
+							newTop = position.bottom <= position.top ? (position.top == (position.bottom - 1) ? rndY / 2 : rndY) : -rndY;
+							$this.animate({
+								top: '+=' + newTop,
+								left: '+=' + newLeft,
+								opacity: 0
+							}, settings.effectTime, settings.easing);
+						});
+					}
+					$nextParts.each(function (i) {
+						$this = $(this);
+						partValues.top = ((i - (i % settings.parts.x)) / settings.parts.x) * partValues.height;
+						partValues.left = (i % settings.parts.x) * partValues.width;
+						var newLeft, newTop, position = [];
+
+						position.top = $this.position().top;
+						position.bottom = $this.parent().height() - $this.position().top - $this.height();
+						position.left = $this.position().left;
+						position.right = $this.parent().width() - $this.position().left - $this.width();
+
+						var rndX = parseInt(Math.random() * settings.shiftValue.x, 10);
+						var rndY = parseInt(Math.random() * settings.shiftValue.y, 10);
+						newLeft = position.right <= position.left ? (position.right == position.left ? rndX / 2 : rndX) : -rndX;
+						newTop = position.bottom <= position.top ? (position.top == (position.bottom - 1) ? rndY / 2 : rndY) : -rndY;
+						newLeft = partValues.left + newLeft;
+						newTop = partValues.top + newTop;
+
+
+						$this.css({
+							top: newTop,
+							left: newLeft,
+							opacity: 0
+						}).animate({
+							top: partValues.top,
+							left: partValues.left,
+							opacity: 1
+						}, settings.effectTime, settings.easing, function () {
+							if (i == $activeParts.length - 1) {
+								vars.active.html(activeContent);
+								vars.next.html(nextContent);
+								vars.active.css({
+									backgroundImage: activeBackgroundImage,
+									backgroundColor: activeBackgroundColor,
+									opacity: 0
+								});
+								vars.next.css({
+									backgroundImage: nextBackgroundImage,
+									backgroundColor: nextBackgroundColor,
+									opacity: 1
+								});
+								callback($slider, settings);
+							}
+						});
+					});
+				}
+
+			explode($slider, settings);
+		},
+		//options: direction, animateActive, easing
+		turnOver: function ($slider, params, callback) {
+			var
+				vars = $slider.data('slider:vars'),
+				settings = params.settings,
+				direction = params.direction,
+				values = []
+			;
+			values.width = vars.container.width();
+			values.height = vars.container.height();
+
+
+
+			//check, in which direction the content will be moved
+			switch (direction) {
+				case 'toTop':
+					values.top = -values.height;
+					values.left = 0;
+					break;
+				case 'toBottom':
+					values.top = values.height;
+					values.left = 0;
+					break;
+				case 'toRight':
+					values.top = 0;
+					values.left = values.width;
+					break;
+				case 'toLeft':
+					values.top = 0;
+					values.left = -values.width;
+					break;
+			}
+			//secure that out and in animation don't play simultaneously
+			values.timeOut = settings.animateActive ? settings.effectTime : 0;
+			values.effectTime = settings.animateActive ? settings.effectTime / 2 : settings.effectTime;
+
+			//put the "next"-element on top of the others and show/hide it, depending on the effect
+			vars.next.css({
+				zIndex: 2,
+				opacity: 1
+			});
+
+			//position "next"-element depending on the direction
+			vars.next.css({
+				top: values.top,
+				left: values.left
+			});
+			//if animateActive is false, the active-element will not move
+			if (settings.animateActive) {
+				vars.active.css({
+					top: 0,
+					left: 0
+				}).animate({
+					top: values.top,
+					left: values.left,
+					opacity: 1
+				}, values.effectTime, settings.easing);
+			}
+
+			setTimeout(function() {
+				vars.next.animate({
+					top: 0,
+					left: 0,
+					opacity: 1
+				}, values.effectTime, settings.easing, function () {
+					vars.active.css('opacity', 0);
+					//reset element-positions
+					callback($slider, settings);
+				});
+			}, values.timeOut);
+		},
+		//options: direction, animateActive, easing, shiftValue, parts, partDelay
+		//animationtime for each part is effectTime - (2 * ((settings.parts - 1) * partDelay))
+		chewyBars: function ($slider, params, callback) {
+			var
+				vars = $slider.data('slider:vars'),
+				settings = params.settings,
+				direction = params.direction,
+				values = [],
+				preSlide = function ($slider, settings, $li) {
+					var vars = $slider.data('slider:vars');
+					$li.html('<div class="' + vars.prefix + 'partContainer">' + $li.html() + '</div>');
+					var
+						part = $li.html(),
+						width = $slider.width(),
+						height = $slider.height()
+					;
+					for (i = 1; i < settings.parts; i++) {
+						$li.html($li.html() + part);
+					}
+					var
+						$parts = $li.children('.' + vars.prefix + 'partContainer'),
+						partValues = []
+					;
+					switch(direction){
+						case 'toLeft':
+							partValues.width = $li.width() / settings.parts;
+							partValues.height = height;
+							break;
+						case 'toTop':
+							partValues.width = width;
+							partValues.height = $li.height() / settings.parts;
+							break;
+					}
+
+					$parts.each(function (i) {
+						var $this = $(this), liWidth = $li.width(), liHeight = $li.height();
+						partValues.left = 'auto';
+						partValues.marginLeft = 'auto';
+						partValues.top = 'auto';
+						partValues.marginTop = 'auto';
+						partValues.right = 'auto';
+						partValues.bottom = 'auto';
+
+						switch(direction){
+							case 'toLeft':
+								partValues.width = liWidth / settings.parts;
+								partValues.height = height;
+								partValues.left = (i % settings.parts) * partValues.width;
+								partValues.marginLeft = -partValues.left;
+								partValues.top = 0;
+								partValues.marginTop = 0;
+								break;
+							case 'toRight':
+								partValues.width = liWidth / settings.parts;
+								partValues.height = height;
+								partValues.right = (i % settings.parts) * partValues.width;
+								partValues.marginLeft = -(liWidth - partValues.right - partValues.width);
+								partValues.top = 0;
+								partValues.marginTop = 0;
+								break;
+							case 'toTop':
+								partValues.width = width;
+								partValues.height = liHeight / settings.parts;
+								partValues.left = 0;
+								partValues.marginLeft = 0;
+								partValues.top = (i % settings.parts) * partValues.height;
+								partValues.marginTop = -partValues.top;
+								break;
+							case 'toBottom':
+								partValues.width = width;
+								partValues.height = liHeight / settings.parts;
+								partValues.left = 0;
+								partValues.marginLeft = 0;
+								partValues.bottom = (i % settings.parts) * partValues.height;
+								partValues.marginTop = -(liHeight - partValues.bottom - partValues.height);
+								break;
+						}
+						$this.css({
+							top: partValues.top,
+							left: partValues.left,
+							bottom: partValues.bottom,
+							right: partValues.right,
+							width: partValues.width,
+							height: partValues.height,
+							position: 'absolute',
+							overflow: 'hidden'
+						}).html('<div class="' + vars.prefix + 'part">' + $this.html() + '</div>');
+						$this.children('.' + vars.prefix + 'part').css({
+							marginLeft: partValues.marginLeft,
+							marginTop: partValues.marginTop,
+							width: width,
+							height: height,
+							background: $li.css('background-image') + ' ' + $li.parent().css('background-color')
+						});
+					});
+					return $parts;
+				},
+				//effect "slideBars"
+				slideBars = function ($slider, settings) {
+					settings.parts = settings.parts < 1 ? 1 : settings.parts;
+					settings.shiftValue.x = settings.shiftValue.x < 0 ? settings.shiftValue.x * -1 : settings.shiftValue.x;
+					settings.shiftValue.y = settings.shiftValue.y < 0 ? settings.shiftValue.y * -1 : settings.shiftValue.y;
+					var vars = $slider.data('slider:vars');
+					var
+						partDuration,
+						partDelay = settings.partDelay,
+						activeContent = vars.active.html(),
+						nextContent = vars.next.html(),
+						width = $slider.width(),
+						height = $slider.height(),
+						$activeParts = preSlide($slider, settings, vars.active),
+						$nextParts = preSlide($slider, settings, vars.next),
+						activeBackgroundImage = vars.active.css('background-image'),
+						activeBackgroundColor = vars.active.css('background-color'),
+						nextBackgroundImage = vars.next.css('background-image'),
+						nextBackgroundColor = vars.next.css('background-color'),
+						delay = 0
+					;
+
+					partDuration = settings.effectTime - (2 * ((settings.parts - 1) * partDelay));
+
+					vars.active.css({
+						backgroundImage: 'none',
+						backgroundColor: 'none',
+						opacity: 1
+					});
+					vars.next.css({
+						backgroundImage: 'none',
+						backgroundColor: 'none',
+						opacity: 1,
+						zIndex: 2
+					});
+					var values = [], aniMap = {opacity: 0}, cssMapNext = {opacity: 0};
+
+					switch(direction){
+						case 'toTop':
+							aniMap.left = -settings.shiftValue.x;
+							aniMap.top = -settings.shiftValue.y;
+							cssMapNext.left = settings.shiftValue.x;
+							cssMapNext.top = height + settings.shiftValue.y;
+							values.width = width;
+							values.height = vars.next.height() / settings.parts;
+							break;
+						case 'toRight':
+							values.width = vars.next.width() / settings.parts;
+							values.height = height;
+							aniMap.top = -settings.shiftValue.y;
+							aniMap.right = -settings.shiftValue.x;
+							cssMapNext.top = settings.shiftValue.y;
+							cssMapNext.right = width + settings.shiftValue.x;
+							break;
+						case 'toBottom':
+							values.width = width;
+							values.height = vars.next.height() / settings.parts;
+							aniMap.left = -settings.shiftValue.x;
+							aniMap.bottom = -settings.shiftValue.y;
+							cssMapNext.left = settings.shiftValue.x;
+							cssMapNext.bottom = height + settings.shiftValue.y;
+							break;
+						case 'toLeft':
+							values.width = vars.next.width() / settings.parts;
+							values.height = height;
+							aniMap.top = -settings.shiftValue.y;
+							aniMap.left = -settings.shiftValue.x;
+							cssMapNext.top = settings.shiftValue.y;
+							cssMapNext.left = width + settings.shiftValue.x;
+							break;
+					}
+					if (settings.animateActive) {
+						$activeParts.each(function (i) {
+							$this = $(this);
+							$this.delay(partDelay * i).animate(aniMap, partDuration, settings.easing);
+						});
+						delay = settings.parts * partDelay;
+					}
+
+					$nextParts.each(function(i){
+						var $this = $(this), newValues = [], aniMap = {opacity: 1};
+
+						switch(direction){
+							case 'toTop':
+								aniMap.left = 0;
+								aniMap.top = values.height * i;
+								break;
+							case 'toRight':
+								aniMap.top = 0;
+								aniMap.right = values.width * i;
+								break;
+							case 'toBottom':
+								aniMap.left = 0;
+								aniMap.bottom = values.height * i;
+								break;
+							case 'toLeft':
+								aniMap.top = 0;
+								aniMap.left = values.width * i;
+								break;
+						}
+
+						$this.delay(delay).css(cssMapNext).delay(i*partDelay).animate(aniMap, partDuration, settings.easing, function () {
+							if (i == settings.parts - 1) {
+								vars.active.html(activeContent);
+								vars.next.html(nextContent);
+								vars.active.css({
+									backgroundImage: activeBackgroundImage,
+									backgroundColor: activeBackgroundColor,
+									opacity: 0
+								});
+								vars.next.css({
+									backgroundImage: nextBackgroundImage,
+									backgroundColor: nextBackgroundColor,
+									opacity: 1
+								});
+								callback($slider, settings);
+							}
+						});
+					});
+				}
+
+			slideBars($slider, settings);
 		}
 	};
 
 	$.fn.rhinoslider.preparations = {
+		none: function ($slider, settings, vars) {},
+		fade: function ($slider, settings, vars) {},
 		slide: function ($slider, settings, vars) {
 			vars.items.css('overflow', 'hidden');
 			$slider.css('overflow', 'hidden');
+		},
+		kick: function ($slider, settings, vars) {
+			vars.items.css('overflow', 'hidden');
+			settings.shiftValue.x = parseInt(tmpShiftValue, 10);
+			settings.shiftValue.y = parseInt(tmpShiftValue, 10);
+			settings.parts.x = parseInt(tmpParts, 10);
+			settings.parts.y = parseInt(tmpParts, 10);
+		},
+		transfer: function($slider, settings, vars) {
+			//if shuffle-effect has x and y shift or parts
+			var shiftValue = String(tmpShiftValue);
+			if (shiftValue.indexOf(',') >= 0) {
+				var tmp = shiftValue.split(',');
+				settings.shiftValue.x = parseInt(tmp[0], 10);
+				settings.shiftValue.y = parseInt(tmp[1], 10);
+			} else {
+				settings.shiftValue.x = parseInt(tmpShiftValue, 10);
+				settings.shiftValue.y = parseInt(tmpShiftValue, 10);
+			}
+
+			vars.items.css('overflow', 'hidden');
+		},
+		shuffle: function ($slider, settings, vars) {
+			//if shuffle-effect has x and y shift or parts
+			var shiftValue = String(tmpShiftValue);
+			if (shiftValue.indexOf(',') >= 0) {
+				var tmp = shiftValue.split(',');
+				settings.shiftValue.x = tmp[0];
+				settings.shiftValue.y = tmp[1];
+			} else {
+				settings.shiftValue.x = parseInt(tmpShiftValue, 10);
+				settings.shiftValue.y = parseInt(tmpShiftValue, 10);
+			}
+			var parts = String(tmpParts);
+			if (parts.indexOf(',') >= 0) {
+				var tmp = parts.split(',');
+				settings.parts.x = tmp[0];
+				settings.parts.y = tmp[1];
+			} else {
+				settings.parts.x = parseInt(tmpParts, 10);
+				settings.parts.y = parseInt(tmpParts, 10);
+			}
+
+			vars.items.css('overflow', 'visible');
+		},
+		explode: function ($slider, settings, vars) {
+			//if shuffle-effect has x and y shift or parts
+			var shiftValue = String(tmpShiftValue);
+			if (shiftValue.indexOf(',') >= 0) {
+				var tmp = shiftValue.split(',');
+				settings.shiftValue.x = tmp[0];
+				settings.shiftValue.y = tmp[1];
+			} else {
+				settings.shiftValue.x = parseInt(tmpShiftValue, 10);
+				settings.shiftValue.y = parseInt(tmpShiftValue, 10);
+			}
+			var parts = String(tmpParts);
+			if (parts.indexOf(',') >= 0) {
+				var tmp = parts.split(',');
+				settings.parts.x = tmp[0];
+				settings.parts.y = tmp[1];
+			} else {
+				settings.parts.x = parseInt(tmpParts, 10);
+				settings.parts.y = parseInt(tmpParts, 10);
+			}
+
+			vars.items.css('overflow', 'visible');
+		},
+		turnOver: function ($slider, settings, vars) {
+			vars.items.css('overflow', 'hidden');
+			$slider.css('overflow', 'hidden');
+		},
+		chewyBars: function ($slider, settings, vars) {
+			//if shuffle-effect has x and y shift or parts
+			var shiftValue = String(tmpShiftValue);
+			if (shiftValue.indexOf(',') >= 0) {
+				var tmp = shiftValue.split(',');
+				settings.shiftValue.x = parseInt(tmp[0], 10);
+				settings.shiftValue.y = parseInt(tmp[1], 10);
+			} else {
+				settings.shiftValue.x = parseInt(tmpShiftValue, 10);
+				settings.shiftValue.y = parseInt(tmpShiftValue, 10);
+			}
+
+			//if bars-effect has x and y shift or parts
+			var parts = String(tmpParts);
+			if (parts.indexOf(',') >= 0) {
+				var tmp = parts.split(',');
+				settings.parts = parseInt(tmp[0], 10) * parseInt(tmp[1], 10);
+			} else {
+				settings.parts = parseInt(tmpParts, 10);
+			}
+
+			vars.items.css('overflow', 'visible');
+
 		}
 	};
 
