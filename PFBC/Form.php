@@ -293,8 +293,8 @@ class Form extends Base {
 
 	protected function renderCSSFiles() {
 		$urls = array(
-			$this->resourcesPath . "/bootstrap/css/bootstrap.min.css",
-			$this->resourcesPath . "/bootstrap/css/bootstrap-responsive.min.css"
+			$this->resourcesPath . "bootstrap/css/bootstrap.min.css",
+			$this->resourcesPath . "bootstrap/css/bootstrap-responsive.min.css"
 		);
 
 		foreach($this->_elements as $element) {
@@ -309,8 +309,8 @@ class Form extends Base {
 			{
 				case 'rhinoslider':
 					$elementUrls = array(
-						$this->resourcesPath . "/rhinoslider/css/rhinoslider-1.05.css",
-						$this->resourcesPath . "/rhinoslider/css/rhinoslider-override.css",
+						$this->resourcesPath . "rhinoslider/css/rhinoslider-1.05.css",
+						$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css",
 					);
 					break;
 			}
@@ -407,11 +407,11 @@ JS;
 
 	protected function renderJSFiles() {
 		$urls = array(
-			$this->resourcesPath . "/jquery.min.js",
-			$this->resourcesPath . "/bootstrap/js/bootstrap.min.js",
-			$this->resourcesPath . "/jquery-placeholder/jquery.placeholder.min.js",
+			$this->resourcesPath . "jquery.min.js",
+			$this->resourcesPath . "bootstrap/js/bootstrap.min.js",
+			$this->resourcesPath . "jquery-placeholder/jquery.placeholder.min.js",
 			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js',
-			$this->resourcesPath . "/knockout.mapping/knockout.mapping-2.4.1.js",
+			$this->resourcesPath . "knockout.mapping/knockout.mapping-2.4.1.js",
 		);
 
 		//$this->debug($this->_elements);
@@ -429,9 +429,9 @@ JS;
 			{
 				case 'rhinoslider':
 					$elementUrls = array(
-						$this->resourcesPath . "/rhinoslider/js/rhinoslider-1.05.min.js",
-						$this->resourcesPath . "/rhinoslider/js/mousewheel.js",
-						$this->resourcesPath . "/rhinoslider/js/easing.js"
+						$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.min.js",
+						$this->resourcesPath . "rhinoslider/js/mousewheel.js",
+						$this->resourcesPath . "rhinoslider/js/easing.js"
 					);
 					break;
 			}
