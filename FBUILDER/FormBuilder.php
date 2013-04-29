@@ -143,7 +143,17 @@ class FormBuilder
 						$field_options = array();
 						if( ! is_null($v->options))
 						{
-							$field_options = array_merge($field_options, $v->options);
+							if(is_array($v->options))
+							{
+								$field_options = array_merge($field_options, $v->options);
+							}
+							else
+							{
+								foreach($v->options as $opt_k => $opt_v)
+								{
+									$field_options['$opt_k'] = $opt_v;
+								}
+							}
 						}
 						$form->addElement(new PFBC\Element\Button($v->name, 'button', $field_options));
 					}
@@ -177,7 +187,17 @@ class FormBuilder
 					$field_options = array();
 					if( ! is_null($v->options))
 					{
-						$field_options = array_merge($field_options, $v->options);
+						if(is_array($v->options))
+						{
+							$field_options = array_merge($field_options, $v->options);
+						}
+						else
+						{
+							foreach($v->options as $opt_k => $opt_v)
+							{
+								$field_options['$opt_k'] = $opt_v;
+							}
+						}
 					}
 
 					$form->addElement(new $type($v->description.$this->options['label_seperator'], $v->name, $field_options));
