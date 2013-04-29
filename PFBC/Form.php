@@ -443,7 +443,8 @@ JS;
 						//$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.min.js",
 						$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.js",
 						$this->resourcesPath . "rhinoslider/js/mousewheel.js",
-						$this->resourcesPath . "rhinoslider/js/easing.js"
+						$this->resourcesPath . "rhinoslider/js/easing.js",
+						$this->resourcesPath . "rhinoslider/js/rhinoslider-ko.js",
 					);
 					break;
 			}

@@ -163,20 +163,6 @@ class FormWizard extends \PFBC\View {
 	{
 		// Setup the FormWizard
 		echo <<< JS
-$('.slider').rhinoslider({
-	controlsMousewheel: false,
-	controlsPlayPause: false,
-	controlsKeyboard: false,
-	cycled: false,
-	showBullets: 'always',
-	showControls: 'always',
-	slidePrevDirection: 'toRight',
-	slideNextDirection: 'toLeft',
-	prevText: 'Back',
-	nextText: 'Next',
-	bulletsClick: false
-});
-
 // Setup the Steps
 $('.rhino-bullet').each(function(index){
 	var link_text = $(this).html();
