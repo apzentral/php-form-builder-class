@@ -50,7 +50,7 @@ JS;
 
 	function getJSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "/ckeditor/ckeditor.js"
+			$this->_form->getResourcesPath() . "ckeditor/ckeditor.js"
 		);
 	}
-}	
+}

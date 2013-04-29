@@ -29,13 +29,13 @@ class Date extends Textbox {
 
 	function getJSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "/jquery-ui/js/jquery-ui.min.js"
+			$this->_form->getResourcesPath() . "jquery-ui/js/jquery-ui.min.js"
 		);
 	}
 
 	public function getCSSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "/jquery-ui/css/smoothness/jquery-ui.min.css"
+			$this->_form->getResourcesPath() . "jquery-ui/css/smoothness/jquery-ui.min.css"
 		);
 	}
 }

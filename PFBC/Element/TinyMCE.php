@@ -15,10 +15,10 @@ class TinyMCE extends Textarea {
 		echo 'tinyMCE.init({ mode: "exact", elements: "', $this->_attributes["id"], '", width: "100%"';
 		if(!empty($this->basic))
 			echo ', theme: "simple"';
-		else	
+		else
 			echo ', theme: "advanced", theme_advanced_resizing: true';
-		echo '});';	
-	
+		echo '});';
+
 		$ajax = $this->_form->getAjax();
 		$id = $this->_form->getAttribute("id");
 		if(!empty($ajax))
@@ -27,7 +27,7 @@ class TinyMCE extends Textarea {
 
 	function getJSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "/tiny_mce/tiny_mce.js"
+			$this->_form->getResourcesPath() . "tiny_mce/tiny_mce.js"
 		);
 	}
-}	
+}
