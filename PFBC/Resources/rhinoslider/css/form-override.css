@@ -124,6 +124,8 @@
   margin-left: 20px; }
 .form-horizontal .row-fluid .element-block input[type="text"], .form-horizontal .row-fluid .element-block select, .form-horizontal .row-fluid .element-block textarea, .form-horizontal .row-fluid .element-block input[type="tel"], .form-horizontal .row-fluid .element-block input[type="number"] {
   float: none; }
+.form-horizontal .row-fluid .birthday-picker select {
+  width: auto; }
 .form-horizontal .options-only .controls {
   margin-left: 30px; }
 .form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {

@@ -182,6 +182,12 @@
 				float: none;
 			}
 		}
+
+		.birthday-picker {
+			select {
+				width: auto;
+			}
+		}
 	}
 	.options-only {
 		.controls {

@@ -4,7 +4,7 @@ namespace PFBC\Element;
 class Date extends Textbox {
 	protected $_attributes = array(
 		"type" => "date",
-		"pattern" => "\d{2}/\d{2}/\d{4}"
+		"pattern" => "(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d"
 	);
 	protected $jQueryOptions;
 
@@ -26,6 +26,7 @@ class Date extends Textbox {
 			$options = array(
 				'changeMonth' => 'true',
 				'changeYear' => 'true',
+				'dateFormat' => "mm/dd/yy"
 			);
 			$this->jQueryOptions = $options;
 		}
