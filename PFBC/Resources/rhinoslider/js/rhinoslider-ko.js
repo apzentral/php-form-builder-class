@@ -20,9 +20,6 @@ $(function(){
 		},
 		setValidation : function(obj) {
 			var currentFieldset = this.getCurrentFieldset(obj);
-			if (currentFieldset === 0) {
-				obj.prev().prev().show({duration:500});
-			}
 			if (currentFieldset === (form_wizard.name.length-2)) {
 				obj.text('Send');
 			}
@@ -40,6 +37,9 @@ $(function(){
 				else {
 					obj.prev().trigger('click');
 				}
+				if (currentFieldset === 0) {
+					obj.prev().prev().show({duration:500});
+				}
 			}
 			obj.one("click", function() {
 				RHINO_FORM.setValidation(obj);
@@ -48,13 +48,27 @@ $(function(){
 		validateFields : function(obj) {
 			// Method to validate fields
 			var error = false;
+			var first_obj = null;
 			var current_form = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.slider .rhino-active');
+			$('#form-modal #modal-title').text('Please correct the following errors');
+			$("#form-modal #modal-body-text").html('');
 			// Get all inputs dom
 			$(":input", current_form).each(function(i){
+				var result;
 				$(this).unbind('blur');
-				error = RHINO_FORM.checkAttr($(this), true);
+				result = RHINO_FORM.checkAttr($(this), true);
+				if ( ! error) {
+					error = result;
+				}
+				if (first_obj === null && result) {
+					first_obj = $(this);
+				}
 			});
 
+			if (error) {
+				first_obj.addClass('first-error');
+				$('#form-modal').modal('show');
+			}
 			return ! error;
 		},
 		checkAttr: function(obj, printError=false) {
@@ -88,6 +102,7 @@ $(function(){
 			obj.blur(function() {
 				RHINO_FORM.checkAttr(obj, false);
 			});
+			$('#form-modal #modal-body-text').append('<p class="text-error">'+html+'</p>');
 		},
 		showRequest : function(formData, jqForm, options) {
 			// formData is an array; here we use $.param to convert it to a string to display it
@@ -144,4 +159,9 @@ $(function(){
 	$(".form-submit").one("click", function() {
 		RHINO_FORM.setValidation($(this));
 	});
+
+	// Modal Event
+	$('#form-modal').on('hidden', function () {
+		$('.slider .first-error').focus().removeClass('first-error');
+    })
 });

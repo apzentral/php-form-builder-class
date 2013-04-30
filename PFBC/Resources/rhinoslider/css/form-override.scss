@@ -149,6 +149,17 @@
 	box-shadow: 0 0 6px #F8B9B7 !important;
 }
 
+#form-modal {
+	.alert {
+		.close {
+			right: -5px;
+		}
+	}
+	#modal-body-text {
+		margin-left: 50px;
+	}
+}
+
 //===== Override BootStrap =====//
 .form-horizontal {
 	.row-fluid {

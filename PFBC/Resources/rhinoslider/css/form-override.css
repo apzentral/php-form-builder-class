@@ -109,6 +109,11 @@
   border-color: #e9322d !important;
   box-shadow: 0 0 6px #f8b9b7 !important; }
 
+#form-modal .alert .close {
+  right: -5px; }
+#form-modal #modal-body-text {
+  margin-left: 50px; }
+
 .form-horizontal .row-fluid label {
   width: 120px;
   font-size: 13px; }
