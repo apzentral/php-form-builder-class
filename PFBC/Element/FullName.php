@@ -49,7 +49,7 @@ class FullName extends Textbox {
 		echo '<div class="row-fluid">';
 		echo '<div class="span5"><input', $new_attr, ' placeholder="Last Name" name="fullname_last_name" id="fullname_last_name"'.$required.' data-validation-name="Last Name"/></div>';
 		echo '<div class="span4"><input', $new_attr, ' placeholder="First Name" name="fullname_first_name" id="fullname_first_name"'.$required.' data-validation-name="First Name"/></div>';
-		echo '<div class="span3"><input', $new_attr, ' placeholder="Middle Initial" name="fullname_middle_name" id="fullname_middle_name"'.$required.' data-validation-name="Middle Initial"/></div>';
+		echo '<div class="span3"><input', $new_attr, ' placeholder="Middle Initial" name="fullname_middle_name" id="fullname_middle_name" data-validation-name="Middle Initial"/></div>';
 		echo '</div>';
 
 		$this->renderAddOn("append");

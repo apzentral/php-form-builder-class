@@ -60,6 +60,12 @@
         color: #000;
         background: #fff;
         border-bottom: none; }
+      .rhino-bullets li a.rhino-bullet.step-error {
+        background: #f5715f;
+        color: #FFF; }
+      .rhino-bullets li a.rhino-bullet.step-success {
+        background: #72e487;
+        color: #FFF; }
 
 .rhino-btn {
   cursor: pointer;

@@ -81,6 +81,17 @@
 					background:#fff;
 					border-bottom: none;
 				}
+
+				// Background
+				&.step-error{
+					background:#f5715f;
+					color:#FFF;
+				}
+
+				&.step-success{
+					background:#72e487;
+					color:#FFF;
+				}
 			}
 		}
 	}

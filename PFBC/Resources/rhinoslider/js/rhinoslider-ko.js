@@ -49,7 +49,9 @@ $(function(){
 			// Method to validate fields
 			var error = false;
 			var first_obj = null;
-			var current_form = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.slider .rhino-active');
+			var obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container');
+			var current_form = obj_parent.find('.slider .rhino-active');
+			var current_bullet = obj_parent.find('.rhino-active-bullet');
 			$('#form-modal #modal-title').text('Please correct the following errors');
 			$("#form-modal #modal-body-text").html('');
 			// Get all inputs dom
@@ -66,8 +68,11 @@ $(function(){
 			});
 
 			if (error) {
+				$(current_bullet).removeClass("step-success").addClass("step-error");
 				first_obj.addClass('first-error');
 				$('#form-modal').modal('show');
+			} else {
+				$(current_bullet).removeClass("step-error").addClass("step-success");
 			}
 			return ! error;
 		},
@@ -82,7 +87,7 @@ $(function(){
 					RHINO_FORM.printError(obj, error_message);
 				}
 			}
-			if ( ! field_error && obj.attr('pattern')) {
+			if ( ! field_error && obj.attr('required') && obj.attr('pattern')) {
 				var regex = new RegExp(obj.attr('pattern'), 'g');
 				if ( ! regex.test(obj.val())) {
 					field_error = true;
