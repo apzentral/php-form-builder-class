@@ -164,6 +164,11 @@ $(function(){
 	$(".form-submit").one("click", function() {
 		RHINO_FORM.setValidation($(this));
 	});
+	$('.rhino-btn').on("keyup", function(e) {
+		if (e.keyCode === 13) {	// Enter Pressed
+			$(this).trigger('click');
+		}
+	});
 
 	// Modal Event
 	$('#form-modal').on('hidden', function () {
