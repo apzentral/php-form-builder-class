@@ -6,6 +6,7 @@ class Date extends Textbox {
 		"type" => "date",
 		"pattern" => "\d{2}/\d{2}/\d{4}"
 	);
+	protected $jQueryOptions;
 
 	public function __construct($label, $name, array $properties = null) {
 		$this->_attributes["placeholder"] = "mm/dd/yyyy";
@@ -20,11 +21,15 @@ class Date extends Textbox {
 	}
 
 	function jQueryDocumentReady() {
-		$options = '{
-		changeMonth: true,
-		changeYear: true
-		}';
-		echo 'jQuery("#', $this->_attributes["id"], '").datepicker('.$options.');';
+		if(is_null($this->jQueryOptions))
+		{
+			$options = array(
+				'changeMonth' => 'true',
+				'changeYear' => 'true',
+			);
+			$this->jQueryOptions = $options;
+		}
+		echo 'jQuery("#', $this->_attributes["id"], '").datepicker(', $this->jQueryOptions(), ');';
 	}
 
 	function getJSFiles() {

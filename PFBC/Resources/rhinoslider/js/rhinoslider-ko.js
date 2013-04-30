@@ -1,9 +1,6 @@
 //===== KO Setup for FormWizard =====//
 $(function(){
 	var RHINO_FORM = {
-		// Property
-		currentFieldset : 0,
-
 		// Methods
 		getCurrentFieldset : function(obj) {
 			return parseInt(obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.rhino-active').attr("id").match(/\d+/g));
@@ -59,7 +56,7 @@ $(function(){
 			// DOM element for the form do this:
 			// var formElement = jqForm[0];
 
-			alert('About to submit: \n\n' + queryString);
+			//alert('About to submit: \n\n' + queryString);
 
 			// here we could return false to prevent the form from being submitted;
 			// returning anything other than false will allow the form submit to continue
@@ -77,7 +74,7 @@ $(function(){
 			// property set to 'json' then the first argument to the success callback
 			// is the json data object returned by the server
 
-			alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.');
+			//alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.');
 		}
 	};
 
