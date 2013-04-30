@@ -50,6 +50,12 @@ class FormWizard extends \PFBC\View {
 		$elementCount = 0;
 		for($e = 0; $e < $elementSize; ++$e) {
 			$element = $elements[$e];
+			// Set the data-validation-name to be used as form validation
+			$data_validation_name = $element->getAttribute('data-validation-name');
+			if( empty($data_validation_name))
+			{
+				$element->setAttribute('data-validation-name', preg_replace('/:/','',$element->getLabel()));
+			}
 
 			if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTML)
 				$element->render();

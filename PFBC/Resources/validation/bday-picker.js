@@ -35,7 +35,8 @@
       "fieldId"       : "birthdate",
       "hiddenDate"    : true,
       "onChange"      : null,
-      "tabindex"      : null
+      "tabindex"      : null,
+      "required"  : false
     };
 
     return this.each(function() {
@@ -43,10 +44,11 @@
       if (options) { $.extend(settings, options); }
 
       // Create the html picker skeleton
+      var req_field = (settings['required']) ? ' required': '';
       var $fieldset = $("<fieldset class='birthday-picker'></fieldset>"),
-          $year = $("<select class='birth-year' name='birth[year]'></select>"),
-          $month = $("<select class='birth-month' name='birth[month]'></select>"),
-          $day = $("<select class='birth-day' name='birth[day]'></select>");
+          $year = $("<select class='birth-year' name='birth[year]'"+req_field+" data-validation-name='Birth Year'></select>"),
+          $month = $("<select class='birth-month' name='birth[month]'"+req_field+" data-validation-name='Birth Month'></select>"),
+          $day = $("<select class='birth-day' name='birth[day]'"+req_field+" data-validation-name='Birth Day'></select>");
 
       if (settings["legend"]) { $("<legend>" + settings["legend"] + "</legend>").appendTo($fieldset); }
 
@@ -78,9 +80,9 @@
 
       // Add the option placeholders if specified
       if (settings["placeholder"]) {
-        $("<option value='0'>Year:</option>").appendTo($year);
-        $("<option value='0'>Month:</option>").appendTo($month);
-        $("<option value='0'>Day:</option>").appendTo($day);
+        $("<option value=''>Year:</option>").appendTo($year);
+        $("<option value=''>Month:</option>").appendTo($month);
+        $("<option value=''>Day:</option>").appendTo($day);
       }
 
       var hiddenDate;

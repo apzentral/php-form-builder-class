@@ -1,6 +1,7 @@
 //===== KO Setup for FormWizard =====//
 $(function(){
 	var RHINO_FORM = {
+		self: this,
 		// Methods
 		getCurrentFieldset : function(obj) {
 			return parseInt(obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.rhino-active').attr("id").match(/\d+/g));
@@ -25,7 +26,8 @@ $(function(){
 			if (currentFieldset === (form_wizard.name.length-2)) {
 				obj.text('Send');
 			}
-			if (this.validateFields()) {
+			// Validate Current Fields
+			if (this.validateFields(obj)) {
 				if (currentFieldset === (form_wizard.name.length-1)) {
 					// Send form
 					var options = {
@@ -43,9 +45,49 @@ $(function(){
 				RHINO_FORM.setValidation(obj);
 			});
 		},
-		validateFields : function() {
+		validateFields : function(obj) {
 			// Method to validate fields
-			return true;
+			var error = false;
+			var current_form = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.slider .rhino-active');
+			// Get all inputs dom
+			$(":input", current_form).each(function(i){
+				$(this).unbind('blur');
+				error = RHINO_FORM.checkAttr($(this), true);
+			});
+
+			return ! error;
+		},
+		checkAttr: function(obj, printError=false) {
+			var field_error = false;
+			var field_name = (obj.data('validation-name')) ? obj.data('validation-name'): '';
+			obj.removeClass('field-error');
+			if (obj.attr('required') && obj.val() == '') {
+				field_error = true;
+				if (printError) {
+					var error_message = field_name + ' is required.';
+					RHINO_FORM.printError(obj, error_message);
+				}
+			}
+			if ( ! field_error && obj.attr('pattern')) {
+				var regex = new RegExp(obj.attr('pattern'), 'g');
+				if ( ! regex.test(obj.val())) {
+					field_error = true;
+					if (printError) {
+						var error_message = field_name + ' is invalid.';
+						RHINO_FORM.printError(obj, error_message);
+					}
+				}
+			}
+			if (field_error) {
+				obj.addClass('field-error');
+			}
+			return field_error;
+		},
+		// Build Error Dialog
+		printError : function(obj, html) {
+			obj.blur(function() {
+				RHINO_FORM.checkAttr(obj, false);
+			});
 		},
 		showRequest : function(formData, jqForm, options) {
 			// formData is an array; here we use $.param to convert it to a string to display it

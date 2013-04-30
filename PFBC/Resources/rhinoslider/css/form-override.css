@@ -105,6 +105,10 @@
   border: 0;
   height: 80px; }
 
+.field-error {
+  border-color: #e9322d !important;
+  box-shadow: 0 0 6px #f8b9b7 !important; }
+
 .form-horizontal .row-fluid label {
   width: 120px;
   font-size: 13px; }

@@ -31,7 +31,7 @@ class BDate extends Textbox {
 
 	function getJSFiles() {
 		return array(
-			$this->_form->getResourcesPath() . "validation/bday-picker.min.js"
+			$this->_form->getResourcesPath() . "validation/bday-picker.js"
 		);
 	}
 
