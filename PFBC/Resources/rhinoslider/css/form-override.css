@@ -11,6 +11,10 @@
     margin: auto; }
   .slider fieldset h4 {
     margin: 20px 0 20px 30px; }
+  .slider .rhino-item {
+    display: none; }
+  .slider .rhino-active {
+    display: block; }
 
 .rhino-bullets {
   display: block;

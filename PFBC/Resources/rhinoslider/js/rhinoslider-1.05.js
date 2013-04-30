@@ -92,7 +92,7 @@
 				//add prev/next-buttons
 				if (settings.controlsPrevNext) {
 					vars.container.addClass(vars.prefix + 'controls-prev-next');
-					buttons = '<div class="form-actions"><a class="' + vars.prefix + 'prev ' + vars.prefix + 'btn btn btn-primary">' + settings.prevText + '</a><a class="' + vars.prefix + 'next ' + vars.prefix + 'btn btn btn-primary">' + settings.nextText + '</a><a class="form-submit rhino-btn btn btn-primary">' + settings.nextText + '</a></div>';
+					buttons = '<div class="form-actions"><a class="' + vars.prefix + 'prev ' + vars.prefix + 'btn btn btn-primary" tabindex="0">' + settings.prevText + '</a><a class="' + vars.prefix + 'next ' + vars.prefix + 'btn btn btn-primary">' + settings.nextText + '</a><a class="form-submit rhino-btn btn btn-primary" tabindex="0">' + settings.nextText + '</a></div>';
 					vars.container.append(buttons);
 
 					vars.buttons.prev = vars.container.find('.' + vars.prefix + 'prev');
