@@ -74,6 +74,7 @@ $(function(){
 			} else {
 				$(current_bullet).removeClass("step-error").addClass("step-success");
 			}
+			//error = false;	// Debug
 			return (! error);
 		},
 		checkAttr: function(obj, printError) {
@@ -88,7 +89,7 @@ $(function(){
 					RHINO_FORM.printError(obj, error_message);
 				}
 			}
-			if ( ! field_error && obj.attr('required') && obj.attr('pattern')) {
+			if ( ! field_error && (obj.attr('required') || obj.val() != '') && obj.attr('pattern')) {
 				var regex = new RegExp(obj.attr('pattern'), 'g');
 				if ( ! regex.test(obj.val())) {
 					field_error = true;
