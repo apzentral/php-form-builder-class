@@ -429,6 +429,7 @@ JS;
 			$this->resourcesPath . "jquery-placeholder/jquery.placeholder.min.js",
 			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js',
 			$this->resourcesPath . "knockout.mapping/knockout.mapping-2.4.1.js",
+			$this->resourcesPath . "knockout.custom.js",
 			$this->resourcesPath . "jquery.form.js",
 			$this->resourcesPath . "validation/jquery.validation.js",
 			$this->resourcesPath . "validation/bootstrap-formhelpers-phone.format.js",
