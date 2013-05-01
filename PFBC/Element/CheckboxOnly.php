@@ -58,7 +58,7 @@ class CheckboxOnly extends Checkbox {
 				$close_div = TRUE;
 			}
 
-			echo '<label class="', $labelClass, '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "required")), ' value="', $this->filter($value), '"';
+			echo '<label class="', $labelClass, '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "required", "data-bind-div", "data-bind-label")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->_attributes["value"]))
 				echo ' checked="checked"';
 			echo '/> ', $text, ' </label> ';

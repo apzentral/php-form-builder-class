@@ -49,7 +49,7 @@ class Select extends \PFBC\OptionElement {
 		if(!empty($this->_attributes["multiple"]) && substr($this->_attributes["name"], -2) != "[]")
 			$this->_attributes["name"] .= "[]";
 
-		echo '<select', $this->getAttributes(array("value", "selected")), '>';
+		echo '<select', $this->getAttributes(array("value", "selected", "data-bind-div", "data-bind-label")), '>';
 		$selected = false;
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);

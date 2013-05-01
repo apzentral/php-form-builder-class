@@ -20,7 +20,7 @@ class BDate extends Textbox {
 
 
 		echo '<div class="row-fluid">';
-		echo '<div class="span12"><div '.$this->getAttributes().'></div></div>';
+		echo '<div class="span12"><div '.$this->getAttributes(array("data-bind-div", "data-bind-label")).'></div></div>';
 		echo '</div>';
 
 		$this->renderAddOn("append");

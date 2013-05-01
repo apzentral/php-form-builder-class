@@ -5,7 +5,7 @@ class Checksort extends Sort {
 	protected $_attributes = array("type" => "checkbox");
 	protected $inline;
 
-	public function render() { 
+	public function render() {
 		if(isset($this->_attributes["value"])) {
 			if(!is_array($this->_attributes["value"]))
 				$this->_attributes["value"] = array($this->_attributes["value"]);
@@ -19,7 +19,7 @@ class Checksort extends Sort {
 		$labelClass = $this->_attributes["type"];
 		if(!empty($this->inline))
 			$labelClass .= " inline";
-		
+
 		$count = 0;
 		$existing = "";
 
@@ -27,7 +27,7 @@ class Checksort extends Sort {
             $value = $this->getOptionValue($value);
             if(!empty($this->inline) && $count > 0)
                 echo ' ';
-            echo '<label class="', $labelClass, '"><input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick", "required")), ' value="', $this->filter($value), '"';
+            echo '<label class="', $labelClass, '"><input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick", "required", "data-bind-div", "data-bind-label")), ' value="', $this->filter($value), '"';
             if(in_array($value, $this->_attributes["value"]))
                 echo ' checked="checked"';
             echo ' onclick="updateChecksort(this, \'', str_replace(array('"', "'"), array('&quot;', "\'"), $text), '\');"/>', $text, '</label>';
@@ -43,14 +43,14 @@ class Checksort extends Sort {
 
 	function renderJS() {
 		echo <<<JS
-if(typeof updateChecksort != "function") {		
+if(typeof updateChecksort != "function") {
 	function updateChecksort(element, text) {
 		var position = element.id.lastIndexOf("-");
 		var id = element.id.substr(0, position);
 		var index = element.id.substr(position + 1);
 		if(element.checked) {
 			jQuery("#" + id).append('<li id="' + id + '-sort-' + index + '" class="ui-state-default"><input type="hidden" name="{$this->_attributes["name"]}" value="' + element.value + '"/>' + text + '</li>');
-		}	
+		}
 		else
 			jQuery("#" + id + "-sort-" + index).remove();
 	}

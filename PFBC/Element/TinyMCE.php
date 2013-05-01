@@ -5,7 +5,7 @@ class TinyMCE extends Textarea {
 	protected $basic;
 
 	public function render() {
-        echo "<textarea", $this->getAttributes(array("value", "required")), ">";
+        echo "<textarea", $this->getAttributes(array("value", "required", "data-bind-div", "data-bind-label")), ">";
         if(!empty($this->_attributes["value"]))
             echo $this->_attributes["value"];
         echo "</textarea>";

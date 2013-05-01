@@ -83,16 +83,12 @@ class FormWizard extends \PFBC\View {
 			}
             else {
 				$class = $element->getAttribute("container_class");	// Adding Class to the container div
-				$data_bind = $element->getAttribute("data-bind");	// Adding data-bind to the container div
 				if( ! empty($class))
 				{
 					$class = ' ' . $class;
 				}
-				if( ! empty($data_bind))
-				{
-					$data_bind = ' ' . $data_bind;
-				}
 
+				$data_bind = ($element->getAttribute('data-bind-div') != '') ? ' data-bind="'.$this->filter($element->getAttribute('data-bind-div')).'"': '';
 				echo '<div class="control-group'.$class.'" id="element_', $element->getAttribute('id'), '"'.$data_bind.'>', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
 				++$elementCount;
 			}
@@ -134,7 +130,8 @@ class FormWizard extends \PFBC\View {
 	protected function renderLabel(\PFBC\Element $element) {
         $label = $element->getLabel();
         if(!empty($label)) {
-			echo '<label class="control-label" for="', $element->getAttribute("id"), '">';
+			$data_bind = ($element->getAttribute('data-bind-label') != '') ? ' data-bind="'.$this->filter($element->getAttribute('data-bind-label')).'"': '';
+			echo '<label class="control-label" for="', $element->getAttribute("id"), '"'.$data_bind.'>';
 			if($element->isRequired())
 				echo '<span class="required">* </span>';
 			echo $label, '</label>';

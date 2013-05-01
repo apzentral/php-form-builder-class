@@ -5,7 +5,7 @@ class Checkbox extends \PFBC\OptionElement {
 	protected $_attributes = array("type" => "checkbox");
 	protected $inline;
 
-	public function render() { 
+	public function render() {
 		if(isset($this->_attributes["value"])) {
 			if(!is_array($this->_attributes["value"]))
 				$this->_attributes["value"] = array($this->_attributes["value"]);
@@ -24,11 +24,11 @@ class Checkbox extends \PFBC\OptionElement {
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);
 
-			echo '<label class="', $labelClass, '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "required")), ' value="', $this->filter($value), '"';
+			echo '<label class="', $labelClass, '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "required", "data-bind-div", "data-bind-label")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->_attributes["value"]))
 				echo ' checked="checked"';
 			echo '/> ', $text, ' </label> ';
 			++$count;
-		}	
+		}
 	}
 }

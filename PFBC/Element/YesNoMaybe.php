@@ -26,7 +26,7 @@ class YesNoMaybe extends Radio {
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);
 
-			echo '<label class="', $labelClass . '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked")), ' value="', $this->filter($value), '"';
+			echo '<label class="', $labelClass . '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "data-bind-div", "data-bind-label")), ' value="', $this->filter($value), '"';
 			if(isset($this->_attributes["value"]) && $this->_attributes["value"] == $value)
 				echo ' checked="checked"';
 			echo '/> ', $text, ' </label> ';
