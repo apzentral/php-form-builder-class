@@ -74,9 +74,10 @@ $(function(){
 			} else {
 				$(current_bullet).removeClass("step-error").addClass("step-success");
 			}
-			return ! error;
+			return (! error);
 		},
-		checkAttr: function(obj, printError=false) {
+		checkAttr: function(obj, printError) {
+			printError = typeof printError !== 'undefined' ? printError : false;
 			var field_error = false;
 			var field_name = (obj.data('validation-name')) ? obj.data('validation-name'): '';
 			obj.removeClass('field-error');
