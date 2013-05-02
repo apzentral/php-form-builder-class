@@ -334,6 +334,11 @@ class Form extends Base {
 			$urls = array_merge($urls, $elementUrls);
 		}
 
+		/* Check for Browser */
+		if ( strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'webkit') !== false ) {
+			array_push($urls, $this->resourcesPath . "override/chrome.css");
+		}
+
 		/*This section prevents duplicate css files from being loaded.*/
 		if(!empty($urls)) {
 			$urls = array_values(array_unique($urls));
