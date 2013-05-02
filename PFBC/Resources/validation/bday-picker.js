@@ -26,7 +26,7 @@
       "minAge"        : 0,
       "futureDates"   : false,
       "maxYear"       : todayYear,
-      "dateFormat"    : "middleEndian",
+      "dateFormat"    : "bigEndian",
       "monthFormat"   : "short",
       "placeholder"   : true,
       "legend"        : "",

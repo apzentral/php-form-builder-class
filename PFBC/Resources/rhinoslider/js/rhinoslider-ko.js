@@ -1,6 +1,6 @@
 //===== KO Setup for FormWizard =====//
 $(function(){
-	var RHINO_FORM = {
+	var FBUILDER = {
 		self: this,
 		// Methods
 		getCurrentFieldset : function(obj) {
@@ -14,8 +14,8 @@ $(function(){
 			if (currentFieldset === (form_wizard.name.length-1)) {
 				obj.next().next().text('Next');
 			}
-			obj.one("click", function() {
-				RHINO_FORM.setBackButton(obj);
+			obj.one("click.fbuilder", function() {
+				FBUILDER.setBackButton(obj);
 			});
 		},
 		setValidation : function(obj) {
@@ -41,8 +41,8 @@ $(function(){
 					obj.prev().prev().show({duration:500});
 				}
 			}
-			obj.one("click", function() {
-				RHINO_FORM.setValidation(obj);
+			obj.one("click.fbuilder", function() {
+				FBUILDER.setValidation(obj);
 			});
 		},
 		validateFields : function(obj) {
@@ -57,8 +57,8 @@ $(function(){
 			// Get all inputs dom
 			$(":input", current_form).each(function(i){
 				var result;
-				$(this).unbind('blur');
-				result = RHINO_FORM.checkAttr($(this), true);
+				$(this).off('blur');
+				result = FBUILDER.checkAttr($(this), true);
 				if ( ! error) {
 					error = result;
 				}
@@ -74,7 +74,7 @@ $(function(){
 			} else {
 				$(current_bullet).removeClass("step-error").addClass("step-success");
 			}
-			//error = false;	// Debug
+			error = false;	// Debug
 			return (! error);
 		},
 		checkAttr: function(obj, printError) {
@@ -86,7 +86,7 @@ $(function(){
 				field_error = true;
 				if (printError) {
 					var error_message = field_name + ' is required.';
-					RHINO_FORM.printError(obj, error_message);
+					FBUILDER.printError(obj, error_message);
 				}
 			}
 			if ( ! field_error && (obj.attr('required') || obj.val() != '') && obj.attr('pattern')) {
@@ -95,7 +95,7 @@ $(function(){
 					field_error = true;
 					if (printError) {
 						var error_message = field_name + ' is invalid.';
-						RHINO_FORM.printError(obj, error_message);
+						FBUILDER.printError(obj, error_message);
 					}
 				}
 			}
@@ -107,7 +107,7 @@ $(function(){
 		// Build Error Dialog
 		printError : function(obj, html) {
 			obj.blur(function() {
-				RHINO_FORM.checkAttr(obj, false);
+				FBUILDER.checkAttr(obj, false);
 			});
 			$('#form-modal #modal-body-text').append('<p class="text-error">'+html+'</p>');
 		},
@@ -160,20 +160,20 @@ $(function(){
 	$(".rhino-prev").hide();
 	$(".rhino-next").hide();
 
-	$(".rhino-prev").one("click", function() {
-		RHINO_FORM.setBackButton($(this));
+	$(".rhino-prev").one("click.fbuilder", function() {
+		FBUILDER.setBackButton($(this));
 	});
-	$(".form-submit").one("click", function() {
-		RHINO_FORM.setValidation($(this));
+	$(".form-submit").one("click.fbuilder", function() {
+		FBUILDER.setValidation($(this));
 	});
-	$('.rhino-btn').on("keyup", function(e) {
+	$('.rhino-btn').on("keyup.fbuilder", function(e) {
 		if (e.keyCode === 13) {	// Enter Pressed
 			$(this).trigger('click');
 		}
 	});
 
 	// Modal Event
-	$('#form-modal').on('hidden', function () {
+	$('#form-modal').on('hidden.fbuilder', function () {
 		$('.slider .first-error').focus().removeClass('first-error');
     })
 });

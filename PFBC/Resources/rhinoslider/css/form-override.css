@@ -226,11 +226,15 @@ div.remove-observableArray:hover {
 .form-horizontal .row-fluid .birthday-picker select {
   width: auto;
 }
-/* line 242, form-override.scss */
+/* line 241, form-override.scss */
+.form-horizontal .row-fluid input[type="button"] {
+  margin: 10px auto;
+}
+/* line 246, form-override.scss */
 .form-horizontal .options-only .controls {
   margin-left: 30px;
 }
-/* line 246, form-override.scss */
+/* line 250, form-override.scss */
 .form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {
   width: 90%;
 }
