@@ -18,7 +18,6 @@ class BDate extends Textbox {
 		if(isset($this->attributes["value"]) && is_array($this->attributes["value"]))
 			$this->attributes["value"] = "";
 
-
 		echo '<div class="row-fluid">';
 		echo '<div class="span12"><div '.$this->getAttributes(array("data-bind-div", "data-bind-label")).'></div></div>';
 		echo '</div>';

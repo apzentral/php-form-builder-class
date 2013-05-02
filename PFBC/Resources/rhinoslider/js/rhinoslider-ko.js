@@ -74,13 +74,14 @@ $(function(){
 			} else {
 				$(current_bullet).removeClass("step-error").addClass("step-success");
 			}
-			error = false;	// Debug
+			//error = false;	// Debug
 			return (! error);
 		},
 		checkAttr: function(obj, printError) {
 			printError = typeof printError !== 'undefined' ? printError : false;
 			var field_error = false;
 			var field_name = (obj.data('validation-name')) ? obj.data('validation-name'): '';
+			obj.val($.trim(obj.val()));	// trim val
 			obj.removeClass('field-error');
 			if (obj.attr('required') && obj.val() == '') {
 				field_error = true;

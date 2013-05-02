@@ -26,7 +26,7 @@
       "minAge"        : 0,
       "futureDates"   : false,
       "maxYear"       : todayYear,
-      "dateFormat"    : "bigEndian",
+      "dateFormat"    : "middleEndian",
       "monthFormat"   : "short",
       "placeholder"   : true,
       "legend"        : "",
@@ -87,12 +87,14 @@
 
       var hiddenDate;
       if (settings["defaultDate"]) {
-        var defDate = new Date(settings["defaultDate"] + "T00:00:00"),
-        defYear = defDate.getFullYear(),
+        var defDate = new Date(settings["defaultDate"] + "T00:00:00");
+      } else {
+        var defDate = new Date();
+      }
+      var defYear = defDate.getFullYear(),
         defMonth = defDate.getMonth() + 1,
         defDay = defDate.getDate();
-        hiddenDate = defYear + "-" + defMonth + "-" + defDay;
-      }
+      hiddenDate = defYear + "-" + defMonth + "-" + defDay;
 
       // Create the hidden date markup
       if (settings["hiddenDate"]) {

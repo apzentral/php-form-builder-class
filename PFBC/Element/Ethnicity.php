@@ -6,7 +6,7 @@ class Ethnicity extends Select {
 		$options = array(
 			"" => "--Select Ethnicity--",
 			"Hispanic" => "Hispanic",
-			"Non-Hispanic" => "Hispanic"
+			"Non-Hispanic" => "Non-Hispanic"
 		);
 		parent::__construct($label, $name, $options, $properties);
     }

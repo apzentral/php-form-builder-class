@@ -1,7 +1,12 @@
 <?php
 namespace PFBC\Element;
 
-class FullName extends Textbox {
+class BloodPressure extends Textbox {
+	protected $_attributes = array(
+		"type" => "number",
+		"min" => 0,
+		"max" => 500
+	);
 
 	public function render() {
 		$addons = array();
@@ -47,9 +52,8 @@ class FullName extends Textbox {
 		//var_dump($this->_attributes);
 		$required = (isset($this->_attributes['required'])) ? ' required': '';
 		echo '<div class="row-fluid">';
-		echo '<div class="span4"><input', $new_attr, ' placeholder="First Name" name="'.$this->_attributes['name'].'_fullname_first_name" id="'.$this->_attributes['name'].'_fullname_first_name"'.$required.' data-validation-name="First Name"/></div>';
-		echo '<div class="span5"><input', $new_attr, ' placeholder="Last Name" name="'.$this->_attributes['name'].'_fullname_last_name" id="'.$this->_attributes['name'].'_fullname_last_name"'.$required.' data-validation-name="Last Name"/></div>';
-		echo '<div class="span3"><input', $new_attr, ' placeholder="Middle Initial" name="'.$this->_attributes['name'].'_fullname_middle_name" id="'.$this->_attributes['name'].'_fullname_middle_name" data-validation-name="Middle Initial"/></div>';
+		echo '<div class="span12 blood-pressure"><input', $new_attr, ' placeholder="Systolic" name="'.$this->_attributes['name'].'_systolic" id="'.$this->_attributes['name'].'_systolic"'.$required.' data-validation-name="Systolic"/> / ';
+		echo '<input', $new_attr, ' placeholder="Diastolic" name="'.$this->_attributes['name'].'_diastolic" id="'.$this->_attributes['name'].'_diastolic"'.$required.' data-validation-name="Diastolic"/></div>';
 		echo '</div>';
 
 		$this->renderAddOn("append");
