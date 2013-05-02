@@ -23,6 +23,10 @@ $(function(){
 
 	// Check for Max and Min Attr
 	$('input[type="number"]').on('blur', function() {
+		$(this).val(parseFloat($(this).val()));
+		if (isNaN($(this).val())) {
+			$(this).val('');
+		}
 		if ($(this).attr('min')) {
 			VAL_HELPER.checkMin($(this));
 		}
