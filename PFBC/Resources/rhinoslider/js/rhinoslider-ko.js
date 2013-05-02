@@ -8,21 +8,25 @@ $(function(){
 		},
 		setBackButton : function(obj) {
 			var currentFieldset = this.getCurrentFieldset(obj);
-			if (currentFieldset === 1) {
-				obj.hide({duration:500});
-			}
-			if (currentFieldset === (form_wizard.name.length-1)) {
-				obj.next().next().text('Next');
-			}
 			obj.one("click.fbuilder", function() {
 				FBUILDER.setBackButton(obj);
 			});
+			var obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container');
+			var previous_bullet = obj_parent.find('.rhino-active-bullet');
+			var current_bullet = $('#rhino-item'+(currentFieldset-1)+'-bullet', obj_parent);
+			var result = FBUILDER.validateFields(obj, false);
+			if (result) {
+				previous_bullet.off('click');
+				FBUILDER.clickBullet(previous_bullet, obj, obj_parent);
+				current_bullet.removeClass('step-success').addClass('rhino-active-bullet');
+				obj.prev().prev().trigger('click');
+			} else {
+				return false;
+			}
 		},
 		setValidation : function(obj) {
 			var currentFieldset = this.getCurrentFieldset(obj);
-			if (currentFieldset === (form_wizard.name.length-2)) {
-				obj.text('Send');
-			}
+
 			// Validate Current Fields
 			if (this.validateFields(obj)) {
 				if (currentFieldset === (form_wizard.name.length-1)) {
@@ -35,23 +39,27 @@ $(function(){
 					obj.parentsUntil('.rhino-form-wrapper', '.form-horizontal').ajaxSubmit(options);
 				}
 				else {
-					obj.prev().trigger('click');
+					obj.prev().prev().trigger('click');
 				}
 				if (currentFieldset === 0) {
-					obj.prev().prev().show({duration:500});
+					obj.prev().show({duration:500});
 				}
 			}
 			obj.one("click.fbuilder", function() {
 				FBUILDER.setValidation(obj);
 			});
 		},
-		validateFields : function(obj) {
+		validateFields : function(obj, setClickE, checkBtn) {
+			setClickE = typeof setClickE === 'undefined' ? true : setClickE;
+			checkBtn = typeof checkBtn === 'undefined' ? true : checkBtn;
 			// Method to validate fields
+			var currentFieldset = this.getCurrentFieldset(obj);
 			var error = false;
 			var first_obj = null;
 			var obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container');
 			var current_form = obj_parent.find('.slider .rhino-active');
 			var current_bullet = obj_parent.find('.rhino-active-bullet');
+
 			$('#form-modal #modal-title').text('Please correct the following errors');
 			$("#form-modal #modal-body-text").html('');
 			// Get all inputs dom
@@ -67,14 +75,37 @@ $(function(){
 				}
 			});
 
+			//error = false;	// Debug
+			if (setClickE) {
+				FBUILDER.clickBullet(current_bullet, obj, obj_parent);
+			}
+
 			if (error) {
-				$(current_bullet).removeClass("step-success").addClass("step-error");
+				current_bullet.removeClass("step-success").addClass("step-error");
 				first_obj.addClass('first-error');
 				$('#form-modal').modal('show');
 			} else {
-				$(current_bullet).removeClass("step-error").addClass("step-success");
+				current_bullet.removeClass("step-error").addClass("step-success");
+
+				if (checkBtn) {
+					if (obj.hasClass('form-submit')) {
+						$('#rhino-item'+(currentFieldset+1)+'-bullet', obj_parent).removeClass("step-success");
+						if (currentFieldset === (form_wizard.name.length-2)) {
+							obj.text('Send');
+						}
+					} else if(obj.hasClass('form-prev')) {
+						if (currentFieldset === 1) {
+							obj.hide({duration:500});
+						}
+						if (currentFieldset > 1) {
+							obj.show({duration:500});
+						}
+						if (currentFieldset <= (form_wizard.name.length-1)) {
+							obj.next().text('Next');
+						}
+					}
+				}
 			}
-			//error = false;	// Debug
 			return (! error);
 		},
 		checkAttr: function(obj, printError) {
@@ -111,6 +142,26 @@ $(function(){
 				FBUILDER.checkAttr(obj, false);
 			});
 			$('#form-modal #modal-body-text').append('<p class="text-error">'+html+'</p>');
+		},
+		clickBullet : function(current_bullet, obj, obj_parent) {
+			current_bullet.one('click', function() {
+				var result = FBUILDER.validateFields(obj, true, false);
+				if (result) {
+					current_bullet.removeClass('step-success');
+					var currentField = parseInt(current_bullet.attr('id').match(/\d+/g));
+					if (currentField === (form_wizard.name.length-1)) {
+						$('.form-submit', obj_parent).text('Send');
+					} else if (currentField === 0) {
+						$('.form-prev', obj_parent).hide({duration:500});
+					} else if (currentField < (form_wizard.name.length-1)) {
+						$('.form-prev', obj_parent).show({duration:500});
+						$('.form-submit', obj_parent).text('Next');
+					}
+				} else {
+					FBUILDER.clickBullet(current_bullet, obj, obj_parent);
+				}
+			});
+			obj_parent.find('.slider').data('rhinoslider').addClickBullet(current_bullet);
 		},
 		showRequest : function(formData, jqForm, options) {
 			// formData is an array; here we use $.param to convert it to a string to display it
@@ -161,7 +212,7 @@ $(function(){
 	$(".rhino-prev").hide();
 	$(".rhino-next").hide();
 
-	$(".rhino-prev").one("click.fbuilder", function() {
+	$(".form-prev").one("click.fbuilder", function() {
 		FBUILDER.setBackButton($(this));
 	});
 	$(".form-submit").one("click.fbuilder", function() {

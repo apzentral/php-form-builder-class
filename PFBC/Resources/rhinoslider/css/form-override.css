@@ -148,7 +148,13 @@
   position: static;
 }
 
-/* line 154, form-override.scss */
+/* line 153, form-override.scss */
+.form-prev {
+  background-position: -168px 0;
+  left: -6px;
+}
+
+/* line 159, form-override.scss */
 .rhino-container .form-actions {
   position: relative;
   margin: 0 auto 30px;
@@ -157,88 +163,88 @@
   height: 80px;
 }
 
-/* line 164, form-override.scss */
+/* line 169, form-override.scss */
 .field-error {
   border-color: #E9322D !important;
   box-shadow: 0 0 6px #F8B9B7 !important;
 }
 
-/* line 171, form-override.scss */
+/* line 176, form-override.scss */
 #form-modal .alert .close {
   right: -5px;
 }
-/* line 175, form-override.scss */
+/* line 180, form-override.scss */
 #form-modal #modal-body-text {
   margin-left: 50px;
 }
 
-/* line 181, form-override.scss */
+/* line 186, form-override.scss */
 div.remove-observableArray {
   padding: 0;
   margin-bottom: 5px;
   border: none;
 }
-/* line 185, form-override.scss */
+/* line 190, form-override.scss */
 div.remove-observableArray:hover {
   cursor: pointer;
 }
 
-/* line 194, form-override.scss */
+/* line 199, form-override.scss */
 .form-horizontal .row-fluid label {
   width: 120px;
   font-size: 13px;
 }
-/* line 198, form-override.scss */
+/* line 203, form-override.scss */
 .form-horizontal .row-fluid label.checkbox, .form-horizontal .row-fluid label.radio {
   width: 80%;
 }
-/* line 201, form-override.scss */
+/* line 206, form-override.scss */
 .form-horizontal .row-fluid label.checkbox.yes-no, .form-horizontal .row-fluid label.radio.yes-no {
   width: 25px;
 }
-/* line 207, form-override.scss */
+/* line 212, form-override.scss */
 .form-horizontal .row-fluid .controls {
   margin-left: 130px;
 }
-/* line 211, form-override.scss */
+/* line 216, form-override.scss */
 .form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid input[type="tel"], .form-horizontal .row-fluid input[type="number"] {
   width: 80%;
 }
-/* line 215, form-override.scss */
+/* line 220, form-override.scss */
 .form-horizontal .row-fluid select {
   width: auto;
 }
-/* line 220, form-override.scss */
+/* line 225, form-override.scss */
 .form-horizontal .row-fluid .element-block label {
   float: none;
   width: auto;
   text-align: left;
 }
-/* line 226, form-override.scss */
+/* line 231, form-override.scss */
 .form-horizontal .row-fluid .element-block .controls {
   margin-left: 20px;
 }
-/* line 230, form-override.scss */
+/* line 235, form-override.scss */
 .form-horizontal .row-fluid .element-block input[type="text"], .form-horizontal .row-fluid .element-block select, .form-horizontal .row-fluid .element-block textarea, .form-horizontal .row-fluid .element-block input[type="tel"], .form-horizontal .row-fluid .element-block input[type="number"] {
   float: none;
 }
-/* line 236, form-override.scss */
+/* line 241, form-override.scss */
 .form-horizontal .row-fluid .birthday-picker select {
   width: auto;
 }
-/* line 241, form-override.scss */
+/* line 246, form-override.scss */
 .form-horizontal .row-fluid input[type="button"] {
   margin: 10px auto;
 }
-/* line 246, form-override.scss */
+/* line 251, form-override.scss */
 .form-horizontal .options-only .controls {
   margin-left: 30px;
 }
-/* line 250, form-override.scss */
+/* line 255, form-override.scss */
 .form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {
   width: 90%;
 }
-/* line 257, form-override.scss */
+/* line 262, form-override.scss */
 .form-horizontal .blood-pressure input[type="number"] {
   width: 30%;
 }

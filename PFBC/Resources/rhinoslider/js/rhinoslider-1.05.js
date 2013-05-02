@@ -92,7 +92,7 @@
 				//add prev/next-buttons
 				if (settings.controlsPrevNext) {
 					vars.container.addClass(vars.prefix + 'controls-prev-next');
-					buttons = '<div class="form-actions"><a class="' + vars.prefix + 'prev ' + vars.prefix + 'btn btn btn-primary" tabindex="0">' + settings.prevText + '</a><a class="' + vars.prefix + 'next ' + vars.prefix + 'btn btn btn-primary">' + settings.nextText + '</a><a class="form-submit rhino-btn btn btn-primary" tabindex="0">' + settings.nextText + '</a></div>';
+					buttons = '<div class="form-actions"><a class="' + vars.prefix + 'prev ' + vars.prefix + 'btn btn btn-primary" tabindex="0">' + settings.prevText + '</a><a class="' + vars.prefix + 'next ' + vars.prefix + 'btn btn btn-primary">' + settings.nextText + '</a><a class="form-prev rhino-btn btn btn-primary" tabindex="0">' + settings.prevText + '</a><a class="form-submit rhino-btn btn btn-primary" tabindex="0">' + settings.nextText + '</a></div>';
 					vars.container.append(buttons);
 
 					vars.buttons.prev = vars.container.find('.' + vars.prefix + 'prev');
@@ -232,23 +232,9 @@
 					vars.buttons.bullets.last().addClass(vars.prefix + 'last-bullet');
 
 					if (settings.bulletsClick) {
-						vars.buttons.bullets.click(function () {
-							var itemID = $(this).attr('id').replace('-bullet', '');
-							var $next = vars.container.find('#' + itemID);
-							var curID = parseInt(vars.navigation.find('.' + vars.prefix + 'active-bullet').attr('id').replace('-bullet', '').replace(vars.prefix + 'item', ''), 10);
-							var nextID = parseInt(itemID.replace(vars.prefix + 'item', ''), 10);
-							if (curID < nextID) {
-								next($slider, settings, $next);
-							} else if (curID > nextID) {
-								prev($slider, settings, $next);
-							} else {
-								return false;
-							}
-
-							//stop autoplay, if set
-							if (settings.autoPlay) {
-								pause();
-							}
+						vars.buttons.bullets.click(function() {clickOnBullet($(this))});
+						vars.buttons.bullets.hover(function() { $(this).css('cursor','pointer'); },
+							function() {$(this).css('cursor','auto');
 						});
 					}
 				}
@@ -416,6 +402,32 @@
 				$slider.data('slider:vars', vars);
 
 				settings.callBackInit();
+			},
+
+			// Click Bullet Event
+			clickOnBullet = function(obj, validate) {
+				validate = typeof validate !== 'undefined' ? validate : false;
+				var itemID = obj.attr('id').replace('-bullet', '');
+				var $next = vars.container.find('#' + itemID);
+				var curID = parseInt(vars.navigation.find('.' + vars.prefix + 'active-bullet').attr('id').replace('-bullet', '').replace(vars.prefix + 'item', ''), 10);
+				var nextID = parseInt(itemID.replace(vars.prefix + 'item', ''), 10);
+				if (validate) {
+					var ol_bullets = obj.parentsUntil('.rhino-container', '.rhino-bullets');
+					if($('.step-error', ol_bullets).length)
+						return false;
+				}
+				if (curID < nextID) {
+					next($slider, settings, $next);
+				} else if (curID > nextID) {
+					prev($slider, settings, $next);
+				} else {
+					return false;
+				}
+
+				//stop autoplay, if set
+				if (settings.autoPlay) {
+					pause();
+				}
 			},
 
 			//check if item element is first-child
@@ -672,6 +684,13 @@
 		this.play = function () {play();};
 		this.prev = function ($next) {prev($slider, settings, $next);};
 		this.next = function ($next) {next($slider, settings, $next);};
+		this.addClickBullet = function(obj) {
+			obj = typeof obj !== 'undefined' ? obj : $(this);
+			vars.buttons.bullets.hover(function() { obj.css('cursor','pointer'); },
+				function() {obj.css('cursor','auto');
+			});
+			obj.one('click', function() {clickOnBullet(obj, true)});
+		}
 		this.uninit = function () {
 			pause();
 			vars.container.before($(element).data('slider:original'));
