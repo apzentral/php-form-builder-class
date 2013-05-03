@@ -27,6 +27,9 @@ class Date extends Textbox {
 
 	public function render() {
 		$this->validation[] = new \PFBC\Validation\RegExp("/" . $this->_attributes["pattern"] . "/", "Error: The %element% field must match the following date format: " . $this->_attributes["title"]);
+		if ( strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'webkit') !== false ) {
+			$this->_attributes['type'] = 'text';	// Chrome has default datepicker.
+		}
 		parent::render();
 	}
 
