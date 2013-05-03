@@ -18,25 +18,26 @@ $(function(){
 			} else {
 				obj.removeClass('field-error');
 			}
+		},
+		validateFloatEvent : function(obj) {
+			obj.val(parseFloat(obj.val()));
+			if (isNaN(obj.val())) {
+				obj.val('');
+			}
+			if (obj.attr('min')) {
+				VAL_HELPER.checkMin(obj);
+			}
+			if (obj.attr('max')) {
+				VAL_HELPER.checkMax(obj);
+			}
+			if (obj.attr('pattern')) {
+				VAL_HELPER.checkPattern(obj);
+			}
 		}
 	};
 
 	// Check for Max and Min Attr
-	$('input[type="number"], input.number').on('blur', function() {
-		$(this).val(parseFloat($(this).val()));
-		if (isNaN($(this).val())) {
-			$(this).val('');
-		}
-		if ($(this).attr('min')) {
-			VAL_HELPER.checkMin($(this));
-		}
-		if ($(this).attr('max')) {
-			VAL_HELPER.checkMax($(this));
-		}
-		if ($(this).attr('pattern')) {
-			VAL_HELPER.checkPattern($(this));
-		}
-	});
+	$('input[type="number"], input.number').on({change : function() {VAL_HELPER.validateFloatEvent($(this))}});
 
 	// Allow Number only
 	$('input[type="number"]:not(.integer), input.integer').on('keydown', function(e){
