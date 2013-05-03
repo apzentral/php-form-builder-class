@@ -213,6 +213,10 @@ div {
 			margin-left: 130px;
 		}
 
+		input, textarea, select {
+			font-size: 13px;
+		}
+
 		input[type="text"], textarea, input[type="tel"], input[type="number"] {
 			width: 80%;
 		}

@@ -40,7 +40,7 @@ $(function(){
 	$('input[type="number"], input.number').on({change : function() {VAL_HELPER.validateFloatEvent($(this))}});
 
 	// Allow Number only
-	$('input[type="number"]:not(.integer), input.integer').on('keydown', function(e){
+	$('input[type="number"]:not(.integer)').on('keydown', function(e){
 		if( !(e.keyCode == 8                                	// backspace
 			|| e.keyCode == 9                              	// tab
 			|| e.keyCode == 17                              // ctrl
@@ -48,17 +48,18 @@ $(function(){
 			|| (e.keyCode >= 35 && e.keyCode <= 40)     // arrow keys/home/end
 			|| (e.keyCode >= 48 && e.keyCode <= 57)     // numbers on keyboard
 			|| (e.keyCode >= 96 && e.keyCode <= 105)   // number on keypad
-			|| (e.keyCode == 190))	// Period
+			|| (e.keyCode == 190)	// Period
+			|| (e.keyCode == 110))	// Decimal Point
 			) {
 				e.preventDefault();     // Prevent character input
 		}
 		var val = $(this).val();
-		if (e.keyCode == 190 && ( ! val || /[\.]/g.test(val) )) {
+		if ( (e.keyCode == 190 || e.keyCode == 110) && ( ! val || /[\.]/g.test(val) )) {
 			e.preventDefault();     // Prevent character input
 		}
 	});
 
-	$('input[type="number"].integer').on('keydown', function(e){
+	$('input[type="number"].integer, input.integer').on('keydown', function(e){
 		if( !(e.keyCode == 8                                	// backspace
 			|| e.keyCode == 9                              	// tab
 			|| e.keyCode == 17                              // ctrl

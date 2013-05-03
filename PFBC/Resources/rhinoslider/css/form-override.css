@@ -207,44 +207,48 @@ div.remove-observableArray:hover {
   margin-left: 130px;
 }
 /* line 216, form-override.scss */
+.form-horizontal .row-fluid input, .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid select {
+  font-size: 13px;
+}
+/* line 220, form-override.scss */
 .form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid input[type="tel"], .form-horizontal .row-fluid input[type="number"] {
   width: 80%;
 }
-/* line 220, form-override.scss */
+/* line 224, form-override.scss */
 .form-horizontal .row-fluid select {
   width: auto;
 }
-/* line 225, form-override.scss */
+/* line 229, form-override.scss */
 .form-horizontal .row-fluid .element-block label {
   float: none;
   width: auto;
   text-align: left;
 }
-/* line 231, form-override.scss */
+/* line 235, form-override.scss */
 .form-horizontal .row-fluid .element-block .controls {
   margin-left: 20px;
 }
-/* line 235, form-override.scss */
+/* line 239, form-override.scss */
 .form-horizontal .row-fluid .element-block input[type="text"], .form-horizontal .row-fluid .element-block select, .form-horizontal .row-fluid .element-block textarea, .form-horizontal .row-fluid .element-block input[type="tel"], .form-horizontal .row-fluid .element-block input[type="number"] {
   float: none;
 }
-/* line 241, form-override.scss */
+/* line 245, form-override.scss */
 .form-horizontal .row-fluid .birthday-picker select {
   width: auto;
 }
-/* line 246, form-override.scss */
+/* line 250, form-override.scss */
 .form-horizontal .row-fluid input[type="button"] {
   margin: 10px auto;
 }
-/* line 251, form-override.scss */
+/* line 255, form-override.scss */
 .form-horizontal .options-only .controls {
   margin-left: 30px;
 }
-/* line 255, form-override.scss */
+/* line 259, form-override.scss */
 .form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {
   width: 95%;
 }
-/* line 262, form-override.scss */
+/* line 266, form-override.scss */
 .form-horizontal .blood-pressure input[type="number"] {
   width: 30%;
 }
