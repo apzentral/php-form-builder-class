@@ -3,7 +3,8 @@ namespace PFBC\Element;
 
 class Zipcode extends Textbox {
 	protected $_attributes = array(
-		"type" => "number"
+		"type" => "text",
+		"class" => "integer"
 	);
 	protected $country;
 

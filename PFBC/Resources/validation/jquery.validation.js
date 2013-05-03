@@ -2,12 +2,12 @@
 $(function(){
 	var VAL_HELPER = {
 		checkMin : function(obj) {
-			if (obj.val() != '' && obj.attr('min') > obj.val()) {
+			if (obj.val() != '' && parseFloat(obj.attr('min')) > parseFloat(obj.val())) {
 				obj.val(obj.attr('min'));
 			}
 		},
 		checkMax : function(obj) {
-			if (obj.attr('max') < obj.val()) {
+			if (obj.val() != '' && parseFloat(obj.attr('max')) < parseFloat(obj.val())) {
 				obj.val(obj.attr('max'));
 			}
 		},
@@ -22,7 +22,7 @@ $(function(){
 	};
 
 	// Check for Max and Min Attr
-	$('input[type="number"]').on('blur', function() {
+	$('input[type="number"], input.number').on('blur', function() {
 		$(this).val(parseFloat($(this).val()));
 		if (isNaN($(this).val())) {
 			$(this).val('');
@@ -39,7 +39,7 @@ $(function(){
 	});
 
 	// Allow Number only
-	$('input[type="number"]:not(.integer)').on('keydown', function(e){
+	$('input[type="number"]:not(.integer), input.integer').on('keydown', function(e){
 		if( !(e.keyCode == 8                                	// backspace
 			|| e.keyCode == 9                              	// tab
 			|| e.keyCode == 17                              // ctrl
