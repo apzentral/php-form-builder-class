@@ -242,7 +242,7 @@ div.remove-observableArray:hover {
 }
 /* line 255, form-override.scss */
 .form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {
-  width: 90%;
+  width: 95%;
 }
 /* line 262, form-override.scss */
 .form-horizontal .blood-pressure input[type="number"] {

@@ -32,7 +32,7 @@ $(function(){
 				if (currentFieldset === (form_wizard.name.length-1)) {
 					// Send form
 					var options = {
-						target: '#respond-output',
+						target: '#modal-body-text',
 						beforeSubmit: this.showRequest,
 						success: this.showResponse
 					};
@@ -60,6 +60,7 @@ $(function(){
 			var current_form = obj_parent.find('.slider .rhino-active');
 			var current_bullet = obj_parent.find('.rhino-active-bullet');
 
+			$('#form-modal .modal-header').removeClass('alert-success').addClass('alert-error');
 			$('#form-modal #modal-title').text('Please correct the following errors');
 			$("#form-modal #modal-body-text").html('');
 			// Get all inputs dom
@@ -166,7 +167,8 @@ $(function(){
 		showRequest : function(formData, jqForm, options) {
 			// formData is an array; here we use $.param to convert it to a string to display it
 			// but the form plugin does this for you automatically when it submits the data
-			var queryString = $.param(formData);
+			var queryString = $.param(formData),
+			result = true;
 
 			// jqForm is a jQuery object encapsulating the form element.  To access the
 			// DOM element for the form do this:
@@ -176,7 +178,10 @@ $(function(){
 
 			// here we could return false to prevent the form from being submitted;
 			// returning anything other than false will allow the form submit to continue
-			return true;
+
+			// Fire Custom before Form Submit Event
+			result = jqForm.trigger('beforeSubmit.fbuilder', [queryString]);
+			return result;
 		},
 		showResponse : function(responseText, statusText, xhr, $form) {
 			// for normal html responses, the first argument to the success callback
@@ -191,6 +196,9 @@ $(function(){
 			// is the json data object returned by the server
 
 			//alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.');
+
+			// Fire Custom Event Before Complete Event
+			$form.trigger('respond.fbuilder', [responseText, statusText, xhr]);
 		}
 	};
 
