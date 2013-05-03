@@ -12,6 +12,7 @@ class FormObject {
 		// Override the internal variables
 		foreach($init as $k => $v)
 		{
+			$k = strtolower($k);
 			$this->{$k} = $v;
 		}
 	}
