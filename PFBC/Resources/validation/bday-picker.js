@@ -91,7 +91,7 @@
       } else {
         var defDate = new Date();
       }
-      var defYear = defDate.getFullYear(),
+      var defYear = 2012,
         defMonth = defDate.getMonth() + 1,
         defDay = defDate.getDate();
       hiddenDate = defYear + "-" + defMonth + "-" + defDay;

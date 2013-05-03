@@ -61,7 +61,7 @@ $(function(){
 			var current_bullet = obj_parent.find('.rhino-active-bullet');
 
 			$('#form-modal .modal-header').removeClass('alert-success').addClass('alert-error');
-			$('#form-modal #modal-title').text('Please correct the following errors');
+			$('#form-modal #modal-title').removeClass('text-success').text('Please correct the following errors');
 			$("#form-modal #modal-body-text").html('');
 			// Get all inputs dom
 			$(":input", current_form).each(function(i){
