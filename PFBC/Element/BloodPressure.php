@@ -4,6 +4,7 @@ namespace PFBC\Element;
 class BloodPressure extends Textbox {
 	protected $_attributes = array(
 		"type" => "number",
+		"step" => "any",
 		"min" => 0,
 		"max" => 500
 	);
