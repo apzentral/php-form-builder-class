@@ -37,6 +37,8 @@ class FormWizard extends \PFBC\View {
 			echo '<form', $this->_form->getAttributes(), '>';
 		}
 
+		// Form Name
+		echo '<input type="hidden" name="FormName" value="'.$this->_form->getAttribute('id').'"/>';
 		// Generate CSRF
 		echo '<input type="hidden" name="'.$_SESSION["form_token"].'" value="1"/>';
 
