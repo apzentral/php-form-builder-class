@@ -32,7 +32,7 @@ $(function(){
 				if (currentFieldset === (form_wizard.name.length-1)) {
 					// Send form
 					var options = {
-						target: '#modal-body-text',
+						//target: '#modal-body-text',
 						beforeSubmit: this.showRequest,
 						success: this.showResponse
 					};
