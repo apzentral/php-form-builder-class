@@ -28,7 +28,7 @@ class FormBuilder
 		// Config for PFBC\Form
 		$this->config = array(
 			"prevent" => array("bootstrap", "jQuery"),
-			'resourcesPath' => BASE_URL.'PFBC/Resources/'
+			'resourcesPath' => '../PFBC/Resources/'
 		);
 
 		// Setup Options for FBUILDER

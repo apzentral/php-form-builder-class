@@ -1,10 +1,6 @@
 <?php
 $base_url = explode('/', dirname(__FILE__));
 
-// Define all the path
-define('BASE_URL', '/'.$base_url[count($base_url)-1].'/');
-define('LIBPATH', dirname(__FILE__).'/');
-
 $cwd = str_replace("\\", "/", getcwd());
 if(strpos($cwd, "/examples") !== false) {
 	$pathPrefix = "../";
