@@ -221,6 +221,8 @@ class Form extends Base {
 				return false;
 			elseif(in_array("jqueryui", $this->prevent) && strpos($url, "/jquery-ui/") !== false)
 				return false;
+			elseif(in_array("noconflict", $this->prevent) && strpos($url, "/jquery.noConflict.js") !== false)
+				return false;
 		}
 
 		return true;
@@ -430,6 +432,7 @@ JS;
 	protected function renderJSFiles() {
 		$urls = array(
 			$this->resourcesPath . "jquery.min.js",
+			$this->resourcesPath . "jquery.noConflict.js",
 			$this->resourcesPath . "bootstrap/js/bootstrap.min.js",
 			$this->resourcesPath . "jquery-placeholder/jquery.placeholder.min.js",
 			'http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js',

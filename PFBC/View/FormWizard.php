@@ -190,7 +190,7 @@ class FormWizard extends \PFBC\View {
 		// Setup the FormWizard
 		echo <<< JS
 // Setup the Steps
-$('.rhino-bullet').each(function(index){
+jQuery('.rhino-bullet').each(function(index){
 	var link_text = $(this).html();
 	var description = $("#rhino-item"+(link_text-1)).attr("data");
 	$(this).html('<p><i class="'+form_wizard.ico_class[index]+'"></i></p><p class="title">'+form_wizard.name[index]+'</p></a>');

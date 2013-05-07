@@ -1,5 +1,5 @@
 /*===== jQuery Validation to check for the input =====*/
-$(function(){
+jQuery(document).ready(function($) {
 	var VAL_HELPER = {
 		checkMin : function(obj) {
 			if (obj.val() != '' && parseFloat(obj.attr('min')) > parseFloat(obj.val())) {

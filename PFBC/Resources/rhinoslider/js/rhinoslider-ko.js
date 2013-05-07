@@ -1,5 +1,5 @@
 //===== KO Setup for FormWizard =====//
-$(function(){
+jQuery(document).ready(function($) {
 	var FBUILDER = {
 		self: this,
 		// Methods
