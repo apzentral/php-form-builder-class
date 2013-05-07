@@ -364,7 +364,7 @@ class Form extends Base {
 		if(!empty($this->alternateJsInit))
 			echo $this->alternateJsInit;
 		else
-			echo 'jQuery(document).ready(function() {';
+			echo 'jQuery(document).ready(function($) {';
 
 		/*When the form is submitted, disable all submit buttons to prevent duplicate submissions.*/
 		echo <<<JS
