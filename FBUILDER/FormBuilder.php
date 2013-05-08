@@ -371,10 +371,15 @@ class FormBuilder
 
 				// Open fieldset
 				$opt = '';
+				$div_class = '';
 				if( count($field->options) )
 				{
 					foreach($field->options as $attr => $option)
 					{
+						if($attr === 'div_class')
+						{
+							$div_class = ' class="'.$option.'"';
+						}
 						$opt .= ' '.$attr.'="'.$option.'"';
 					}
 				}
@@ -383,7 +388,7 @@ class FormBuilder
 
 				if($this->options['fieldset_div'])
 				{
-					$html .= '<div>';
+					$html .= '<div'.$div_class.'>';
 				}
 
 				if($field->description)
