@@ -12,18 +12,14 @@ class Button extends \PFBC\Element {
 		if(!empty($type))
 			$properties["type"] = $type;
 
-		$class = "btn";
-		if(empty($type) || $type == "submit")
+		$class = (empty($properties["class"])) ? 'btn' : $properties["class"];
+
+		if((empty($type) || $type == "submit") && stripos($class, 'btn-primary') === NULL)
 			$class .= " btn-primary";
-			
-		if(!empty($properties["class"]))
-			$properties["class"] .= " " . $class;
-		else
-			$properties["class"] = $class;
-		
+
 		if(empty($properties["value"]))
 			$properties["value"] = $label;
-		
+
 		parent::__construct("", "", $properties);
 	}
 }
