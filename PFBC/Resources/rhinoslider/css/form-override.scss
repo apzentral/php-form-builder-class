@@ -145,6 +145,23 @@
 	}
 }
 
+input[type="button"] {
+	&.btn-primary {
+		background-image: linear-gradient(to bottom, #08C, #04C);
+
+		&:hover, &:focus {
+			background: #04C;
+			transition: background-position 0.1s linear 0s;
+		}
+
+		&.disabled {
+			&:hover {
+				cursor: default;
+			}
+		}
+	}
+}
+
 .rhino-prev, .rhino-next {
 	bottom: 0;
 	position: static;
