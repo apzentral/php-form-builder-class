@@ -38,13 +38,15 @@ class Button extends \PFBC\Element {
 			{
 				switch($k)
 				{
+					case'icon-left':
+					case'icon-right':
+						$text = (stripos($k, '-left') !== NULL) ? '<i class="'.$attr.'"></i> '.$text : $text.' <i class="'.$attr.'"></i>';
 					case 'render':
 					case 'value':
 						unset($this->_attributes[$k]);
 						break;
 				}
 			}
-
 
 			echo '<button', $this->getAttributes(), '>'.$text.'</button>';
 			$this->_attributes = $tmp;
