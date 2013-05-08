@@ -7,14 +7,14 @@ jQuery(document).ready(function($) {
 			return parseInt(obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.rhino-active').attr("id").match(/\d+/g));
 		},
 		setBackButton : function(obj) {
-			var currentFieldset = this.getCurrentFieldset(obj);
+			var currentFieldset = this.getCurrentFieldset(obj),
+			obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container'),
+			previous_bullet = obj_parent.find('.rhino-active-bullet'),
+			current_bullet = $('#rhino-item'+(currentFieldset-1)+'-bullet', obj_parent),
+			result = FBUILDER.validateFields(obj, false);
 			obj.one("click.fbuilder", function() {
 				FBUILDER.setBackButton(obj);
 			});
-			var obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container');
-			var previous_bullet = obj_parent.find('.rhino-active-bullet');
-			var current_bullet = $('#rhino-item'+(currentFieldset-1)+'-bullet', obj_parent);
-			var result = FBUILDER.validateFields(obj, false);
 			if (result) {
 				previous_bullet.off('click');
 				FBUILDER.clickBullet(previous_bullet, obj, obj_parent);
@@ -53,12 +53,12 @@ jQuery(document).ready(function($) {
 			setClickE = typeof setClickE === 'undefined' ? true : setClickE;
 			checkBtn = typeof checkBtn === 'undefined' ? true : checkBtn;
 			// Method to validate fields
-			var currentFieldset = this.getCurrentFieldset(obj);
-			var error = false;
-			var first_obj = null;
-			var obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container');
-			var current_form = obj_parent.find('.slider .rhino-active');
-			var current_bullet = obj_parent.find('.rhino-active-bullet');
+			var currentFieldset = this.getCurrentFieldset(obj),
+			error = false,
+			first_obj = null,
+			obj_parent = obj.parentsUntil('.rhino-form-wrapper', '.rhino-container'),
+			current_form = obj_parent.find('.slider .rhino-active'),
+			current_bullet = obj_parent.find('.rhino-active-bullet');
 
 			$('#form-modal .modal-header').removeClass('alert-success').addClass('alert-error');
 			$('#form-modal #modal-title').removeClass('text-success').text('Please correct the following errors');
@@ -111,23 +111,29 @@ jQuery(document).ready(function($) {
 		},
 		checkAttr: function(obj, printError) {
 			printError = typeof printError !== 'undefined' ? printError : false;
-			var field_error = false;
-			var field_name = (obj.data('validation-name')) ? obj.data('validation-name'): '';
+			var field_error = false,
+			field_name = (obj.data('validation-name')) ? obj.data('validation-name'): '',
+			error_message = null,
+			regex = null;
 			obj.val($.trim(obj.val()));	// trim val
 			obj.removeClass('field-error');
-			if (obj.attr('required') && obj.val() == '') {
+			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked'))) ) {
 				field_error = true;
 				if (printError) {
-					var error_message = field_name + ' is required.';
+					if (obj.data('error-msg')) {
+						error_message = (field_name==='') ? obj.data('error-msg'): field_name+' ' + obj.data('error-msg');
+					} else {
+						error_message = field_name + ' is required.';
+					}
 					FBUILDER.printError(obj, error_message);
 				}
 			}
-			if ( ! field_error && (obj.attr('required') || obj.val() != '') && obj.attr('pattern')) {
-				var regex = new RegExp(obj.attr('pattern'), 'g');
+			if ( ! field_error && (obj.attr('required') || obj.val() !== '') && obj.attr('pattern')) {
+				regex = new RegExp(obj.attr('pattern'), 'g');
 				if ( ! regex.test(obj.val())) {
 					field_error = true;
 					if (printError) {
-						var error_message = field_name + ' is invalid.';
+						error_message = field_name + ' is invalid.';
 						FBUILDER.printError(obj, error_message);
 					}
 				}
@@ -235,5 +241,5 @@ jQuery(document).ready(function($) {
 	// Modal Event
 	$('#form-modal').on('hidden.fbuilder', function () {
 		$('.slider .first-error').focus().removeClass('first-error');
-    })
+    });
 });

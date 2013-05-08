@@ -3,19 +3,29 @@ namespace PFBC\Element;
 
 class CheckboxOnly extends Checkbox {
 	protected $columns;
+	protected $required;
 
 	public function __construct($label, $name, array $options, array $properties = null) {
 		$this->columns = 3;
 
+		$properties = (array)$properties;
+
 		foreach($options as $k => $v)
 		{
-			$this->{$k} = $v;
+			if(property_exists($this, $k))
+			{
+				$this->{$k} = $v;
+			}
+			else
+			{
+				$properties[$k] = $v;
+			}
 		}
 
 		if(!empty($this->options) && array_values($this->options) === $this->options)
 			$this->options = array_combine($this->options, $this->options);
 
-		parent::__construct($label, $name, $this->options);
+		parent::__construct($label, $name, $this->options, $properties);
 	}
 
 	public function render() {
@@ -50,6 +60,7 @@ class CheckboxOnly extends Checkbox {
 		foreach($this->options as $value => $text) {
 			$value = $this->getOptionValue($value);
 
+			$required = ($this->required === NULL) ? '' : ' required';
 			if($count % $options_col === 0 && $count_col < $this->columns)
 			{
 				echo '<div class="span'.$bootstrap_col.'">';
@@ -61,7 +72,7 @@ class CheckboxOnly extends Checkbox {
 			echo '<label class="', $labelClass, '"> <input id="', $this->_attributes["id"], '-', $count, '"', $this->getAttributes(array("id", "value", "checked", "required", "data-bind-div", "data-bind-label")), ' value="', $this->filter($value), '"';
 			if(in_array($value, $this->_attributes["value"]))
 				echo ' checked="checked"';
-			echo '/> ', $text, ' </label> ';
+			echo $required.'/> ', $text, ' </label> ';
 
 			++$count;
 
