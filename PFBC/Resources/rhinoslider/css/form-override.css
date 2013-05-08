@@ -104,12 +104,12 @@
     .rhino-btn.btn-primary.disabled:hover {
       cursor: default; }
 
-input[type="button"].btn-primary {
+input[type="button"].btn-primary, button.btn-primary {
   background-image: linear-gradient(to bottom, #0088cc, #0044cc); }
-  input[type="button"].btn-primary:hover, input[type="button"].btn-primary:focus {
+  input[type="button"].btn-primary:hover, input[type="button"].btn-primary:focus, button.btn-primary:hover, button.btn-primary:focus {
     background: #04C;
     transition: background-position 0.1s linear 0s; }
-  input[type="button"].btn-primary.disabled:hover {
+  input[type="button"].btn-primary.disabled:hover, button.btn-primary.disabled:hover {
     cursor: default; }
 
 .rhino-prev, .rhino-next {

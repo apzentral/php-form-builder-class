@@ -145,7 +145,7 @@
 	}
 }
 
-input[type="button"] {
+input[type="button"], button {
 	&.btn-primary {
 		background-image: linear-gradient(to bottom, #08C, #04C);
 

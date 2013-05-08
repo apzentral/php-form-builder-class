@@ -14,7 +14,7 @@ class Button extends \PFBC\Element {
 
 		$class = (empty($properties["class"])) ? 'btn' : $properties["class"];
 
-		if((empty($type) || $type == "submit") && stripos($class, 'btn-primary') === NULL)
+		if((empty($type) || $type == "submit") && stripos($class, 'btn-primary') === FALSE)
 			$class .= " btn-primary";
 
 		if(empty($properties["value"]))
@@ -40,7 +40,7 @@ class Button extends \PFBC\Element {
 				{
 					case'icon-left':
 					case'icon-right':
-						$text = (stripos($k, '-left') !== NULL) ? '<i class="'.$attr.'"></i> '.$text : $text.' <i class="'.$attr.'"></i>';
+						$text = (stripos($k, '-left') !== FALSE) ? '<i class="'.$attr.'"></i> '.$text : $text.' <i class="'.$attr.'"></i>';
 					case 'render':
 					case 'value':
 						unset($this->_attributes[$k]);
