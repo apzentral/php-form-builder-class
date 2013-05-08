@@ -41,7 +41,7 @@ jQuery(document).ready(function($) {
 				else {
 					// Custom Event Before Click Next
 					var $form = obj.parentsUntil('.rhino-form-wrapper', 'form');
-					$form.trigger('beforeNextStep.fbuilder', [$form]);
+					$form.trigger('beforeNextStep.fbuilder', [$form, currentFieldset]);
 					obj.prev().prev().trigger('click');
 				}
 				if (currentFieldset === 0) {
