@@ -295,6 +295,7 @@ class FormBuilder
 
 				$data_bind = ( ! empty($field->options['data-bind'])) ? ' data-bind="'.$field->options['data-bind'].'"' : '';
 
+				$style = ($field->style) ? ' style="'.$field->style.'"': '';
 				if($this->open_tags['Row'])
 				{
 					$html = '';
@@ -308,13 +309,13 @@ class FormBuilder
 					}
 
 					// Close the div for Row
-					$html .= '</div><div class="'.$field->class.'"'.$data_bind.'>';
+					$html .= '</div><div class="'.$field->class.'"'.$data_bind.$style.'>';
 					$this->open_tags['Row'] = FALSE;
 				}
 				else
 				{
 					// Open div
-					$html = '<div class="'.$field->class.'"'.$data_bind.'>';
+					$html = '<div class="'.$field->class.'"'.$data_bind.$style.'>';
 				}
 
 				$this->open_tags['Row'] = ! $this->open_tags['Row'];
@@ -324,16 +325,17 @@ class FormBuilder
 
 				$data_bind = ( ! empty($field->options['data-bind'])) ? ' data-bind="'.$field->options['data-bind'].'"' : '';
 
+				$style = ($field->style) ? ' style="'.$field->style.'"': '';
 				if($this->open_tags['Col'])
 				{
 					// Close the div for Col
-					$html = '</div><div class="'.$field->class.'"'.$data_bind.'>';
+					$html = '</div><div class="'.$field->class.'"'.$data_bind.$style.'>';
 					$this->open_tags['Col'] = FALSE;
 				}
 				else
 				{
 					// Open div
-					$html = '<div class="'.$field->class.'"'.$data_bind.'>';
+					$html = '<div class="'.$field->class.'"'.$data_bind.$style.'>';
 				}
 
 				$this->open_tags['Col'] = ! $this->open_tags['Col'];

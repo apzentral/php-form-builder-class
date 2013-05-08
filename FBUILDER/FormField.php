@@ -7,6 +7,7 @@ class FormField {
 	private $description;
 	private $id;
 	private $class;
+	private $style;
 	private $options;
 	private $config;
 
