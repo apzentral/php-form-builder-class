@@ -22,4 +22,20 @@ class Button extends \PFBC\Element {
 
 		parent::__construct("", "", $properties);
 	}
+
+	// Allow button tag to render as a button
+	public function render() {
+		if(isset($this->attributes["value"]) && is_array($this->attributes["value"]))
+			$this->attributes["value"] = "";
+
+		// If user want to render as button instead of input it is ok!
+		if(isset($this->_attributes['render']) && $this->_attributes['render'] === 'button')
+		{
+			echo '<button', $this->getAttributes(), '/>';
+		}
+		else
+		{
+			echo '<input', $this->getAttributes(), '/>';
+		}
+	}
 }
