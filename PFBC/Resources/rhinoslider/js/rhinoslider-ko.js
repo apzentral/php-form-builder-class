@@ -39,6 +39,9 @@ jQuery(document).ready(function($) {
 					obj.parentsUntil('.rhino-form-wrapper', '.form-horizontal').ajaxSubmit(options);
 				}
 				else {
+					// Custom Event Before Click Next
+					var $form = obj.parentsUntil('.rhino-form-wrapper', 'form');
+					$form.trigger('beforeNextStep.fbuilder', [$form]);
 					obj.prev().prev().trigger('click');
 				}
 				if (currentFieldset === 0) {
