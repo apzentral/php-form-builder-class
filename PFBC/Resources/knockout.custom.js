@@ -57,9 +57,9 @@ ko.bindingHandlers.slideVisible = {
 
         // Now manipulate the DOM element
         if (valueUnwrapped == true)
-            $(element).slideDown(duration); // Make the element visible
+            jQuery(element).slideDown(duration); // Make the element visible
         else
-            $(element).slideUp(duration);   // Make the element invisible
+            jQuery(element).slideUp(duration);   // Make the element invisible
     }
 };
 
@@ -76,8 +76,8 @@ ko.bindingHandlers.fadeVisible = {
 
         // Now manipulate the DOM element
         if (valueUnwrapped == true)
-            $(element).fadeIn(duration); // Make the element visible
+            jQuery(element).fadeIn(duration); // Make the element visible
         else
-            $(element).fadeOut(duration);   // Make the element invisible
+            jQuery(element).fadeOut(duration);   // Make the element invisible
     }
 };

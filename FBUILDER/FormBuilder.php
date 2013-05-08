@@ -386,7 +386,10 @@ class FormBuilder
 					$html .= '<div>';
 				}
 
-				$html .= '<'.$this->options['fieldset_tag'].'>' . $field->description . '</'.$this->options['fieldset_tag'].'>';
+				if($field->description)
+				{
+					$html .= '<'.$this->options['fieldset_tag'].'>' . $field->description . '</'.$this->options['fieldset_tag'].'>';
+				}
 
 				$this->open_tags['Fieldset'] = ! $this->open_tags['Fieldset'];
 				break;
