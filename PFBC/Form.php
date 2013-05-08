@@ -11,6 +11,11 @@ spl_autoload_register("PFBC\Load");
 if(in_array("__autoload", spl_autoload_functions()))
 	spl_autoload_register("__autoload");
 
+// Include Helper Files
+foreach (glob(__DIR__ . "/Helper/" . "*.php") as $filename) {
+	require_once $filename;
+}
+
 class Form extends Base {
 	protected $_elements = array();
 	protected $_prefix = "http";
