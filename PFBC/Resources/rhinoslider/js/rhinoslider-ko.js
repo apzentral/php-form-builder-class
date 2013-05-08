@@ -19,6 +19,9 @@ jQuery(document).ready(function($) {
 				previous_bullet.off('click');
 				FBUILDER.clickBullet(previous_bullet, obj, obj_parent);
 				current_bullet.removeClass('step-success').addClass('rhino-active-bullet');
+				// Custom Event Before Click Back
+				var $form = obj.parentsUntil('.rhino-form-wrapper', 'form');
+				$form.trigger('beforePreviousStep.fbuilder', [$form, currentFieldset]);
 				obj.prev().prev().trigger('click');
 			} else {
 				return false;
