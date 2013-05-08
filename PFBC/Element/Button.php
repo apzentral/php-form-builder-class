@@ -34,7 +34,6 @@ class Button extends \PFBC\Element {
 			$text = $this->_attributes['value'];
 			$tmp = $this->_attributes;
 
-			// ' type="button" value="Remove Member" name class="btn btn-danger pull-right" data-bind="fadeVisible: members().length &gt; 0, click: removeMember" render="button" id="MedicalScreeningForm-element-25" data-validation-name'
 			foreach($this->_attributes as $k => $attr)
 			{
 				switch($k)
