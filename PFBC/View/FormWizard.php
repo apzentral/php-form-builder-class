@@ -18,7 +18,8 @@ class FormWizard extends \PFBC\View {
 			'css-properties' => array(	// Set up default form width and height
 				'form-height' => '500px',
 				'form-width' => '750px',
-			)
+			),
+			'after-form-render' => array()	// If user want to add custom html after form
 		);
 	}
 
@@ -127,6 +128,16 @@ class FormWizard extends \PFBC\View {
 
 		// Respond Output
 		echo '<div id="respond-output"></div>';
+
+		// If this form has after html render
+		$this->params['after-form-render'] = (array)$this->params['after-form-render'];	// Cast to array
+		if(isset($this->params['after-form-render'][0]))
+		{
+			foreach($this->params['after-form-render'] as $data)
+			{
+				echo $data;
+			}
+		}
     }
 
 	protected function renderLabel(\PFBC\Element $element) {
