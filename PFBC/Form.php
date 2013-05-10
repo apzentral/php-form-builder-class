@@ -225,9 +225,23 @@ class Form extends Base {
 				return false;
 			elseif(in_array("jquery", $this->prevent) && strpos($url, "/jquery.min.js") !== false)
 				return false;
+			elseif(in_array("jquery-all", $this->prevent) && strpos($url, "/jquery") !== false)
+				return false;
 			elseif(in_array("jqueryui", $this->prevent) && strpos($url, "/jquery-ui/") !== false)
 				return false;
 			elseif(in_array("noconflict", $this->prevent) && strpos($url, "/jquery.noConflict.js") !== false)
+				return false;
+			elseif(in_array("knockout", $this->prevent) && strpos($url, "/knockout") !== false)
+				return false;
+			elseif(in_array("validation", $this->prevent) && strpos($url, "/validation") !== false)
+				return false;
+			elseif(in_array("rhinoslider", $this->prevent) && strpos($url, "/rhinoslider") !== false)
+				return false;
+			elseif(in_array("font-awesome", $this->prevent) && strpos($url, "/font-awesome") !== false)
+				return false;
+			elseif(in_array("bootstrap-switch", $this->prevent) && strpos($url, "/bootstrap-switch") !== false)
+				return false;
+			elseif(in_array("views", $this->prevent) && strpos($url, "/views") !== false)
 				return false;
 			elseif(in_array("all", $this->prevent))
 				return false;
