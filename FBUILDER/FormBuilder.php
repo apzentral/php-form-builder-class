@@ -37,7 +37,7 @@ class FormBuilder
 		$this->options = array(
 			'label_seperator' => ':',
 			'title_tag' => 'h3',
-			'title_class' => 'title',
+			'title_class' => 'fb-title',
 			'fieldset_tag' => 'h4',
 			'fieldset_div' => FALSE,
 			'sub_form' => FALSE

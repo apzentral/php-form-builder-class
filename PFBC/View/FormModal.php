@@ -41,8 +41,8 @@ class FormModal extends \PFBC\View {
 		$container_attr = ($this->params['container-attr']['data-bind'] === '') ? '': ' data-bind="'.$this->params['container-attr']['data-bind'].'"';
 		$container_attr .= ($this->params['container-attr']['id'] === '') ? '': ' id="'.$this->params['container-attr']['id'].'"';
 		$container_attr .= ($this->params['container-attr']['style'] === '') ? '': ' style="'.$this->params['container-attr']['style'].'"';
-		$container_attr .= ($this->params['container-attr']['other'] === '') ? '': ' '.$this->params['container-attr']['other'].'"';
-		echo '<div class="form-modal-wrapper'.$container_class.'"'.htmlentities($container_attr).'>';
+		$container_attr .= ($this->params['container-attr']['other'] === '') ? '': ' '.$this->params['container-attr']['other'];
+		echo '<div class="form-modal-wrapper'.$container_class.'"'.$container_attr.'>';
 
 		if( $this->params['fieldset'] )
 		{
@@ -178,6 +178,10 @@ echo "\n".
 #".$this->_form->getAttribute('id')." {
 	height : ".$this->params['css-properties']['form-height'].";
 	width : ".$this->params['css-properties']['form-width'].";
+}
+.form-modal-wrapper .modal-header h3{
+	border-bottom: none;
+	margin: 0;
 }
 ";
 	}
