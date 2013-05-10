@@ -17,6 +17,13 @@ class FormModal extends \PFBC\View {
 				'form-width' => 'auto',
 				'form-height' => 'auto',
 			),
+			'container-attr' => array(
+				'class' => '',
+				'data-bind' => '',
+				'id' => '',
+				'style' => '',
+				'other' => ''
+			),
 			'actions' => array(
 				'data-bind-submit' => '',
 				'submit-val' => 'Submit',
@@ -30,7 +37,12 @@ class FormModal extends \PFBC\View {
 
 		$this->_form->appendAttribute("class", $this->class);
 
-		echo '<div class="form-modal-wrapper">';
+		$container_class = ($this->params['container-attr']['class'] === '') ? '': ' '.$this->params['container-attr']['class'];
+		$container_attr = ($this->params['container-attr']['data-bind'] === '') ? '': ' data-bind="'.$this->params['container-attr']['data-bind'].'"';
+		$container_attr .= ($this->params['container-attr']['id'] === '') ? '': ' id="'.$this->params['container-attr']['id'].'"';
+		$container_attr .= ($this->params['container-attr']['style'] === '') ? '': ' style="'.$this->params['container-attr']['style'].'"';
+		$container_attr .= ($this->params['container-attr']['other'] === '') ? '': ' '.$this->params['container-attr']['other'].'"';
+		echo '<div class="form-modal-wrapper'.$container_class.'"'.htmlentities($container_attr).'>';
 
 		if( $this->params['fieldset'] )
 		{
