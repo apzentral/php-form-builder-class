@@ -15,6 +15,7 @@ class FormModal extends \PFBC\View {
 			'form-actions' => FALSE,	// Auto wrap button with form-actions div
 			'css-properties' => array(	// Set up default form width and height
 				'form-width' => 'auto',
+				'form-height' => 'auto',
 			),
 			'actions' => array(
 				'data-bind-submit' => '',
@@ -154,4 +155,18 @@ class FormModal extends \PFBC\View {
 			echo $label, '</label>';
         }
     }
+
+		// Render CSS
+	public function renderCSS()
+	{
+		parent::renderCSS();
+
+echo "\n".
+"
+#".$this->_form->getAttribute('id')." {
+	height : ".$this->params['css-properties']['form-height'].";
+	width : ".$this->params['css-properties']['form-width'].";
+}
+";
+	}
 }

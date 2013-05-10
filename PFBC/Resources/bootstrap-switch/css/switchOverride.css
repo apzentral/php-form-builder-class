@@ -1,0 +1,7 @@
+.form-horizontal .row-fluid .yes-no-btn {
+  width: 100%; }
+  .form-horizontal .row-fluid .yes-no-btn label {
+    width: 70%;
+    text-align: left; }
+  .form-horizontal .row-fluid .yes-no-btn .controls {
+    margin-left: 75%; }

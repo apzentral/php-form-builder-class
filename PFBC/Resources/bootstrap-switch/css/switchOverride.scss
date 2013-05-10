@@ -1,0 +1,16 @@
+//===== Override YesNoBtn Element =====//
+.form-horizontal {
+	.row-fluid {
+		.yes-no-btn {
+			width: 100%;
+			label {
+				width: 70%;
+				text-align: left;
+			}
+			.controls {
+				margin-left: 75%;
+			}
+		}
+	}
+}
+
