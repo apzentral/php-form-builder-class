@@ -28,6 +28,7 @@ class Form extends Base {
 	protected $errorView;
 	protected $labelToPlaceholder;
 	protected $resourcesPath;
+	public $subFormTitle;
 	/*Prevents various automated from being automatically applied.  Current options for this array
 	included jquery, jqueryui, bootstrap and focus.*/
 	protected $prevent = array();
@@ -319,7 +320,7 @@ class Form extends Base {
 		$urls = array(
 			$this->resourcesPath . "bootstrap/css/bootstrap.min.css",
 			$this->resourcesPath . "bootstrap/css/bootstrap-responsive.min.css",
-			$this->resourcesPath . "font-awesome/css/font-awesome.min.css",
+			$this->resourcesPath . "font-awesome/css/font-awesome.min.css"
 		);
 
 		foreach($this->_elements as $element) {
@@ -335,13 +336,14 @@ class Form extends Base {
 				case 'rhinoslider':
 					$elementUrls = array(
 						$this->resourcesPath . "rhinoslider/css/rhinoslider-1.05.css",
-						//$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css",
-						$this->resourcesPath . "rhinoslider/css/form-override.css"
+						//$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css"
 					);
 					break;
 			}
 			$urls = array_merge($urls, $elementUrls);
 		}
+
+		$urls[] = $this->resourcesPath . "rhinoslider/css/form-override.css";
 
 		/* Check for Browser */
 		if ( strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'webkit') !== false ) {

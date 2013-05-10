@@ -20,9 +20,33 @@ abstract class Element extends Base {
 
 		/*Merge any properties provided with an associative array containing the label
 		and name properties.*/
+
 		if(is_array($properties))
 			$configuration = array_merge($configuration, $properties);
 
+		foreach($configuration as $k => $v)
+		{
+			if( is_string($v) && preg_match('/(true|false)/i', $v))
+			{
+				$configuration[$k] = filter_var($v, FILTER_VALIDATE_BOOLEAN);
+				continue;
+			}
+			$v = (array)$v;
+			foreach($v as $k2 => $v2)
+			{
+				if( is_string($v2) && preg_match('/(true|false)/i', $v2))
+				{
+					if(is_array($configuration[$k]))
+					{
+						$configuration[$k][$k2] = filter_var($v2, FILTER_VALIDATE_BOOLEAN);
+					}
+					elseif(is_object($configuration[$k]))
+					{
+						$configuration[$k]->{$k2} = filter_var($v2, FILTER_VALIDATE_BOOLEAN);
+					}
+				}
+			}
+		}
 		$this->configure($configuration);
 
 		// Auto Assign ID from name attr

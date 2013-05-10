@@ -2,6 +2,7 @@
 namespace PFBC\Element;
 
 class FullName extends Textbox {
+	protected $middle_name;
 
 	public function render() {
 		$addons = array();
@@ -49,7 +50,12 @@ class FullName extends Textbox {
 		echo '<div class="row-fluid">';
 		echo '<div class="span4"><input', $new_attr, ' placeholder="First Name" name="'.$this->_attributes['name'].'_fullname_first_name" id="'.$this->_attributes['name'].'_fullname_first_name"'.$required.' data-validation-name="First Name"/></div>';
 		echo '<div class="span5"><input', $new_attr, ' placeholder="Last Name" name="'.$this->_attributes['name'].'_fullname_last_name" id="'.$this->_attributes['name'].'_fullname_last_name"'.$required.' data-validation-name="Last Name"/></div>';
-		echo '<div class="span3"><input', $new_attr, ' placeholder="Middle Initial" name="'.$this->_attributes['name'].'_fullname_middle_name" id="'.$this->_attributes['name'].'_fullname_middle_name" data-validation-name="Middle Initial"/></div>';
+		//var_dump($this->middle_name);
+		//var_dump(is_null($this->middle_name) || $this->middle_name);
+		if( is_null($this->middle_name) || $this->middle_name )
+		{
+			echo '<div class="span3"><input', $new_attr, ' placeholder="Middle Initial" name="'.$this->_attributes['name'].'_fullname_middle_name" id="'.$this->_attributes['name'].'_fullname_middle_name" data-validation-name="Middle Initial"/></div>';
+		}
 		echo '</div>';
 
 		$this->renderAddOn("append");

@@ -50,17 +50,67 @@ class FormModal extends \PFBC\View {
 
 		// Modal Header
 		echo '<div class="modal-header">';
-
+		echo '<button class="close" aria-hidden="true" data-dismiss="modal" type="button">X</button>';
+		echo $this->_form->subFormTitle;
 		echo '</div>';
 
 		// Modal Body
 		echo '<div class="modal-body form-horizontal">';
+		$this->_form->getErrorView()->render();
 
+		$elements = $this->_form->getElements();
+		$elementSize = sizeof($elements);
+		$elementCount = 0;
+		for($e = 0; $e < $elementSize; ++$e) {
+			$element = $elements[$e];
+			// Set the data-validation-name to be used as form validation
+			$data_validation_name = $element->getAttribute('data-validation-name');
+			if( empty($data_validation_name))
+			{
+				$element->setAttribute('data-validation-name', preg_replace('/:/','',$element->getLabel()));
+			}
+
+			if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTML)
+				$element->render();
+            elseif($element instanceof \PFBC\Element\Button) {
+
+				if($this->params['form-actions'])
+				{
+					if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+						echo '<div class="form-actions">';
+					else
+						echo ' ';
+				}
+
+				$element->render();
+
+				if($this->params['form-actions'])
+				{
+					if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+						echo '</div>';
+				}
+            }
+			elseif($element instanceof \PFBC\Element\CheckboxOnly) {
+				echo '<div class="control-group options-only" id="element_', $element->getAttribute('id'), '">', $element->render(), $this->renderDescriptions($element), '</div>';
+				++$elementCount;
+			}
+            else {
+				$class = $element->getAttribute("container_class");	// Adding Class to the container div
+				if( ! empty($class))
+				{
+					$class = ' ' . $class;
+				}
+
+				$data_bind = ($element->getAttribute('data-bind-div') != '') ? ' data-bind="'.$this->filter($element->getAttribute('data-bind-div')).'"': '';
+				echo '<div class="control-group'.$class.'" id="element_', $element->getAttribute('id'), '"'.$data_bind.'>', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
+				++$elementCount;
+			}
+		}
 		echo '</div>';
 
 		// Modal Footer
-		echo '<div class="modal-footer">';
-		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel">'.$this->params['actions']['cancel-val'].'</button>';
+		echo '<div class="modal-footer text-right">';
+		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel" style="margin-right:10px;">'.$this->params['actions']['cancel-val'].'</button>';
 		echo '<button type="submit" class="btn btn-primary" id="'.$this->_form->getAttribute('id').'_submit">'.$this->params['actions']['submit-val'].'</button>';
 		echo '</div>';
 
@@ -94,4 +144,14 @@ class FormModal extends \PFBC\View {
 		}
     }
 
+	protected function renderLabel(\PFBC\Element $element) {
+        $label = $element->getLabel();
+        if(!empty($label)) {
+			$data_bind = ($element->getAttribute('data-bind-label') != '') ? ' data-bind="'.$this->filter($element->getAttribute('data-bind-label')).'"': '';
+			echo '<label class="control-label" for="', $element->getAttribute("id"), '"'.$data_bind.'>';
+			if($element->isRequired())
+				echo '<span class="required">* </span>';
+			echo $label, '</label>';
+        }
+    }
 }

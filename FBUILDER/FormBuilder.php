@@ -39,7 +39,8 @@ class FormBuilder
 			'title_tag' => 'h3',
 			'title_class' => 'title',
 			'fieldset_tag' => 'h4',
-			'fieldset_div' => FALSE
+			'fieldset_div' => FALSE,
+			'sub_form' => FALSE
 		);
 
 		// Setup Tag keep track of what tag has been open.
@@ -74,6 +75,40 @@ class FormBuilder
 				$this->options[$k] = $v;
 			}
 		}
+
+		foreach($this->config as $k => $v)
+		{
+			if( is_string($v) && preg_match('/(true|false)/i', $v))
+			{
+				$this->config[$k] = filter_var($v, FILTER_VALIDATE_BOOLEAN);
+				continue;
+			}
+			$v = (array)$v;
+			foreach($v as $k2 => $v2)
+			{
+				if( is_string($v2) && preg_match('/(true|false)/i', $v2))
+				{
+					$this->config[$k][$k2] = filter_var($v2, FILTER_VALIDATE_BOOLEAN);
+				}
+			}
+		}
+
+		foreach($this->options as $k => $v)
+		{
+			if( is_string($v) && preg_match('/(true|false)/i', $v))
+			{
+				$this->options[$k] = filter_var($v, FILTER_VALIDATE_BOOLEAN);
+				continue;
+			}
+			$v = (array)$v;
+			foreach($v as $k2 => $v2)
+			{
+				if( is_string($v2) && preg_match('/(true|false)/i', $v2))
+				{
+					$this->options[$k][$k2] = filter_var($v2, FILTER_VALIDATE_BOOLEAN);
+				}
+			}
+		}
 	}
 
 	/**
@@ -96,6 +131,11 @@ class FormBuilder
 		{
 			$view = 'PFBC\\View\\'.$this->config['view'];
 			$this->config['view'] = new $view;
+		}
+		//var_dump($this->options['sub_form']);
+		if($this->options['sub_form'])
+		{
+			$this->config['subFormTitle'] = '<'.$this->options['title_tag'].' class="'.$this->options['title_class'].'" id="'.$data->name.'_title_txt'.'">'.$data->title.'</'.$this->options['title_tag'].'>';
 		}
 		$form->configure($this->config);
 
@@ -263,7 +303,14 @@ class FormBuilder
 			}
 		}
 
-		return '<'.$this->options['title_tag'].' class="'.$this->options['title_class'].'">'.$data->title.'</'.$this->options['title_tag'].'>' . $form->render(TRUE, $params);
+		if($this->options['sub_form'])
+		{
+			return $form->render(TRUE, $params);
+		}
+		else
+		{
+			return '<'.$this->options['title_tag'].' class="'.$this->options['title_class'].'">'.$data->title.'</'.$this->options['title_tag'].'>' . $form->render(TRUE, $params);
+		}
 	}
 
 
