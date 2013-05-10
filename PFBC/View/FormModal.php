@@ -58,12 +58,10 @@ class FormModal extends \PFBC\View {
 
 		echo '</div>';
 
-
-var_dump($this->params['actions']);
 		// Modal Footer
 		echo '<div class="modal-footer">';
-		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel">'.$this->params['actions']->{'cancel-val'}.'</button>';
-		echo '<button type="submit" class="btn btn-primary" id="'.$this->_form->getAttribute('id').'_submit">'.$this->params['actions']->{'submit-val'}.'</button>';
+		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel">'.$this->params['actions']['cancel-val'].'</button>';
+		echo '<button type="submit" class="btn btn-primary" id="'.$this->_form->getAttribute('id').'_submit">'.$this->params['actions']['submit-val'].'</button>';
 		echo '</div>';
 
 
