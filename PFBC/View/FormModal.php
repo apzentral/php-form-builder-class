@@ -111,7 +111,7 @@ class FormModal extends \PFBC\View {
 
 		// Modal Footer
 		echo '<div class="modal-footer text-right">';
-		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel" style="margin-right:10px;">'.$this->params['actions']['cancel-val'].'</button>';
+		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel" style="margin-right:40px;">'.$this->params['actions']['cancel-val'].'</button>';
 		echo '<button type="submit" class="btn btn-primary" id="'.$this->_form->getAttribute('id').'_submit">'.$this->params['actions']['submit-val'].'</button>';
 		echo '</div>';
 

@@ -1,7 +1,13 @@
 .form-horizontal .row-fluid .yes-no-btn {
+  overflow: hidden;
   width: 100%; }
   .form-horizontal .row-fluid .yes-no-btn label {
-    width: 70%;
+    width: auto;
     text-align: left; }
+    .form-horizontal .row-fluid .yes-no-btn label:hover {
+      cursor: default; }
   .form-horizontal .row-fluid .yes-no-btn .controls {
-    margin-left: 75%; }
+    float: right;
+    margin-left: 0; }
+.form-horizontal .row-fluid .popover.top .arrow:after {
+  margin-left: 0; }

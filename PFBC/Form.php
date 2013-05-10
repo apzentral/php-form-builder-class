@@ -451,6 +451,7 @@ JS;
 			$this->resourcesPath . "validation/jquery.validation.js",
 			$this->resourcesPath . "validation/bootstrap-formhelpers-phone.format.js",
 			$this->resourcesPath . "validation/bootstrap-formhelpers-phone.js",
+			$this->resourcesPath . "views/js/all_views.js",
 		);
 
 		//$this->debug($this->_elements);

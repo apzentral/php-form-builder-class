@@ -2,13 +2,25 @@
 .form-horizontal {
 	.row-fluid {
 		.yes-no-btn {
+			overflow: hidden;
 			width: 100%;
 			label {
-				width: 70%;
+				width: auto;
 				text-align: left;
+				&:hover {
+					cursor: default;
+				}
 			}
 			.controls {
-				margin-left: 75%;
+				float: right;
+				margin-left: 0;
+			}
+		}
+		.popover {
+			&.top {
+				.arrow:after {
+					margin-left: 0;
+				}
 			}
 		}
 	}
