@@ -228,6 +228,8 @@ class Form extends Base {
 				return false;
 			elseif(in_array("noconflict", $this->prevent) && strpos($url, "/jquery.noConflict.js") !== false)
 				return false;
+			elseif(in_array("all", $this->prevent))
+				return false;
 		}
 
 		return true;

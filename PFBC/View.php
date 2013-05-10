@@ -45,8 +45,25 @@ abstract class View extends Base {
 			{
 				foreach($v as $k2 => $v2)
 				{
-					$this->params[$k][$k2] = $v2;
+					if(is_array($v2))
+					{
+						$this->params[$k][$k2] = array_merge($this->params[$k][$k2], $v2);
+					}
+					elseif(is_object($v2))
+					{
+						$v2 = (array)$v2;
+						$this->params[$k][$k2] = array_merge($this->params[$k][$k2], $v2);
+					}
+					else
+					{
+						$this->params[$k][$k2] = $v2;
+					}
 				}
+			}
+			elseif(is_object($v))
+			{
+				$v = (array)$v;
+				$this->params[$k] = array_merge($this->params[$k], $v);
 			}
 			else
 			{

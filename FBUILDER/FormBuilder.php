@@ -26,12 +26,14 @@ class FormBuilder
 	function __construct($form_config = array(), $options = array())
 	{
 		// Config for PFBC\Form
+		// FormSetup
 		$this->config = array(
 			"prevent" => array("bootstrap", "jQuery", "noConflict"),
 			'resourcesPath' => '../PFBC/Resources/'
 		);
 
 		// Setup Options for FBUILDER
+		// FormOptions
 		$this->options = array(
 			'label_seperator' => ':',
 			'title_tag' => 'h3',
