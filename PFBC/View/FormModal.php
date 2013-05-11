@@ -179,9 +179,17 @@ echo "\n".
 	height : ".$this->params['css-properties']['form-height'].";
 	width : ".$this->params['css-properties']['form-width'].";
 }
+.form-modal-wrapper .modal-header {
+	background-color: #F5F5F5;
+	padding: 15px 30px;
+}
 .form-modal-wrapper .modal-header h3{
 	border-bottom: none;
 	margin: 0;
+}
+.form-modal-wrapper .modal-footer {
+	padding-top: 20px;
+	padding-bottom: 0px;
 }
 ";
 	}
