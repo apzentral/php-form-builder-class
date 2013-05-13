@@ -69,7 +69,7 @@ class YesNoBtn extends Radio {
 			});
 			jQuery("#', $this->_attributes["id"], ' > input:hidden").on("change", function() {
 				var $parent = $(this).parent();
-				$("button",$parent).removeClass("btn-success btn-danger");
+				$("button",$parent).removeClass("btn-success btn-danger active");
 				if($(this).val() === "1") {
 					$(".yes",$parent).addClass("btn-success");
 				} else if($(this).val() === "0") {
