@@ -14,6 +14,13 @@
 			.controls {
 				float: right;
 				margin-left: 0;
+				.btn-group {
+					&.field-error {
+						border-width: 1px;
+						border-style: solid;
+						border-radius: 4px;
+					}
+				}
 			}
 		}
 		.popover {
@@ -26,3 +33,8 @@
 	}
 }
 
+.popover.fade.top.in {
+	.arrow:after {
+		margin-left: 0;
+	}
+}
