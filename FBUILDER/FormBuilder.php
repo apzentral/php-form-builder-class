@@ -430,6 +430,7 @@ class FormBuilder
 						if($attr === 'div_class')
 						{
 							$div_class = ' class="'.$option.'"';
+							continue;
 						}
 						$opt .= ' '.$attr.'="'.$option.'"';
 					}

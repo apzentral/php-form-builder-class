@@ -9,10 +9,11 @@
   .form-horizontal .row-fluid .yes-no-btn .controls {
     float: right;
     margin-left: 0; }
-    .form-horizontal .row-fluid .yes-no-btn .controls .btn-group.field-error {
+    .form-horizontal .row-fluid .yes-no-btn .controls .btn-group {
       border-width: 1px;
       border-style: solid;
-      border-radius: 4px; }
+      border-radius: 4px;
+      border-color: #FFF; }
 .form-horizontal .row-fluid .popover.top .arrow:after {
   margin-left: 0; }
 
