@@ -124,7 +124,7 @@ class FormBuilder
 		//===== Start Building the form =====//
 
 		// Create a new Form
-		$form = new Form($data->name);
+		$form = new Form($data->name, $this->options['sub_form']);
 
 		// Setup config
 		if( isset($this->config['view']) )

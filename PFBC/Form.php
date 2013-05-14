@@ -34,7 +34,7 @@ class Form extends Base {
 	protected $prevent = array();
 	protected $view;
 
-	public function __construct($id = "pfbc") {
+	public function __construct($id = "pfbc", $sub_form = FALSE) {
 		$this->configure(array(
 			"action" => basename($_SERVER["SCRIPT_NAME"]),
 			"id" => preg_replace("/\W/", "-", $id),
@@ -67,7 +67,10 @@ class Form extends Base {
 		{
 			session_start();
 		}
-		$_SESSION["form_token"] = md5(uniqid(mt_rand(), true));
+		if( ! $sub_form)
+		{
+			$_SESSION["form_token"] = md5(uniqid(mt_rand(), true));
+		}
 	}
 
 	/*When a form is serialized and stored in the session, this function prevents any non-essential
