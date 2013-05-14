@@ -170,6 +170,8 @@ jQuery(document).ready(function($) {
 						$('.form-prev', obj_parent).show({duration:500});
 						$('.form-submit', obj_parent).text('Next');
 					}
+					// Send clicked bullet event
+					obj_parent.trigger('clickedBullet.fbuilder', [currentField, current_bullet]);
 				} else {
 					FBUILDER.clickBullet(current_bullet, obj, obj_parent);
 				}
