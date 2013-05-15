@@ -4,8 +4,8 @@ namespace PFBC\Element;
 class Select extends \PFBC\OptionElement {
 	protected $_attributes = array();
 
-	public function __construct($label, $name, array $options, array $properties = null) {
-
+	public function __construct($label, $name, array $options, array $properties = null)
+	{
 		if(isset($options['options']))
 		{
 			$this->options = $options['options'];

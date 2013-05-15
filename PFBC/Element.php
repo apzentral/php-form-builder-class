@@ -26,7 +26,7 @@ abstract class Element extends Base {
 
 		foreach($configuration as $k => $v)
 		{
-			if( is_string($v) && preg_match('/(true|false)/i', $v))
+			if( is_string($v) && preg_match('/^(true|false)/i', $v))
 			{
 				$configuration[$k] = filter_var($v, FILTER_VALIDATE_BOOLEAN);
 				continue;
@@ -34,7 +34,7 @@ abstract class Element extends Base {
 			$v = (array)$v;
 			foreach($v as $k2 => $v2)
 			{
-				if( is_string($v2) && preg_match('/(true|false)/i', $v2))
+				if( is_string($v2) && preg_match('/^(true|false)/i', $v2))
 				{
 					if(is_array($configuration[$k]))
 					{
