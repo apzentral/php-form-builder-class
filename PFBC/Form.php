@@ -15,6 +15,9 @@ if(in_array("__autoload", spl_autoload_functions()))
 foreach (glob(__DIR__ . "/Helper/" . "*.php") as $filename) {
 	require_once $filename;
 }
+foreach (glob(__DIR__ . "/../FBUILDER/" . "*.php") as $filename) {
+	require_once $filename;
+}
 
 class Form extends Base {
 	protected $_elements = array();
@@ -361,6 +364,12 @@ class Form extends Base {
 		}
 
 		$urls[] = $this->resourcesPath . "rhinoslider/css/form-override.css";
+
+		// If this is < IE9 will need to include override
+		if( \FBUILDER\FBuilderHelper::isBrowser('ie', 9) )
+		{
+			$urls[] = $this->resourcesPath . "rhinoslider/css/form-override-ie9.css";
+		}
 
 		/* Check for Browser */
 		if ( strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'webkit') !== false ) {

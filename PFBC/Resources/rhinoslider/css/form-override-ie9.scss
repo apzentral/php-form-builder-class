@@ -1,0 +1,20 @@
+//===== IE Override =====//
+
+.rhino-form-wrapper {
+	.rhino-container {
+		.form-actions {
+			.rhino-btn {
+				background-image: none;
+				background-color: inherit;
+
+				&.btn-primary {
+					background-color: rgb(0, 109, 204);
+
+					&:hover {
+						background-color: #04C;
+					}
+				}
+			}
+		}
+	}
+}
