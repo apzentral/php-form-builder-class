@@ -81,3 +81,12 @@ ko.bindingHandlers.fadeVisible = {
             jQuery(element).fadeOut(duration);   // Make the element invisible
     }
 };
+
+/*===== Display Yes No =====*/
+ko.bindingHandlers.textBoolean = {
+    update: function(element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        value = (value === '1') ? 'Yes' : 'No';
+        jQuery(element).text(value);
+    }
+};
