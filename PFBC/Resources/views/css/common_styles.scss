@@ -1,0 +1,7 @@
+.popover.fade {
+	&.top, &.bottom {
+		.arrow:after {
+			margin-left: 0;
+		}
+	}
+}
