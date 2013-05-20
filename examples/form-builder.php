@@ -153,6 +153,22 @@ $json = '
 			"name" : "gender",
 			"type" : "Gender",
 			"description" : "Gender"
+		},
+		{
+			"type" : "Row",
+			"class" : "row-fluid"
+		},
+		{
+			"type" : "Col",
+			"class" : "span12"
+		},
+		{
+			"name" : "test_radio",
+			"type" : "Radio",
+			"description" : "Radio",
+			"config" : {
+				"options": ["Yes", "No"]
+			}
 		}
 		]
 	}
@@ -161,6 +177,11 @@ $json = '
 
 $decoded_json = json_decode($json);
 //echo var_dump($decoded_json);
+
+if(empty($decoded_json))
+{
+	throw new Exception('Invalid JSON data.');
+}
 
 	$formbuilder = new FormBuilder($decoded_json->form_setup, $decoded_json->form_options);
 

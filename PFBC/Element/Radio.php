@@ -5,6 +5,40 @@ class Radio extends \PFBC\OptionElement {
 	protected $_attributes = array("type" => "radio");
 	protected $inline;
 
+	public function __construct($label, $name, array $options, array $properties = null)
+	{
+		if(isset($options['options']))
+		{
+			$this->options = $options['options'];
+			$tmp_array = array();
+			foreach($options as $k => $v)
+			{
+				switch($k)
+				{
+					case 'options':
+						break;
+
+					default:
+						$tmp_array[$k] = $v;
+				}
+			}
+
+			if( ! empty($tmp_array))
+			{
+				$properties = $tmp_array;
+			}
+		}
+		else
+		{
+			$this->options = $options;
+		}
+
+		if(!empty($this->options) && array_values($this->options) === $this->options)
+			$this->options = array_combine($this->options, $this->options);
+
+		parent::__construct($label, $name, $this->options, $properties);
+	}
+
 	public function render() {
 		$labelClass = $this->_attributes["type"];
 		if(!empty($this->inline))

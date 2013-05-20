@@ -220,7 +220,7 @@ class FormBuilder
 						$form->addElement(new PFBC\Element\Button($v->name, 'button', $field_options));
 					}
 				}
-				else if($v->type === 'Select')
+				else if($v->type === 'Select' || $v->type === 'Radio' || $v->type === 'CheckboxOnly')
 				{
 					// Using Form Builder to build the input
 					$field_options = array();
@@ -229,18 +229,8 @@ class FormBuilder
 						$field_options = array_merge($field_options, $v->config);
 					}
 
-					$form->addElement(new PFBC\Element\Select($v->description.$this->options['label_seperator'], $v->name, $field_options));
-				}
-				else if($v->type === 'CheckboxOnly')
-				{
-					// Using Form Builder to build the input
-					$field_options = array();
-					if( ! is_null($v->config))
-					{
-						$field_options = array_merge($field_options, $v->config);
-					}
-
-					$form->addElement(new PFBC\Element\CheckboxOnly($v->description.$this->options['label_seperator'], $v->name, $field_options));
+					$type = "PFBC\\Element\\{$v->type}";
+					$form->addElement(new $type($v->description.$this->options['label_seperator'], $v->name, $field_options));
 				}
 				else
 				{
@@ -257,7 +247,7 @@ class FormBuilder
 						{
 							foreach($v->options as $opt_k => $opt_v)
 							{
-								$field_options['$opt_k'] = $opt_v;
+								$field_options[$opt_k] = $opt_v;
 							}
 						}
 					}
