@@ -70,6 +70,7 @@ jQuery(document).ready(function($) {
 			$('#form-modal #modal-title').removeClass('text-success').text('Please correct the following errors');
 			$("#form-modal #modal-body-text").html('');
 			// Get all inputs dom
+			$('form .slider .controls.printed-error').removeClass('printed-error');
 			$(":input", current_form).each(function(i){
 				var result;
 				$(this).off('blur');
@@ -123,9 +124,20 @@ jQuery(document).ready(function($) {
 			regex = null;
 			obj.val($.trim(obj.val()));	// trim val
 			obj.removeClass('field-error');
-			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked'))) ) {
+			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio'))) ) {
 				field_error = true;
 				if (printError) {
+					if (obj.is(':radio')) {
+						var _radio_container = obj.parents('.controls');
+						if ($(':radio[name='+obj.attr('name')+']:checked', _radio_container).is(':checked')) {
+							return;
+						}
+						if (_radio_container.hasClass('printed-error')) {
+							return;
+						} else {
+							_radio_container.addClass('printed-error');
+						}
+					}
 					if (obj.data('error-msg')) {
 						error_message = (field_name==='') ? obj.data('error-msg'): field_name+' ' + obj.data('error-msg');
 					} else {

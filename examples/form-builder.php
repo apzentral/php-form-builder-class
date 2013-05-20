@@ -167,7 +167,8 @@ $json = '
 			"type" : "Radio",
 			"description" : "Radio",
 			"config" : {
-				"options": ["Yes", "No"]
+				"options": ["Yes", "No"],
+				"required" : "1"
 			}
 		}
 		]
