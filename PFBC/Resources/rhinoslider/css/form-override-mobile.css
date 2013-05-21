@@ -1,0 +1,7 @@
+.rhino-form-wrapper .rhino-container .form-actions .rhino-btn {
+  background-image: none;
+  background-color: inherit; }
+  .rhino-form-wrapper .rhino-container .form-actions .rhino-btn.btn-primary {
+    background-color: #006dcc; }
+    .rhino-form-wrapper .rhino-container .form-actions .rhino-btn.btn-primary:hover {
+      background-color: #04C; }

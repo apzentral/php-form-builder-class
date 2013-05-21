@@ -371,6 +371,10 @@ class Form extends Base {
 		{
 			$urls[] = $this->resourcesPath . "rhinoslider/css/form-override-ie9.css";
 		}
+		elseif(\FBUILDER\FBuilderHelper::isMobile())
+		{
+			$urls[] = $this->resourcesPath . "rhinoslider/css/form-override-mobile.css";
+		}
 
 		/* Check for Browser */
 		if ( strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'webkit') !== false ) {
