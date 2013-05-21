@@ -163,7 +163,7 @@ jQuery(document).ready(function($) {
 		},
 		// Build Error Dialog
 		printError : function(obj, html) {
-			obj.blur(function() {
+			obj.on('blur', function() {
 				FBUILDER.checkAttr(obj, false);
 			});
 			$('#form-modal #modal-body-text').append('<p class="text-error">'+html+'</p>');
