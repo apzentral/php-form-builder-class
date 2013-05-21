@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 			$('form .slider .controls.printed-error').removeClass('printed-error');
 			$(":input", current_form).each(function(i){
 				var result;
-				$(this).off('blur');
+				$('body #'+$(this).attr('id')).off('blur');
 				result = FBUILDER.checkAttr($(this), true);
 				if ( ! error) {
 					error = result;
@@ -163,7 +163,7 @@ jQuery(document).ready(function($) {
 		},
 		// Build Error Dialog
 		printError : function(obj, html) {
-			obj.on('blur', function() {
+			$('body').on('blur', '#'+obj.attr('id'), function() {
 				FBUILDER.checkAttr(obj, false);
 			});
 			$('#form-modal #modal-body-text').append('<p class="text-error">'+html+'</p>');
