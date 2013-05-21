@@ -12,6 +12,10 @@ class Phone extends Textbox {
 		$this->_attributes["data-format"] = "(ddd) ddd-dddd";
 		$this->_attributes["class"] = "bfh-phone";
 
+		if ( strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie 8') !== false ) {
+			$this->_attributes['type'] = 'text';	// Chrome has default datepicker.
+		}
+
 		parent::__construct($label, $name, $properties);
     }
 }
