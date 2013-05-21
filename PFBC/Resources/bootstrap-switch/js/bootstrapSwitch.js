@@ -246,6 +246,6 @@
   };
 }(jQuery);
 
-$(function () {
+jQuery(document).ready(function($) {
   $('.switch')['bootstrapSwitch']();
 });
