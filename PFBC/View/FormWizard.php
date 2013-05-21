@@ -233,7 +233,8 @@ JS;
 		echo "\n".
 "
 .rhino-form-wrapper {
-	height: $form_height
+	height: $form_height,
+	overflow: hidden
 }
 .slider {
 	height: {$this->params['css-properties']['form-height']};
