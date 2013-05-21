@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
 					obj.prev().prev().trigger('click');
 				}
 				if (currentFieldset === 0) {
-					obj.prev().show({duration:500});
+					obj.prev().show('slow');
 				}
 			}
 			obj.one("click.fbuilder", function() {
@@ -103,10 +103,10 @@ jQuery(document).ready(function($) {
 						}
 					} else if(obj.hasClass('form-prev')) {
 						if (currentFieldset === 1) {
-							obj.hide({duration:500});
+							obj.hide('slow');
 						}
 						if (currentFieldset > 1) {
-							obj.show({duration:500});
+							obj.show('slow');
 						}
 						if (currentFieldset <= (form_wizard.name.length-1)) {
 							obj.next().text('Next');
@@ -177,9 +177,9 @@ jQuery(document).ready(function($) {
 					if (currentField === (form_wizard.name.length-1)) {
 						$('.form-submit', obj_parent).text('Send');
 					} else if (currentField === 0) {
-						$('.form-prev', obj_parent).hide({duration:500});
+						$('.form-prev', obj_parent).hide('slow');
 					} else if (currentField < (form_wizard.name.length-1)) {
-						$('.form-prev', obj_parent).show({duration:500});
+						$('.form-prev', obj_parent).show('slow');
 						$('.form-submit', obj_parent).text('Next');
 					}
 					// Send clicked bullet event
