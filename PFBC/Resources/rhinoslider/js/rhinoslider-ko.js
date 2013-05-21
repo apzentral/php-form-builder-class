@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
 		checkAttr: function(obj, printError) {
 			printError = typeof printError !== 'undefined' ? printError : false;
 			var field_error = false,
-			field_name = (obj.data('validation-name')) ? obj.data('validation-name'): '',
+			field_name = obj.attr('data-validation-name') || '',
 			error_message = null,
 			regex = null;
 			obj.val($.trim(obj.val()));	// trim val
