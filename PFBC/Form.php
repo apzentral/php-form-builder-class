@@ -66,20 +66,13 @@ class Form extends Base {
 		else
 			$this->resourcesPath = "/PFBC/Resources";
 
-		if( ! isset($_SESSION))
-		{
-			session_start();
-		}
 		/**
 		 * Just to be safe, if some user (Chrome) has install HTMLValidation
 		 * It will perform 2 requests to the server and can lead to changing
 		 * of the token.
 		 * Please remove this token, if the user has send this form.
 		 */
-		if( ! isset($_SESSION["form_token"]))
-		{
-			$_SESSION["form_token"] = md5(uniqid(mt_rand(), true));
-		}
+		\FBUILDER\FBuilderHelper::randomTokenSession('form_token', 180);
 
 		// Check Session Variables
 		//$log = new \FBUILDER\Logging();

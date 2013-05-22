@@ -4,6 +4,40 @@ namespace FBUILDER;
 abstract class FBuilderHelper {
 
 	/**
+	 * Function to set random Token and set up the timeout
+	 */
+	public static function randomTokenSession($name, $timeout = '')
+	{
+		if( ! isset($_SESSION))
+		{
+			session_start();
+		}
+
+		if($timeout !== '')
+		{
+			if(isset($_SESSION[$name.'_TIME']))
+			{
+				if( (time() - $_SESSION[$name.'_TIME']) > $_SESSION[$name.'_DURATION'])
+				{
+					// Unset Time and Session Name
+					unset($_SESSION[$name.'_TIME']);
+					unset($_SESSION[$name]);
+				}
+			}
+			else
+			{
+				$_SESSION[$name.'_DURATION'] = $timeout;
+				$_SESSION[$name.'_TIME'] = time();
+			}
+		}
+
+		if( ! isset($_SESSION[$name]))
+		{
+			$_SESSION[$name] = md5(uniqid(mt_rand(), true));
+		}
+	}
+
+	/**
 	 * Check Browser Version
 	 * isBrowser('ie', 8)
 	 * isBrowser('ie', '[1-8]')

@@ -20,9 +20,9 @@ class Logging {
         {
             $this->log_file = $fname;
         }
-        else
+        elseif($_SERVER['SERVER_NAME'] === 'localhost')
         {
-            $this->log_file = '/Applications/MAMP/htdocs/log/'.date('Y-m-d').':log.txt';
+            $this->log_file = '/Applications/MAMP/htdocs/log/'.date('Y-m-d').'_log.txt';
         }
     }
 
