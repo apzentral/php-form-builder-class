@@ -70,10 +70,22 @@ class Form extends Base {
 		{
 			session_start();
 		}
-		if( ! $sub_form)
+		/**
+		 * Just to be safe, if some user (Chrome) has install HTMLValidation
+		 * It will perform 2 requests to the server and can lead to changing
+		 * of the token.
+		 * Please remove this token, if the user has send this form.
+		 */
+		if( ! isset($_SESSION["form_token"]))
 		{
 			$_SESSION["form_token"] = md5(uniqid(mt_rand(), true));
 		}
+
+		// Check Session Variables
+		//$log = new \FBUILDER\Logging();
+		//$log->lwrite($id);
+		//$log->lwrite($_SESSION["form_token"]);
+		//$log->lclose();
 	}
 
 	/*When a form is serialized and stored in the session, this function prevents any non-essential
