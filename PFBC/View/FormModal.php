@@ -173,10 +173,23 @@ class FormModal extends \PFBC\View {
 	{
 		parent::renderCSS();
 
+		if($this->params['css-properties']['form-width'] !== 'auto')
+		{
+			$margin_left = 'margin-left: -'.(int)($this->params['css-properties']['form-width']/2).'px;';
+		}
+		else
+		{
+			$margin_left = '';
+		}
+
 echo "\n".
 "
 #".$this->_form->getAttribute('id')." {
 	height : ".$this->params['css-properties']['form-height'].";
+	width : ".$this->params['css-properties']['form-width'].";
+}
+.form-modal-wrapper {
+	".$margin_left."
 	width : ".$this->params['css-properties']['form-width'].";
 }
 .form-modal-wrapper .modal-header {
