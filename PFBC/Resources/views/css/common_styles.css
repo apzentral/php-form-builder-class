@@ -1,2 +1,7 @@
 .popover.fade.top .arrow:after, .popover.fade.bottom .arrow:after {
   margin-left: 0; }
+
+.form-modal-wrapper form {
+  margin-bottom: 0; }
+  .form-modal-wrapper form .modal-footer {
+    padding-bottom: 15px; }

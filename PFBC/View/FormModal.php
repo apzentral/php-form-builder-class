@@ -17,6 +17,7 @@ class FormModal extends \PFBC\View {
 				'form-width' => 'auto',
 				'form-height' => 'auto',
 			),
+			'modal' => FALSE,
 			'container-attr' => array(
 				'class' => '',
 				'data-bind' => '',
@@ -63,7 +64,10 @@ class FormModal extends \PFBC\View {
 
 		// Modal Header
 		echo '<div class="modal-header">';
-		echo '<button class="close" aria-hidden="true" data-dismiss="modal" type="button">X</button>';
+		if( ! $this->params['modal'])
+		{
+			echo '<button class="close" aria-hidden="true" data-dismiss="modal" type="button">X</button>';
+		}
 		echo $this->_form->subFormTitle;
 		echo '</div>';
 
@@ -123,7 +127,11 @@ class FormModal extends \PFBC\View {
 
 		// Modal Footer
 		echo '<div class="modal-footer text-right">';
-		echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel" style="margin-right:40px;">'.$this->params['actions']['cancel-val'].'</button>';
+
+		if( ! $this->params['modal'])
+		{
+			echo '<button class="btn" data-dismiss="modal" aria-hidden="true" id="'.$this->_form->getAttribute('id').'_cancel" style="margin-right:40px;">'.$this->params['actions']['cancel-val'].'</button>';
+		}
 		echo '<button type="submit" class="btn btn-primary" id="'.$this->_form->getAttribute('id').'_submit"'.((isset($this->params['actions']["data-bind-submit"]))? ' data-bind="'.$this->params['actions']["data-bind-submit"].'"':'').'>'.$this->params['actions']['submit-val'].'</button>';
 		echo '</div>';
 

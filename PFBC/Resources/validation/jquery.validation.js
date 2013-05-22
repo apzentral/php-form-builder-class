@@ -77,4 +77,11 @@ jQuery(document).ready(function($) {
 			VAL_HELPER.checkMax($(this));
 		}
 	});
+
+	/**
+	 * Convert to upppercase only
+	 */
+	$('body').on('keyup', ':input.uppercase', function(e){
+		$(this).val(($(this).val()).toUpperCase());
+	});
 });
