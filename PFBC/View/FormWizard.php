@@ -234,14 +234,15 @@ JS;
 "
 .rhino-form-wrapper {
 	height: $form_height;
-	overflow: hidden
+	overflow: hidden;
+	clear: both;
 }
 .slider {
 	height: {$this->params['css-properties']['form-height']};
-	width: {$this->params['css-properties']['form-width']}
+	width: {$this->params['css-properties']['form-width']};
 }
 .rhino-bullets li {
-	width: $bullet_width
+	width: $bullet_width;
 }
 ";
 	}
