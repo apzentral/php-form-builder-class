@@ -211,8 +211,17 @@ class Form extends Base {
 					/*If a validation error is found, the error message is saved in the session along with
 					the element's name.*/
 					if(!$element->isValid($value)) {
-						self::setError($id, $element->getErrors(), $name);
-						$valid = false;
+						switch(get_class($element))
+						{
+							case 'PFBC\Element\FullName':
+							case 'PFBC\Element\BDate':
+							case 'PFBC\Element\Date':
+								break;
+
+							default:
+								self::setError($id, $element->getErrors(), $name);
+								$valid = false;
+						}
 					}
 				}
 			}

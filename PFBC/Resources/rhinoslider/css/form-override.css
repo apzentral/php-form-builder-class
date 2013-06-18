@@ -43,8 +43,8 @@
       width: 100%;
       height: 80px;
       cursor: pointer;
-      background: none repeat scroll 0 0 #f8fdff;
-      border: 1px solid #eeeeee;
+      background: none repeat scroll 0 0 #F8FDFF;
+      border: 1px solid #EEEEEE;
       font-size: 10px;
       text-align: center;
       padding: 10px 0 5px 0;
@@ -128,8 +128,8 @@ input[type="button"].btn-primary, button.btn-primary {
   height: 80px; }
 
 .field-error {
-  border-color: #e9322d !important;
-  box-shadow: 0 0 6px #f8b9b7 !important; }
+  border-color: #E9322D !important;
+  box-shadow: 0 0 6px #F8B9B7 !important; }
 
 #form-modal .alert .close {
   right: -5px; }
@@ -154,7 +154,7 @@ div.remove-observableArray {
   margin-left: 130px; }
 .form-horizontal .row-fluid input, .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid select {
   font-size: 13px; }
-.form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid input[type="tel"], .form-horizontal .row-fluid input[type="number"] {
+.form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid input[type="tel"], .form-horizontal .row-fluid input[type="number"], .form-horizontal .row-fluid input[type="date"] {
   width: 80%; }
 .form-horizontal .row-fluid select {
   width: auto; }
