@@ -9,6 +9,7 @@
       var bindEvent, log, settings;
 
       settings = {
+        noSpace: 'no-space',
         numberClass: 'numeric',
         integerClass: 'integer',
         posNumberClass: 'positive',
@@ -17,6 +18,11 @@
       };
       settings = $.extend(settings, options);
       bindEvent = function($el) {
+        $el.on("keydown", "input." + settings.noSpace, function(e) {
+          if (e.which === 32) {
+            return e.preventDefault();
+          }
+        });
         $el.on("keydown", "input." + settings.posNumberClass, function(e) {
           var val;
 
@@ -29,13 +35,7 @@
           }
         });
         return $el.on("keydown", "input." + settings.posIntegerClass, function(e) {
-          var val;
-
           if (!(e.which === 8 || e.which === 9 || e.which === 17 || e.which === 46 || (e.which >= 35 && e.which <= 40) || (e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105))) {
-            e.preventDefault();
-          }
-          val = $(this).val();
-          if ((e.which === 190 || e.which === 110) && (!val || /[\.]/g.test(val))) {
             return e.preventDefault();
           }
         });
