@@ -25,8 +25,7 @@ class FormWizard extends \PFBC\View {
 
 	public function render()
 	{
-
-		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		if($this->_form->ie7)
 		{
 			$this->renderIE7();
 		}
@@ -209,7 +208,7 @@ class FormWizard extends \PFBC\View {
 
 	public function renderJS()
 	{
-		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		if($this->_form->ie7)
 		{
 			$this->renderJSIE7();
 		}
@@ -270,7 +269,7 @@ class FormWizard extends \PFBC\View {
 	// Set Up the Rhino Slider Wizard
 	public function jQueryDocumentReady()
 	{
-		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		if($this->_form->ie7)
 		{
 			echo 'jQuery("#'.$this->_form->getAttribute('id').'_wizard").wizard();';
 		}
@@ -291,7 +290,7 @@ JS;
 
 	public function renderCSS()
 	{
-		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		if($this->_form->ie7)
 		{
 			$this->renderCSSIE7();
 		}

@@ -36,8 +36,15 @@ class Form extends Base {
 	included jquery, jqueryui, bootstrap and focus.*/
 	protected $prevent = array();
 	protected $view;
+	public $ie7 = false;
 
 	public function __construct($id = "pfbc", $sub_form = FALSE) {
+
+		if(preg_match('/(?i)msie [5-7]\./',$_SERVER['HTTP_USER_AGENT']))
+		{
+			$this->ie7 = true;
+		}
+
 		$this->configure(array(
 			"action" => basename($_SERVER["SCRIPT_NAME"]),
 			"id" => preg_replace("/\W/", "-", $id),
@@ -369,7 +376,7 @@ class Form extends Base {
 			switch($this->view->js)
 			{
 				case 'rhinoslider':
-					if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+					if($this->ie7)
 					{
 						$elementUrls = array(
 							$this->resourcesPath . "fuel-ux/css/fuelux.min.css"
@@ -434,7 +441,7 @@ class Form extends Base {
 		jQuery("#$id").bind("submit", function() {
 			jQuery(this).find("input[type=submit]").attr("disabled", "disabled");
 		});
-		jQuery('input, textarea').placeholder();
+		if(jQuery.placeholder) { jQuery('input, textarea').placeholder(); }
 JS;
 
 		/*jQuery is used to set the focus of the form's initial element.*/
@@ -522,7 +529,7 @@ JS;
 			switch($this->view->js)
 			{
 				case 'rhinoslider':
-					if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+					if($this->ie7)
 					{
 						$elementUrls = array(
 							$this->resourcesPath . "fuel-ux/wizard.js",
