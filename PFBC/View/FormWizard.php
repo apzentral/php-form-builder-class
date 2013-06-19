@@ -38,14 +38,17 @@ class FormWizard extends \PFBC\View {
 
 	public function renderIE7()
 	{
+		echo '<div class="fuelux">';
 		echo '<div id="'.$this->_form->getAttribute('id').'_wizard" class="wizard">
-	<ul class="steps">
-		<li data-target="#step1" class="active"><span class="badge badge-info">1</span>Step 1<span class="chevron"></span></li>
-		<li data-target="#step2"><span class="badge">2</span>Step 2<span class="chevron"></span></li>
-		<li data-target="#step3"><span class="badge">3</span>Step 3<span class="chevron"></span></li>
-		<li data-target="#step4"><span class="badge">4</span>Step 4<span class="chevron"></span></li>
-		<li data-target="#step5"><span class="badge">5</span>Step 5<span class="chevron"></span></li>
-	</ul>
+	<ul class="steps">';
+
+		foreach($this->params['slides-name'] as $k => $v)
+		{
+			$k++;
+			echo '<li data-target="#step'.$k.'"><span class="badge badge-info">'.$k.'</span>'. $v .'<span class="chevron"></span></li>';
+		}
+
+		echo '</ul>
 	<div class="actions">
 		<button type="button" class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
 		<button type="button" class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
@@ -63,18 +66,98 @@ class FormWizard extends \PFBC\View {
 		// Generate CSRF
 		echo '<input type="hidden" name="'.$_SESSION["form_token"].'" value="1"/>';
 
+		$elements = $this->_form->getElements();
+		$elementSize = sizeof($elements);
+		$elementCount = 0;
+		$step = 1;
+		for($e = 0; $e < $elementSize; ++$e) {
+			$element = $elements[$e];
+			// Set the data-validation-name to be used as form validation
+			$data_validation_name = $element->getAttribute('data-validation-name');
+			if( empty($data_validation_name))
+			{
+				$element->setAttribute('data-validation-name', preg_replace('/:/','',$element->getLabel()));
+			}
 
-		// Render Each Step;
-		echo '<div class="step-pane active" id="step1">This is step 1</div>
-<div class="step-pane" id="step2">This is step 2</div>
-<div class="step-pane" id="step3">This is step 3</div>
-<div class="step-pane" id="step4">This is step 4</div>
-<div class="step-pane" id="step5">This is step 5</div>';
+			if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTML)
+			{
+				// Render Each Step;
+				//print_r(htmlentities($element->getAttribute('value')));
+				// If found fieldset mean this is the new div
 
+				$last_fieldset = stripos($element->getAttribute('value'), '</fieldset>');
+
+				if( stripos($element->getAttribute('value'), '<fieldset ') !== FALSE )
+				{
+					//echo 'Start' . '<br>';
+					//echo htmlentities($element->getAttribute('value')) . '<br>';
+					$first_tab = ($step === 1) ? ' active': '';
+					echo '<div class="step-pane'.$first_tab.'" id="step'.$step.'">';
+
+					$element->render();
+				}
+				else if($last_fieldset !== FALSE)
+				{
+					$step++;
+					//echo 'Debug' . '<br>';
+					//echo htmlentities($element->getAttribute('value')) . '<br>';
+					echo substr($element->getAttribute('value'), 0, $last_fieldset);
+					echo '</fieldset>';
+					//echo '<h1>'.$step.'</h1><h2>'.count($this->params['slides-name']).'</h2>';
+
+					if( count($this->params['slides-name']) >= $step)
+					{
+						echo '</div><div class="step-pane" id="step'.$step.'">';
+						echo substr($element->getAttribute('value'), $last_fieldset+11);
+					}
+					else {
+						//echo htmlentities($element->getAttribute('value')) . '<br>';
+						echo '</div>';
+					}
+					//echo 'Done' . '<br>';
+				}
+				else
+				{
+					$element->render();
+				}
+			}
+            elseif($element instanceof \PFBC\Element\Button) {
+
+				if($this->params['form-actions'])
+				{
+					if($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+						echo '<div class="form-actions">';
+					else
+						echo ' ';
+				}
+
+				$element->render();
+
+				if($this->params['form-actions'])
+				{
+					if(($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+						echo '</div>';
+				}
+            }
+			elseif($element instanceof \PFBC\Element\CheckboxOnly) {
+				echo '<div class="control-group options-only" id="element_', $element->getAttribute('id'), '">', $element->render(), $this->renderDescriptions($element), '</div>';
+				++$elementCount;
+			}
+            else {
+				$class = $element->getAttribute("container_class");	// Adding Class to the container div
+				if( ! empty($class))
+				{
+					$class = ' ' . $class;
+				}
+
+				$data_bind = ($element->getAttribute('data-bind-div') != '') ? ' data-bind="'.$this->filter($element->getAttribute('data-bind-div')).'"': '';
+				echo '<div class="control-group'.$class.'" id="element_', $element->getAttribute('id'), '"'.$data_bind.'>', $this->renderLabel($element), '<div class="controls">', $element->render(), $this->renderDescriptions($element), '</div></div>';
+				++$elementCount;
+			}
+		}
 
 		echo '</form>';
-
-		echo '</div>';
+		echo '</div></div>';
 	}
 
 	public function renderNormal()
@@ -271,7 +354,7 @@ class FormWizard extends \PFBC\View {
 	{
 		if($this->_form->ie7)
 		{
-			echo 'jQuery("#'.$this->_form->getAttribute('id').'_wizard").wizard();';
+			echo ' jQuery("#'.$this->_form->getAttribute('id').'_wizard").wizard();';
 		}
 		else
 		{

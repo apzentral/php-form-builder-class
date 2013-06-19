@@ -44,6 +44,7 @@ class Form extends Base {
 		{
 			$this->ie7 = true;
 		}
+		$this->ie7 = true;
 
 		$this->configure(array(
 			"action" => basename($_SERVER["SCRIPT_NAME"]),
@@ -379,7 +380,8 @@ class Form extends Base {
 					if($this->ie7)
 					{
 						$elementUrls = array(
-							$this->resourcesPath . "fuel-ux/css/fuelux.min.css"
+							$this->resourcesPath . "fuel-ux/css/fuelux.min.css",
+							$this->resourcesPath . "fuel-ux/css/fuel-ux-override.css"
 						);
 					}
 					else
@@ -532,7 +534,7 @@ JS;
 					if($this->ie7)
 					{
 						$elementUrls = array(
-							$this->resourcesPath . "fuel-ux/wizard.js",
+							$this->resourcesPath . "fuel-ux/wizard_alone.js",
 						);
 					}
 					else
