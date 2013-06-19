@@ -369,10 +369,19 @@ class Form extends Base {
 			switch($this->view->js)
 			{
 				case 'rhinoslider':
-					$elementUrls = array(
-						$this->resourcesPath . "rhinoslider/css/rhinoslider-1.05.css",
-						//$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css"
-					);
+					if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+					{
+						$elementUrls = array(
+							$this->resourcesPath . "fuel-ux/css/fuelux.min.css"
+						);
+					}
+					else
+					{
+						$elementUrls = array(
+							$this->resourcesPath . "rhinoslider/css/rhinoslider-1.05.css",
+							//$this->resourcesPath . "rhinoslider/css/rhinoslider-override.css"
+						);
+					}
 					break;
 			}
 			$urls = array_merge($urls, $elementUrls);
@@ -513,13 +522,22 @@ JS;
 			switch($this->view->js)
 			{
 				case 'rhinoslider':
-					$elementUrls = array(
-						//$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.min.js",
-						$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.js",
-						$this->resourcesPath . "rhinoslider/js/mousewheel.js",
-						$this->resourcesPath . "rhinoslider/js/easing.js",
-						$this->resourcesPath . "rhinoslider/js/rhinoslider-ko.js"
-					);
+					if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+					{
+						$elementUrls = array(
+							$this->resourcesPath . "fuel-ux/wizard.js",
+						);
+					}
+					else
+					{
+						$elementUrls = array(
+							//$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.min.js",
+							$this->resourcesPath . "rhinoslider/js/rhinoslider-1.05.js",
+							$this->resourcesPath . "rhinoslider/js/mousewheel.js",
+							$this->resourcesPath . "rhinoslider/js/easing.js",
+							$this->resourcesPath . "rhinoslider/js/rhinoslider-ko.js"
+						);
+					}
 					break;
 			}
 			$urls = array_merge($urls, $elementUrls);

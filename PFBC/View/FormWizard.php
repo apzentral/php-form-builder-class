@@ -39,7 +39,43 @@ class FormWizard extends \PFBC\View {
 
 	public function renderIE7()
 	{
+		echo '<div id="'.$this->_form->getAttribute('id').'_wizard" class="wizard">
+	<ul class="steps">
+		<li data-target="#step1" class="active"><span class="badge badge-info">1</span>Step 1<span class="chevron"></span></li>
+		<li data-target="#step2"><span class="badge">2</span>Step 2<span class="chevron"></span></li>
+		<li data-target="#step3"><span class="badge">3</span>Step 3<span class="chevron"></span></li>
+		<li data-target="#step4"><span class="badge">4</span>Step 4<span class="chevron"></span></li>
+		<li data-target="#step5"><span class="badge">5</span>Step 5<span class="chevron"></span></li>
+	</ul>
+	<div class="actions">
+		<button type="button" class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
+		<button type="button" class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+	</div>
+</div>';
 
+		$this->_form->appendAttribute("class", $this->class);
+
+		echo '<div class="step-content">';
+
+		echo '<form', $this->_form->getAttributes(), '>';
+
+		// Form Name
+		echo '<input type="hidden" name="FormName" value="'.$this->_form->getAttribute('id').'"/>';
+		// Generate CSRF
+		echo '<input type="hidden" name="'.$_SESSION["form_token"].'" value="1"/>';
+
+
+		// Render Each Step;
+		echo '<div class="step-pane active" id="step1">This is step 1</div>
+<div class="step-pane" id="step2">This is step 2</div>
+<div class="step-pane" id="step3">This is step 3</div>
+<div class="step-pane" id="step4">This is step 4</div>
+<div class="step-pane" id="step5">This is step 5</div>';
+
+
+		echo '</form>';
+
+		echo '</div>';
 	}
 
 	public function renderNormal()
@@ -171,8 +207,24 @@ class FormWizard extends \PFBC\View {
         }
     }
 
-	// Set Up Init Variables
 	public function renderJS()
+	{
+		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		{
+			$this->renderJSIE7();
+		}
+		else
+		{
+			$this->renderJSNormal();
+		}
+	}
+
+	public function renderJSIE7()
+	{
+	}
+
+	// Set Up Init Variables
+	public function renderJSNormal()
 	{
 		$html = 'var form_wizard = {';
 		$object_array = array();
@@ -218,7 +270,13 @@ class FormWizard extends \PFBC\View {
 	// Set Up the Rhino Slider Wizard
 	public function jQueryDocumentReady()
 	{
-		// Setup the FormWizard
+		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		{
+			echo 'jQuery("#'.$this->_form->getAttribute('id').'_wizard").wizard();';
+		}
+		else
+		{
+			// Setup the FormWizard
 		echo <<< JS
 // Setup the Steps
 jQuery('.rhino-bullet').each(function(index){
@@ -228,10 +286,28 @@ jQuery('.rhino-bullet').each(function(index){
 });
 
 JS;
+		}
+	}
+
+	public function renderCSS()
+	{
+		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		{
+			$this->renderCSSIE7();
+		}
+		else
+		{
+			$this->renderCSSNormal();
+		}
+	}
+
+	public function renderCSSIE7()
+	{
+
 	}
 
 	// Render CSS
-	public function renderCSS()
+	public function renderCSSNormal()
 	{
 		parent::renderCSS();
 
