@@ -23,7 +23,27 @@ class FormWizard extends \PFBC\View {
 		);
 	}
 
-	public function render() {
+	public function render()
+	{
+
+		if(preg_match('/(?i)msie [1-7]/',$_SERVER['HTTP_USER_AGENT']))
+		{
+			$this->renderIE7();
+		}
+		else
+		{
+			$this->renderNormal();
+		}
+
+	}
+
+	public function renderIE7()
+	{
+
+	}
+
+	public function renderNormal()
+	{
 
 		$this->_form->appendAttribute("class", $this->class);
 
