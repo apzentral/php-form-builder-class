@@ -143,36 +143,36 @@ div.remove-observableArray {
   div.remove-observableArray:hover {
     cursor: pointer; }
 
-.form-horizontal .row-fluid label {
+.form-horizontal .row-fluid label, .fuelux .form-horizontal .row-fluid label {
   width: 120px;
   font-size: 13px; }
-  .form-horizontal .row-fluid label.checkbox, .form-horizontal .row-fluid label.radio {
+  .form-horizontal .row-fluid label.checkbox, .form-horizontal .row-fluid label.radio, .fuelux .form-horizontal .row-fluid label.checkbox, .fuelux .form-horizontal .row-fluid label.radio {
     width: 80%; }
-    .form-horizontal .row-fluid label.checkbox.yes-no, .form-horizontal .row-fluid label.radio.yes-no {
+    .form-horizontal .row-fluid label.checkbox.yes-no, .form-horizontal .row-fluid label.radio.yes-no, .fuelux .form-horizontal .row-fluid label.checkbox.yes-no, .fuelux .form-horizontal .row-fluid label.radio.yes-no {
       width: 25px; }
-.form-horizontal .row-fluid .controls {
+.form-horizontal .row-fluid .controls, .fuelux .form-horizontal .row-fluid .controls {
   margin-left: 130px; }
-.form-horizontal .row-fluid input, .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid select {
+.form-horizontal .row-fluid input, .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid select, .fuelux .form-horizontal .row-fluid input, .fuelux .form-horizontal .row-fluid textarea, .fuelux .form-horizontal .row-fluid select {
   font-size: 13px; }
-.form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid input[type="tel"], .form-horizontal .row-fluid input[type="number"], .form-horizontal .row-fluid input[type="date"] {
+.form-horizontal .row-fluid input[type="text"], .form-horizontal .row-fluid textarea, .form-horizontal .row-fluid input[type="tel"], .form-horizontal .row-fluid input[type="number"], .form-horizontal .row-fluid input[type="date"], .fuelux .form-horizontal .row-fluid input[type="text"], .fuelux .form-horizontal .row-fluid textarea, .fuelux .form-horizontal .row-fluid input[type="tel"], .fuelux .form-horizontal .row-fluid input[type="number"], .fuelux .form-horizontal .row-fluid input[type="date"] {
   width: 80%; }
-.form-horizontal .row-fluid select {
+.form-horizontal .row-fluid select, .fuelux .form-horizontal .row-fluid select {
   width: auto; }
-.form-horizontal .row-fluid .element-block label {
+.form-horizontal .row-fluid .element-block label, .fuelux .form-horizontal .row-fluid .element-block label {
   float: none;
   width: auto;
   text-align: left; }
-.form-horizontal .row-fluid .element-block .controls {
+.form-horizontal .row-fluid .element-block .controls, .fuelux .form-horizontal .row-fluid .element-block .controls {
   margin-left: 20px; }
-.form-horizontal .row-fluid .element-block input[type="text"], .form-horizontal .row-fluid .element-block select, .form-horizontal .row-fluid .element-block textarea, .form-horizontal .row-fluid .element-block input[type="tel"], .form-horizontal .row-fluid .element-block input[type="number"] {
+.form-horizontal .row-fluid .element-block input[type="text"], .form-horizontal .row-fluid .element-block select, .form-horizontal .row-fluid .element-block textarea, .form-horizontal .row-fluid .element-block input[type="tel"], .form-horizontal .row-fluid .element-block input[type="number"], .fuelux .form-horizontal .row-fluid .element-block input[type="text"], .fuelux .form-horizontal .row-fluid .element-block select, .fuelux .form-horizontal .row-fluid .element-block textarea, .fuelux .form-horizontal .row-fluid .element-block input[type="tel"], .fuelux .form-horizontal .row-fluid .element-block input[type="number"] {
   float: none; }
-.form-horizontal .row-fluid .birthday-picker select {
+.form-horizontal .row-fluid .birthday-picker select, .fuelux .form-horizontal .row-fluid .birthday-picker select {
   width: auto; }
-.form-horizontal .row-fluid input[type="button"] {
+.form-horizontal .row-fluid input[type="button"], .fuelux .form-horizontal .row-fluid input[type="button"] {
   margin: 10px auto; }
-.form-horizontal .options-only .controls {
+.form-horizontal .options-only .controls, .fuelux .form-horizontal .options-only .controls {
   margin-left: 30px; }
-.form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio {
+.form-horizontal .options-only label.checkbox, .form-horizontal .options-only label.radio, .fuelux .form-horizontal .options-only label.checkbox, .fuelux .form-horizontal .options-only label.radio {
   width: 95%; }
-.form-horizontal .blood-pressure input[type="number"] {
+.form-horizontal .blood-pressure input[type="number"], .fuelux .form-horizontal .blood-pressure input[type="number"] {
   width: 30%; }

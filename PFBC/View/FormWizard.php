@@ -385,7 +385,31 @@ JS;
 
 	public function renderCSSIE7()
 	{
+		parent::renderCSS();
 
+		$form_height =  (int)$this->params['css-properties']['form-height'] + 200;
+		$form_height .= 'px';
+
+		$total_name = count($this->params['slides-name']);
+		if( $total_name > 0)
+		{
+			$bullet_width = (int)$this->params['css-properties']['form-width'] / (float)$total_name;
+			$bullet_width -= 1;	// Subtract margin
+			$bullet_width .= 'px';
+		}
+		else
+		{
+			$bullet_width = '100px';
+		}
+
+		echo "\n".
+"
+.fuelux {
+	height: $form_height;
+	overflow: hidden;
+	clear: both;
+}
+";
 	}
 
 	// Render CSS
