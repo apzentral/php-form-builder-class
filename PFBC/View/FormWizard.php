@@ -34,6 +34,34 @@ class FormWizard extends \PFBC\View {
 			$this->renderNormal();
 		}
 
+		// Modal to show fields error
+		echo '
+<div id="form-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header alert alert-error">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+		<h3 id="modal-title"></h3>
+	</div>
+	<div class="modal-body">
+		<div id="modal-body-text"></div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>';
+
+		// Respond Output
+		echo '<div id="respond-output"></div>';
+
+		// If this form has after html render
+		$this->params['after-form-render'] = (array)$this->params['after-form-render'];	// Cast to array
+		if(isset($this->params['after-form-render'][0]))
+		{
+			foreach($this->params['after-form-render'] as $data)
+			{
+				echo $data;
+			}
+		}
+
 	}
 
 	public function renderIE7()
@@ -251,34 +279,6 @@ class FormWizard extends \PFBC\View {
 		}
 
 		echo '</div>';
-
-		// Modal to show fields error
-		echo '
-<div id="form-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header alert alert-error">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-		<h3 id="modal-title"></h3>
-	</div>
-	<div class="modal-body">
-		<div id="modal-body-text"></div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
-	</div>
-</div>';
-
-		// Respond Output
-		echo '<div id="respond-output"></div>';
-
-		// If this form has after html render
-		$this->params['after-form-render'] = (array)$this->params['after-form-render'];	// Cast to array
-		if(isset($this->params['after-form-render'][0]))
-		{
-			foreach($this->params['after-form-render'] as $data)
-			{
-				echo $data;
-			}
-		}
     }
 
 	protected function renderLabel(\PFBC\Element $element) {
