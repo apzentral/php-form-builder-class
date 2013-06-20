@@ -540,6 +540,7 @@ JS;
 					{
 						$elementUrls = array(
 							$this->resourcesPath . "fuel-ux/wizard_alone.js",
+							$this->resourcesPath . "fuel-ux/fuel-ux-check-form.js"
 						);
 					}
 					else

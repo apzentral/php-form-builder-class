@@ -306,6 +306,8 @@ class FormWizard extends \PFBC\View {
 
 	public function renderJSIE7()
 	{
+		$html = ' var FUEL_UX_FORM = { $WIZARD: jQuery("#'.$this->_form->getAttribute('id').'_wizard") }; ';
+		echo $html;
 	}
 
 	// Set Up Init Variables
