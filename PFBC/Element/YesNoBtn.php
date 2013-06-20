@@ -55,15 +55,17 @@ class YesNoBtn extends Radio {
 		if(is_null($this->parentBind))
 		{
 			echo 'jQuery("#', $this->_attributes["id"], ' > button").on("click", function() {
-			var $parent = $(this).parent(),
+			var _val = $(this).val(),
+			_val_str = this.value,
+			$parent = $(this).parent(),
 			$input = $parent.find("input");
 			$parent.find("button").removeClass("btn-success btn-danger");
-			if($(this).val() === "1") {
+			if(_val === "1" || _val_str === "Yes") {
 				$input.val(1);
-			} else if($(this).val() === "0") {
+			} else if(_val === "0" || _val_str === "No") {
 				$input.val(0);
 			} else {
-				$input.val("");
+				$input.val(0);
 			}
 			$input.trigger("change");
 			});

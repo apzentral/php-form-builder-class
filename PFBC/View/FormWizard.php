@@ -45,13 +45,16 @@ class FormWizard extends \PFBC\View {
 		foreach($this->params['slides-name'] as $k => $v)
 		{
 			$k++;
-			echo '<li data-target="#step'.$k.'"><span class="badge badge-info">'.$k.'</span>'. $v .'<span class="chevron"></span></li>';
+
+			$first_tab = ($k === 1) ? 'class="active" ': '';
+
+			echo '<li '.$first_tab.'data-target="#step'.$k.'"><span class="badge badge-info">'.$k.'</span>'. $v .'<span class="chevron"></span></li>';
 		}
 
 		echo '</ul>
 	<div class="actions">
-		<button type="button" class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
-		<button type="button" class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+		<button type="button" class="btn btn-primary btn-prev" disabled=""> <i class="icon-arrow-left"></i>Prev</button>
+		<button type="button" class="btn btn-primary btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
 	</div>
 </div>';
 

@@ -1,10 +1,36 @@
 /*===== Fuel UX Override =====*/
 
+.modal {
+	hr {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.modal-header {
+		overflow: hidden;
+		h3 {
+			width: 80%;
+			float: left;
+		}
+	}
+}
+
 .fuelux {
+
+	a {
+		[class*="icon-"] {
+			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
 
 	.icon-user {
 		background: none;
 		width: auto;
+		line-height: normal;
+		height: auto;
 	}
 
 	.step-content {
@@ -13,4 +39,32 @@
 		padding: 30px;
 	}
 
+	.wizard {
+		ul {
+			li {
+				.chevron {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.form-horizontal, .fuelux .form-horizontal {
+	&:first-child {
+		.controls {
+			padding-left: auto !important;
+		}
+	}
+
+	.row-fluid {
+		.controls {
+			margin-left: auto !important;
+
+			&:first-child {
+				*padding-left: auto !important;
+			}
+
+		}
+	}
 }

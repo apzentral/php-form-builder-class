@@ -366,6 +366,11 @@ class Form extends Base {
 			$this->resourcesPath . "views/css/common_styles.css",
 		);
 
+		if($this->ie7)
+		{
+			$urls[] = $this->resourcesPath . "font-awesome/css/font-awesome-ie7.min.css";
+		}
+
 		foreach($this->_elements as $element) {
 			$elementUrls = $element->getCSSFiles();
 			if(is_array($elementUrls))
