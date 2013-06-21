@@ -25,11 +25,9 @@ jQuery(document).ready(function($) {
 						success: this.showResponse
 					};
 					//obj.parentsUntil('.fuelux', '.step-content').ajaxSubmit(options);
-				}
-				else {
-					// Custom Event Before Click Next
-					var $form = obj.parentsUntil('.fuelux', 'form');
-					$form.trigger('beforeNextStep.fbuilder', [$form, currentFieldset]);
+				} else {
+					var $form = $("#"+e.currentTarget.id).parent().filter('form');
+					$form.trigger('beforeNextStep.fbuilder', [$form, FUEL_UX_FORM.checkCurrentPage]);
 				}
 			}
 			else {
@@ -39,8 +37,7 @@ jQuery(document).ready(function($) {
 		},
 		validateFields : function() {
 			// Method to validate fields
-			var currentFieldset = FUEL_UX_FORM.checkCurrentPage(),
-			error = false,
+			var error = false,
 			first_obj = null,
 			current_form = FUEL_UX_FORM.getjQCurrentPage();
 
@@ -67,6 +64,7 @@ jQuery(document).ready(function($) {
 			}
 			return (! error);
 		},
+		// Note: Since IE7 does not support attr required will check with class
 		checkAttr: function(obj, printError) {
 			printError = typeof printError !== 'undefined' ? printError : false;
 			var field_error = false,
@@ -75,7 +73,8 @@ jQuery(document).ready(function($) {
 			regex = null;
 			obj.val($.trim(obj.val()));	// trim val
 			obj.removeClass('field-error');
-			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio'))) ) {
+
+			if ( (obj.attr('required') && ! obj.hasClass('not-required')) && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio'))) ) {
 				field_error = true;
 				if (printError) {
 					if (obj.is(':radio')) {
@@ -172,5 +171,6 @@ jQuery(document).ready(function($) {
 		//console.log('finished');
 		//console.log(FUEL_UX_FORM.checkCurrentPage());
 		//console.log(current_page);
+		FBUILDER.setValidation(e);
 	});
 });
