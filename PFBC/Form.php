@@ -44,7 +44,7 @@ class Form extends Base {
 		{
 			$this->ie7 = true;
 		}
-		$this->ie7 = true;
+		//$this->ie7 = true;	// Debug IE7 Issue
 
 		$this->configure(array(
 			"action" => basename($_SERVER["SCRIPT_NAME"]),
