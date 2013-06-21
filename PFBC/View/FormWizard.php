@@ -81,8 +81,8 @@ class FormWizard extends \PFBC\View {
 
 		echo '</ul>
 	<div class="actions">
-		<button type="button" class="btn btn-primary btn-prev" disabled=""> <i class="icon-arrow-left"></i>Prev</button>
-		<button type="button" class="btn btn-primary btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+		<button type="button" class="btn btn-primary btn-prev" disabled="" style="visibility:hidden"> <i class="icon-arrow-left"></i>Prev</button>
+		<button type="button" class="btn btn-primary btn-next" data-last="Finish" style="visibility:hidden">Next<i class="icon-arrow-right"></i></button>
 	</div>
 </div>';
 

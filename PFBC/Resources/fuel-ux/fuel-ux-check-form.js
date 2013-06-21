@@ -161,6 +161,17 @@ jQuery(document).ready(function($) {
 		FBUILDER.setValidation(e);
 	});
 
+	FUEL_UX_FORM.$WIZARD.on('changed', function(e) {
+		var $nextBtn = $('.btn-next', FUEL_UX_FORM.$WIZARD),
+		$prevBtn = $('.btn-prev', FUEL_UX_FORM.$WIZARD),
+		$wiNextBtn = $('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX),
+		$wiPrevBtn = $('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX);
+		//console.log($('.btn-next', FUEL_UX_FORM.$WIZARD).html());
+		$wiNextBtn.html($nextBtn.html());
+		($nextBtn.attr('disabled')) ? $wiNextBtn.attr('disabled', true): $wiNextBtn.removeAttr('disabled');
+		($prevBtn.attr('disabled')) ? $wiPrevBtn.attr('disabled', true): $wiPrevBtn.removeAttr('disabled');
+	});
+
 	//FUEL_UX_FORM.$WIZARD.on('stepclick', function(e) {
 	//	console.log('stepclick');
 	//	console.log(FUEL_UX_FORM.checkCurrentPage());
@@ -173,4 +184,18 @@ jQuery(document).ready(function($) {
 		//console.log(current_page);
 		FBUILDER.setValidation(e);
 	});
+
+	// Remove Prev and Next Btn.
+	$('.btn-prev, .btn-next', FUEL_UX_FORM.$WIZARD).hide();
+	// Adding Button
+	FUEL_UX_FORM.$WIZARD_BOX.append('<div class="wizard-actions"><button type="button" class="btn btn-primary btn-large" id="wizard-prev"><i class="icon-arrow-left"></i> Prev</button><button type="button" class="btn btn-primary btn-large" id="wizard-next">Next <i class="icon-arrow-right"></i></button></div>');
+
+	// Events
+	$('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX).click(function() {
+		$('.btn-next', FUEL_UX_FORM.$WIZARD).trigger('click');
+	});
+	$('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX).click(function() {
+		$('.btn-prev', FUEL_UX_FORM.$WIZARD).trigger('click');
+	}).attr('disabled', true);
+
 });

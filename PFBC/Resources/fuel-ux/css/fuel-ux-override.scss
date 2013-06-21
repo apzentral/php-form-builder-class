@@ -36,7 +36,11 @@
 	.step-content {
 		border: solid 1px #D4D4D4;
 		border-radius: 0 0 4px 4px;
+		border-bottom: none 0;
+		border-top: none 0;
+		margin-bottom: 0;
 		padding: 30px;
+		padding-bottom: 1px;
 	}
 
 	.wizard {
@@ -45,6 +49,46 @@
 				.chevron {
 					display: none;
 				}
+			}
+		}
+	}
+
+	.wizard-actions {
+		margin-top: 0;
+		padding: 20px;
+		padding-top: 0;
+		border: solid 1px #D4D4D4;
+		border-top: none 0;
+		overflow: hidden;
+		height: auto;
+
+		#wizard-prev {
+			float: left;
+			i {
+				margin-right: 5px;
+			}
+		}
+		#wizard-next {
+			float: right;
+			i {
+				margin-left: 5px;
+			}
+		}
+	}
+
+	.btn {
+		&.btn-large {
+			line-height: normal;
+			overflow: hidden;
+			width: auto;
+			height: auto;
+
+			i {
+				line-height: normal;
+				height: 20px;
+				width: 20px;
+				margin-top: 0;
+				background-image: none;
 			}
 		}
 	}

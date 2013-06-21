@@ -20,9 +20,40 @@
 .fuelux .step-content {
   border: solid 1px #D4D4D4;
   border-radius: 0 0 4px 4px;
-  padding: 30px; }
+  border-bottom: none 0;
+  border-top: none 0;
+  margin-bottom: 0;
+  padding: 30px;
+  padding-bottom: 1px; }
 .fuelux .wizard ul li .chevron {
   display: none; }
+.fuelux .wizard-actions {
+  margin-top: 0;
+  padding: 20px;
+  padding-top: 0;
+  border: solid 1px #D4D4D4;
+  border-top: none 0;
+  overflow: hidden;
+  height: auto; }
+  .fuelux .wizard-actions #wizard-prev {
+    float: left; }
+    .fuelux .wizard-actions #wizard-prev i {
+      margin-right: 5px; }
+  .fuelux .wizard-actions #wizard-next {
+    float: right; }
+    .fuelux .wizard-actions #wizard-next i {
+      margin-left: 5px; }
+.fuelux .btn.btn-large {
+  line-height: normal;
+  overflow: hidden;
+  width: auto;
+  height: auto; }
+  .fuelux .btn.btn-large i {
+    line-height: normal;
+    height: 20px;
+    width: 20px;
+    margin-top: 0;
+    background-image: none; }
 
 .form-horizontal:first-child .controls, .fuelux .form-horizontal:first-child .controls {
   padding-left: auto !important; }
