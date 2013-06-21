@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 						beforeSubmit: this.showRequest,
 						success: this.showResponse
 					};
-					//obj.parentsUntil('.fuelux', '.step-content').ajaxSubmit(options);
+					$('#'+e.currentTarget.id).parent().find('.step-content form').ajaxSubmit(options);
 				} else {
 					var $form = $("#"+e.currentTarget.id).parent().filter('form');
 					$form.trigger('beforeNextStep.fbuilder', [$form, FUEL_UX_FORM.checkCurrentPage]);
@@ -162,14 +162,15 @@ jQuery(document).ready(function($) {
 	});
 
 	FUEL_UX_FORM.$WIZARD.on('changed', function(e) {
-		var $nextBtn = $('.btn-next', FUEL_UX_FORM.$WIZARD),
-		$prevBtn = $('.btn-prev', FUEL_UX_FORM.$WIZARD),
-		$wiNextBtn = $('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX),
-		$wiPrevBtn = $('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX);
-		//console.log($('.btn-next', FUEL_UX_FORM.$WIZARD).html());
-		$wiNextBtn.html($nextBtn.html());
-		($nextBtn.attr('disabled')) ? $wiNextBtn.attr('disabled', true): $wiNextBtn.removeAttr('disabled');
-		($prevBtn.attr('disabled')) ? $wiPrevBtn.attr('disabled', true): $wiPrevBtn.removeAttr('disabled');
+		switch(FUEL_UX_FORM.checkCurrentPage()) {
+			case 1:
+				$('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX).attr('disabled', true);
+				break;
+
+			case 2:
+				$('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX).removeAttr('disabled');
+				break;
+		}
 	});
 
 	//FUEL_UX_FORM.$WIZARD.on('stepclick', function(e) {
