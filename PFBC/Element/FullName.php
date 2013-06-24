@@ -5,6 +5,12 @@ class FullName extends Textbox {
 	protected $middle_name;
 
 	public function render() {
+
+		if( isset($this->_attributes['middlename']) )
+		{
+			$this->middle_name = $this->_attributes['middlename'];
+		}
+
 		$addons = array();
 		if(!empty($this->prepend))
 			$addons[] = "input-prepend";
