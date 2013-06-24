@@ -7,6 +7,7 @@ use PFBC\Element;
 use PFBC\View;
 
 require_once(dirname(__FILE__).'/../PFBC/Form.php');
+require_once(dirname(__FILE__).'/../FirePHPCore/FirePHP.class.php');
 
 if( ! function_exists('FBUILDER\Load') )
 {
@@ -20,14 +21,17 @@ if( ! function_exists('FBUILDER\Load') )
 		spl_autoload_register("__autoload");
 }
 
-class FormBuilder
+class FormSchemaBuilder
 {
 	private $config;
 	private $open_tag;
 	private $options;
+	protected $firephp;
 
 	function __construct($form_config = array(), $options = array())
 	{
+		$this->firephp = \FirePHP::getInstance(true);
+
 		// Config for PFBC\Form
 		// FormSetup
 		$this->config = array(
@@ -129,6 +133,7 @@ class FormBuilder
 		// Create a new Form
 		$form = new Form($data->name, $this->options['sub_form']);
 
+		//var_dump($data->view);
 		// Setup config
 		if( isset($this->config['view']) )
 		{
@@ -137,8 +142,10 @@ class FormBuilder
 		}
 		else if( isset($data->view) )
 		{
-			$view = 'PFBC\\View\\'.$this->config['view'];
+			$view = 'PFBC\\View\\'.$data->view;
+			//var_dump($view);
 			$this->config['view'] = new $view;
+			//var_dump($this->config['view']);
 		}
 		//var_dump($this->options['sub_form']);
 		if($this->options['sub_form'])
@@ -171,7 +178,24 @@ class FormBuilder
 		{
 			if(get_class($v) !== 'FormField')
 			{
+				//$this->firephp->log($v);
 				$v = new FormField($v);
+
+				// Convert the name into Fields Class
+				switch($v->type)
+				{
+					case 'TextBox':
+						$v->type = 'Textbox';
+						break;
+
+					case 'SelectMulti':
+						$v->type = 'Checkbox';
+						break;
+
+					case 'SelectSingle':
+						$v->type = 'Select';
+						break;
+				}
 			}
 
 			if(is_object($v->options))

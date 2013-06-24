@@ -6,6 +6,7 @@ class FormObject {
 	private $title;
 	private $language;
 	private $fields;
+	private $view;
 
 	function __construct($init = array())
 	{
