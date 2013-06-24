@@ -153,6 +153,8 @@ class FormSchemaBuilder
 		{
 			$this->config['subFormTitle'] = '<'.$this->options['title_tag'].' class="'.$this->options['title_class'].'" id="'.$data->name.'_title_txt'.'">'.$data->title.'</'.$this->options['title_tag'].'>';
 		}
+		// Set up Form Attributes
+		$this->config = array_merge($this->config, $data->formoptions);
 		$form->configure($this->config);
 
 		// Create Title of this form

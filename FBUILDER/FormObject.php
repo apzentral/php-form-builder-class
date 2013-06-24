@@ -7,6 +7,7 @@ class FormObject {
 	private $language;
 	private $fields;
 	private $view;
+	private $formoptions;
 
 	function __construct($init = array())
 	{
@@ -16,6 +17,8 @@ class FormObject {
 			$k = strtolower($k);
 			$this->{$k} = $v;
 		}
+
+		$this->formatAttributes();
 	}
 
 	public function __get($property) {
@@ -30,5 +33,24 @@ class FormObject {
 		}
 
 		return $this;
+	}
+
+	public function formatAttributes()
+	{
+		$array = array();
+		foreach($this->formoptions as $k => $v)
+		{
+			switch($k)
+			{
+				case 'CssClass':
+					$array['class'] = $v;
+					break;
+
+				default:
+					$array[strtolower($k)] = $v;
+					break;
+			}
+		}
+		$this->formoptions = $array;
 	}
 }

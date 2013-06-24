@@ -384,6 +384,13 @@ class Form extends Base {
 		{
 			switch($this->view->js)
 			{
+				case 'fuelwizard':
+					$elementUrls = array(
+						$this->resourcesPath . "fuel-ux/css/fuelux.min.css",
+						$this->resourcesPath . "fuel-ux/css/fuel-ux-override.css"
+					);
+					break;
+
 				case 'rhinoslider':
 					if($this->ie7)
 					{
@@ -538,6 +545,13 @@ JS;
 		{
 			switch($this->view->js)
 			{
+				case 'fuelwizard':
+					$elementUrls = array(
+						$this->resourcesPath . "fuel-ux/wizard_alone.js",
+						$this->resourcesPath . "fuel-ux/fuel-ux-check-form.js"
+					);
+					break;
+
 				case 'rhinoslider':
 					if($this->ie7)
 					{
