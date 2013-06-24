@@ -20,7 +20,7 @@ class Button extends \PFBC\Element {
 		if(empty($properties["value"]))
 			$properties["value"] = $label;
 
-		if(strtolower($properties['render']) === 'button')
+		if(isset($properties['render']) && strtolower($properties['render']) === 'button')
 		{
 			$properties['name'] = $properties['value'];
 		}
