@@ -238,6 +238,11 @@ class FormSchemaBuilder
 									$field_options['$opt_k'] = $opt_v;
 								}
 							}
+
+							if( ! is_null($v->description) )
+							{
+								$field_options['description'] = $v->description;
+							}
 						}
 						$form->addElement(new PFBC\Element\Button($v->name, 'button', $field_options));
 					}

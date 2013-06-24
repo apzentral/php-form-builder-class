@@ -77,6 +77,10 @@ class FormField {
 					case 'featured':
 						break;
 
+					case 'cssclass':
+						$options['class'] = $v;
+						break;
+
 					case 'type':
 						switch($this->type)
 						{

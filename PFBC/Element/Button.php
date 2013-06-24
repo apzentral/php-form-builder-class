@@ -20,6 +20,10 @@ class Button extends \PFBC\Element {
 		if(empty($properties["value"]))
 			$properties["value"] = $label;
 
+		if(strtolower($properties['render']) === 'button')
+		{
+			$properties['name'] = $properties['value'];
+		}
 		parent::__construct("", "", $properties);
 	}
 
@@ -29,7 +33,7 @@ class Button extends \PFBC\Element {
 			$this->attributes["value"] = "";
 
 		// If user want to render as button instead of input it is ok!
-		if(isset($this->_attributes['render']) && $this->_attributes['render'] === 'button')
+		if(isset($this->_attributes['render']) && strtolower($this->_attributes['render']) === 'button')
 		{
 			$text = $this->_attributes['value'];
 			$tmp = $this->_attributes;
@@ -48,6 +52,7 @@ class Button extends \PFBC\Element {
 				}
 			}
 
+			$text = (isset($this->_attributes['description'])) ? $this->_attributes['description']: $text;
 			echo '<button', $this->getAttributes(), '>'.$text.'</button>';
 			$this->_attributes = $tmp;
 		}
