@@ -15,8 +15,8 @@ class FormField {
 	private $id;
 	private $class;
 	private $style;
-	private $options;
-	private $config;
+	private $options;		// Other Fields
+	private $config;		// This is select, options, checkbox
 
 	private $firephp;
 
@@ -51,15 +51,76 @@ class FormField {
 
 	protected function formatAttributes()
 	{
+		$options = array();
 		foreach($this as $k => $v)
 		{
 			if(is_null($v) || $k === 'firephp')
 			{
 				continue;
 			}
-			//$this->firephp->log('=====');
-			//$this->firephp->log($k);
-			//$this->firephp->log($v);
+			else if(is_object($v))
+			{
+				//$this->firephp->log('=====');
+				//$this->firephp->log($k);
+				//$this->firephp->log($v);
+				foreach($v as $obj_k => $obj_v)
+				{
+					$options[strtolower($obj_k)] = $obj_v;
+				}
+			}
+			else
+			{
+				switch($k)
+				{
+					case 'name':
+					case 'description':
+					case 'featured':
+						break;
+
+					case 'type':
+						switch($this->type)
+						{
+							case 'TextBox':
+								$this->type = 'Textbox';
+								break;
+
+							case 'SelectMulti':
+								$this->type = 'Checkbox';
+								break;
+
+							case 'SelectSingle':
+								$this->type = 'Select';
+
+							case 'Select':
+							case 'Radio':
+							case 'CheckboxOnly':
+								$this->config = (is_null($this->config)) ? array(): $this->config;
+								break;
+
+						}
+						break;
+					default:
+						$options[$k] = $v;
+						break;
+				}
+			}
+		}
+
+		//$this->firephp->log($options);
+		//$this->firephp->log($this->type);
+
+		if( ! is_null($this->config) )
+		{
+			if( ! empty($options['values']))
+			{
+				$options['options'] = $options['values'];
+				unset($options['values']);
+			}
+			$this->config = array_merge((array)$this->config, $options);
+		}
+		else
+		{
+			$this->options = array_merge((array)$this->options, $options);
 		}
 	}
 }

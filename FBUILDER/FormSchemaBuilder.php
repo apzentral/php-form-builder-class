@@ -126,6 +126,7 @@ class FormSchemaBuilder
 	public function parseFormSchema(FormObject $data, $option_params = array())
 	{
 		// Debug Data
+		//$this->firephp->log($data);
 		//var_dump($data);
 
 		//===== Start Building the form =====//
@@ -176,26 +177,13 @@ class FormSchemaBuilder
 
 		foreach($data->fields as $v)
 		{
+			//$this->firephp->log('=====');
+			//$this->firephp->log($v);
+
 			if(get_class($v) !== 'FormField')
 			{
-				//$this->firephp->log($v);
 				$v = new FormField($v);
-
-				// Convert the name into Fields Class
-				switch($v->type)
-				{
-					case 'TextBox':
-						$v->type = 'Textbox';
-						break;
-
-					case 'SelectMulti':
-						$v->type = 'Checkbox';
-						break;
-
-					case 'SelectSingle':
-						$v->type = 'Select';
-						break;
-				}
+				//$this->firephp->log($v);
 			}
 
 			if(is_object($v->options))
