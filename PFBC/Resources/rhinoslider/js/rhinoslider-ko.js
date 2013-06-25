@@ -1,7 +1,7 @@
 //===== KO Setup for FormWizard =====//
 jQuery(document).ready(function($) {
 	var FBUILDER = {
-		self: this,
+		fieldsetHeights : [],
 		// Methods
 		getCurrentFieldset : function(obj) {
 			return parseInt(obj.parentsUntil('.rhino-form-wrapper', '.rhino-container').find('.rhino-active').attr("id").match(/\d+/g));
@@ -23,6 +23,10 @@ jQuery(document).ready(function($) {
 				var $form = obj.parentsUntil('.rhino-form-wrapper', 'form');
 				$form.trigger('beforePreviousStep.fbuilder', [$form, currentFieldset]);
 				obj.prev().prev().trigger('click');
+
+				// Adjust Height
+				//console.log(currentFieldset);
+				FBUILDER.adjustHeight(currentFieldset-1);
 			} else {
 				return false;
 			}
@@ -32,6 +36,10 @@ jQuery(document).ready(function($) {
 
 			// Validate Current Fields
 			if (this.validateFields(obj)) {
+				// Adjust Height
+				//console.log(currentFieldset);
+				FBUILDER.adjustHeight(currentFieldset+1);
+
 				if (currentFieldset === (form_wizard.name.length-1)) {
 					// Send form
 					var options = {
@@ -175,15 +183,19 @@ jQuery(document).ready(function($) {
 					current_bullet.removeClass('step-success');
 					var currentField = parseInt(current_bullet.attr('id').match(/\d+/g));
 					if (currentField === (form_wizard.name.length-1)) {
+						$('.form-prev', obj_parent).show('slow');
 						$('.form-submit', obj_parent).text('Send');
 					} else if (currentField === 0) {
 						$('.form-prev', obj_parent).hide('slow');
+						$('.form-submit', obj_parent).text('Next');
 					} else if (currentField < (form_wizard.name.length-1)) {
 						$('.form-prev', obj_parent).show('slow');
 						$('.form-submit', obj_parent).text('Next');
 					}
 					// Send clicked bullet event
 					obj_parent.trigger('clickedBullet.fbuilder', [currentField, current_bullet]);
+					// Adjust Height
+					FBUILDER.adjustHeight(currentField);
 				} else {
 					FBUILDER.clickBullet(current_bullet, obj, obj_parent);
 				}
@@ -238,12 +250,26 @@ jQuery(document).ready(function($) {
 			//console.log(form_wizard.name.length)
 			//console.log(Math.floor(_width/form_wizard.name.length));
 		},
-		adjustHeight : function() {
+		setHeights : function() {
+			var $wrapper = $('div.rhino-form-wrapper'),
+			_height = 0;
+			$('fieldset', $wrapper).each(function() {
+				FBUILDER.fieldsetHeights.push($(this).height());
+			});
+		},
+		adjustMaxHeight : function() {
 			var $wrapper = $('div.rhino-form-wrapper'),
 			_height = 0;
 			$('fieldset', $wrapper).each(function() {
 				_height = Math.max(_height, $(this).height());
 			});
+			$wrapper.height(_height + 200);
+			$('.slider', $wrapper).height(_height);
+		},
+		adjustHeight : function(index) {
+			index = index || 0
+			var $wrapper = $('div.rhino-form-wrapper'),
+			_height = FBUILDER.fieldsetHeights[index];
 			$wrapper.height(_height + 200);
 			$('.slider', $wrapper).height(_height);
 		},
@@ -255,6 +281,7 @@ jQuery(document).ready(function($) {
 	FBUILDER.removeMarkup();
 
 	// Adjust Width and Height
+	FBUILDER.setHeights();
 	FBUILDER.adjustHeight();
 
 	$('.slider').rhinoslider({

@@ -101,8 +101,13 @@ class FormField {
 								$this->config = (is_null($this->config)) ? array(): $this->config;
 								break;
 
+							case 'DateInput':
+								$this->type = 'Date';
+								break;
+
 						}
 						break;
+
 					default:
 						$options[$k] = $v;
 						break;
@@ -112,6 +117,18 @@ class FormField {
 
 		//$this->firephp->log($options);
 		//$this->firephp->log($this->type);
+
+		//var_dump('=========');
+		//var_dump($options);
+		if(isset($options['required']))
+		{
+			$options['required'] = filter_var($options['required'], FILTER_VALIDATE_BOOLEAN);
+			if($options['required'] === FALSE)
+			{
+				unset($options['required']);
+			}
+		}
+		//var_dump($options);
 
 		if( ! is_null($this->config) )
 		{
