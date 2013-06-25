@@ -46,6 +46,10 @@ class FormObject {
 					$array['class'] = $v;
 					break;
 
+				case 'Path':
+					$array['resourcesPath'] = $v;
+					break;
+
 				default:
 					$array[strtolower($k)] = $v;
 					break;

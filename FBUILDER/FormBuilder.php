@@ -135,10 +135,11 @@ class FormBuilder
 			$view = 'PFBC\\View\\'.$this->config['view'];
 			$this->config['view'] = new $view;
 		}
-		else if( isset($data->view) )
+		else if( ! is_null($data->view) )
 		{
-			$view = 'PFBC\\View\\'.$this->config['view'];
+			$view = 'PFBC\\View\\'.$data->view;
 			$this->config['view'] = new $view;
+			//var_dump($this->config['view']);
 		}
 		//var_dump($this->options['sub_form']);
 		if($this->options['sub_form'])

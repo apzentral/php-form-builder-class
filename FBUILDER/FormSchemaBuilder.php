@@ -139,21 +139,24 @@ class FormSchemaBuilder
 		if( isset($this->config['view']) )
 		{
 			$view = 'PFBC\\View\\'.$this->config['view'];
+			//var_dump($view);
 			$this->config['view'] = new $view;
 		}
-		else if( isset($data->view) )
+		else if( ! is_null($data->view) )
 		{
 			$view = 'PFBC\\View\\'.$data->view;
-			//var_dump($view);
 			$this->config['view'] = new $view;
 			//var_dump($this->config['view']);
 		}
+
 		//var_dump($this->options['sub_form']);
 		if($this->options['sub_form'])
 		{
 			$this->config['subFormTitle'] = '<'.$this->options['title_tag'].' class="'.$this->options['title_class'].'" id="'.$data->name.'_title_txt'.'">'.$data->title.'</'.$this->options['title_tag'].'>';
 		}
 		// Set up Form Attributes
+		//var_dump($data->formoptions);
+		//var_dump($this->config);
 		$this->config = array_merge($this->config, $data->formoptions);
 		$form->configure($this->config);
 
