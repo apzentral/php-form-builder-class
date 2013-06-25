@@ -247,6 +247,7 @@ jQuery(document).ready(function($) {
 			//console.log($('.slider', $wrapper).width());
 			//console.log(_width);
 			$('.slider', $wrapper).width(_width);
+			$('.slider fieldset', $wrapper).width(_width);
 			$('.rhino-container', $wrapper).width(_width);
 			$('.rhino-bullets li', $wrapper).css('width', Math.floor(_width/form_wizard.name.length));
 			//console.log($('.slider', $wrapper).width());
@@ -255,12 +256,26 @@ jQuery(document).ready(function($) {
 		},
 		setHeights : function() {
 			var $wrapper = $('div.rhino-form-wrapper'),
-			_height = 0;
+			_height = 0, _hr = $('hr', $wrapper), _hr_height = 0;
+
+			//console.log($('hr:first', $wrapper).css('margin-top'));
+			//console.log($('hr:first', $wrapper).height());
+			//console.log($('hr:first', $wrapper).innerHeight());
+			//console.log($('hr:first', $wrapper).outerHeight());
+			//console.log($('hr:first', $wrapper).outerHeight(true));
+			if (_hr.height() > 0) {
+				_hr_height = _hr.outerHeight(true) - _hr.outerHeight();
+			}
+			//console.log(_hr_height);
+
 			$('fieldset', $wrapper).each(function() {
 				//console.log(this);
-				//console.log('This Height:' + this.height);
+				//console.log('Position:'+$(this).css('position'));
+				//console.log('Padding:' + $(this).css('padding-top') + ' ' + $(this).css('padding-bottom'));
+				//console.log('Margin:' + $(this).css('margin-top') + ' ' + $(this).css('margin-bottom'));
 				//console.log('Height:' + $(this).height() + ' CSS:' + $(this).css('height'));
-				FBUILDER.fieldsetHeights.push($(this).height());
+				FBUILDER.fieldsetHeights.push($(this).height() + (_hr.length * _hr_height) );
+				//console.log(FBUILDER.fieldsetHeights[FBUILDER.fieldsetHeights.length-1]);
 			});
 		},
 		adjustMaxHeight : function() {
