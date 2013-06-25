@@ -8,6 +8,7 @@ class FormObject {
 	private $fields;
 	private $view;
 	private $formoptions;
+	private $viewoptions;
 
 	function __construct($init = array())
 	{

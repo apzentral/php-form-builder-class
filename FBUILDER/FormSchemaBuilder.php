@@ -168,6 +168,12 @@ class FormSchemaBuilder
 			'fieldset' => FALSE
 		);
 
+		// Setup ViewOptions
+		if( ! is_null($data->viewoptions) )
+		{
+			$params = array_merge($params, (array)$data->viewoptions);
+		}
+
 		if(is_array($option_params))
 		{
 			$params = array_merge($params, $option_params);

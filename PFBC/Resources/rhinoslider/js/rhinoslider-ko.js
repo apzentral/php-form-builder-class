@@ -225,8 +225,37 @@ jQuery(document).ready(function($) {
 
 			// Fire Custom Event Before Complete Event
 			$form.trigger('respond.fbuilder', [responseText, statusText, xhr]);
+		},
+		adjustWidth : function() {
+			var $wrapper = $('div.rhino-form-wrapper'),
+			_width = $wrapper.width();
+			//console.log($('.slider', $wrapper).width());
+			//console.log(_width);
+			$('.slider', $wrapper).width(_width);
+			$('.rhino-container', $wrapper).width(_width);
+			$('.rhino-bullets li', $wrapper).css('width', Math.floor(_width/form_wizard.name.length));
+			//console.log($('.slider', $wrapper).width());
+			//console.log(form_wizard.name.length)
+			//console.log(Math.floor(_width/form_wizard.name.length));
+		},
+		adjustHeight : function() {
+			var $wrapper = $('div.rhino-form-wrapper'),
+			_height = 0;
+			$('fieldset', $wrapper).each(function() {
+				_height = Math.max(_height, $(this).height());
+			});
+			$wrapper.height(_height + 200);
+			$('.slider', $wrapper).height(_height);
+		},
+		removeMarkup : function() {
+			$('div.rhino-form-wrapper div.slider :button').remove();
 		}
 	};
+
+	FBUILDER.removeMarkup();
+
+	// Adjust Width and Height
+	FBUILDER.adjustHeight();
 
 	$('.slider').rhinoslider({
 		controlsMousewheel: false,
@@ -241,6 +270,8 @@ jQuery(document).ready(function($) {
 		nextText: 'Next',
 		bulletsClick: false
 	});
+
+	FBUILDER.adjustWidth();
 
 	// Hide Button
 	$(".rhino-prev").hide();

@@ -16,6 +16,13 @@
   .slider .rhino-active {
     display: block; }
 
+ol.rhino-bullets, ul.rhino-bullets {
+  padding: 0 !important;
+  margin: 0 !important; }
+  ol.rhino-bullets li, ul.rhino-bullets li {
+    margin: 0 !important;
+    padding: 0 !important; }
+
 .rhino-bullets {
   display: block;
   position: static;
