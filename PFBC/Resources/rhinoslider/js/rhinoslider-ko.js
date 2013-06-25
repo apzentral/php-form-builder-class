@@ -124,13 +124,16 @@ jQuery(document).ready(function($) {
 			}
 			return (! error);
 		},
+		// Validation Logic
 		checkAttr: function(obj, printError) {
 			printError = typeof printError !== 'undefined' ? printError : false;
 			var field_error = false,
 			field_name = obj.attr('data-validation-name') || '',
 			error_message = null,
 			regex = null;
-			obj.val($.trim(obj.val()));	// trim val
+			if (obj.attr('type') !== 'file') {
+				obj.val($.trim(obj.val()));	// trim val
+			}
 			obj.removeClass('field-error');
 			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio'))) ) {
 				field_error = true;
@@ -254,6 +257,9 @@ jQuery(document).ready(function($) {
 			var $wrapper = $('div.rhino-form-wrapper'),
 			_height = 0;
 			$('fieldset', $wrapper).each(function() {
+				//console.log(this);
+				//console.log('This Height:' + this.height);
+				//console.log('Height:' + $(this).height() + ' CSS:' + $(this).css('height'));
 				FBUILDER.fieldsetHeights.push($(this).height());
 			});
 		},

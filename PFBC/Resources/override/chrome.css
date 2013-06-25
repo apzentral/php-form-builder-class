@@ -1,19 +1,23 @@
 /* Remove Webkit Default Style */
-/* line 5, chrome.scss */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button,
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0;
-}
+  margin: 0; }
 
-/* line 10, chrome.scss */
 input::-webkit-calendar-picker-indicator {
-  display: none;
-}
+  display: none; }
 
-/* line 13, chrome.scss */
 input[type="date"]::-webkit-input-placeholder {
-  visibility: hidden !important;
-}
+  visibility: hidden !important; }
+
+fieldset, ol, ul {
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-padding-before: 0;
+  -webkit-padding-start: 0;
+  -webkit-padding-end: 0;
+  -webkit-padding-after: 0; }

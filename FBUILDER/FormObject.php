@@ -9,6 +9,8 @@ class FormObject {
 	private $view;
 	private $formoptions;
 	private $viewoptions;
+	private $submitbutton;
+	private $resetbutton;
 
 	function __construct($init = array())
 	{
@@ -49,6 +51,11 @@ class FormObject {
 
 				case 'Path':
 					$array['resourcesPath'] = $v;
+					break;
+
+				case 'SubmitButton':
+				case 'ResetButton':
+					$this->{strtolower($k)} = $v;
 					break;
 
 				default:
