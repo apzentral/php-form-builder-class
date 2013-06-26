@@ -19,5 +19,13 @@ abstract class Validation extends Base {
 		return false;
 	}
 
+	protected function getMimeType($file)
+	{
+		$finfo = \finfo_open(FILEINFO_MIME_TYPE);
+		$result = \finfo_file($finfo, $file);
+		\finfo_close($finfo);
+		return $result;
+	}
+
 	public abstract function isValid($value);
 }
