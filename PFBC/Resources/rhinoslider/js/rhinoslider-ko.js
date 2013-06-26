@@ -1,6 +1,7 @@
 //===== KO Setup for FormWizard =====//
 jQuery(document).ready(function($) {
 	var FBUILDER = {
+		imgExt : ['gif','png','jpg','jpeg'],
 		fieldsetHeights : [],
 		// Methods
 		getCurrentFieldset : function(obj) {
@@ -135,7 +136,7 @@ jQuery(document).ready(function($) {
 				obj.val($.trim(obj.val()));	// trim val
 			}
 			obj.removeClass('field-error');
-			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio'))) ) {
+			if (obj.attr('required') && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio') )) ) {
 				field_error = true;
 				if (printError) {
 					if (obj.is(':radio')) {
@@ -155,6 +156,19 @@ jQuery(document).ready(function($) {
 						error_message = field_name + ' is required.';
 					}
 					FBUILDER.printError(obj, error_message);
+				}
+			} else if (obj.is(':file') && obj.attr('accept')) {
+				var ext = obj.val().split('.').pop().toLowerCase();
+				switch (obj.attr('accept')) {
+					case 'image/*':
+						if($.inArray(ext, FBUILDER.imgExt) === -1) {
+							field_error = true;
+							if (printError) {
+								error_message = field_name + ' is not a valid image extension.';
+								FBUILDER.printError(obj, error_message);
+							}
+						}
+						break;
 				}
 			}
 			if ( ! field_error && (obj.attr('required') || obj.val() !== '') && obj.attr('pattern')) {
