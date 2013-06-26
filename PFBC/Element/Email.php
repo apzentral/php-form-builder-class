@@ -20,7 +20,7 @@ class Email extends Textbox {
 
 		$this->validation[] = new \PFBC\Validation\Email;
 
-		if( isset($this->_attributes['autocomplete']) || isset($this->_attributes['defaultemail']) )
+		if( isset($this->_attributes['autocomplete']) && $this->_attributes['autocomplete'] )
 		{
 			$this->renderAutoComplete();
 		}
