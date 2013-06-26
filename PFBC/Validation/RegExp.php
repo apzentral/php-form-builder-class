@@ -11,8 +11,11 @@ class RegExp extends \PFBC\Validation {
 	}
 
 	public function isValid($value) {
+		var_dump($this->pattern);
+		var_dump($value);
+
 		if($this->isNotApplicable($value) || preg_match($this->pattern, $value))
 			return true;
-		return false;	
+		return false;
 	}
 }

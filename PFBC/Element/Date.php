@@ -4,7 +4,7 @@ namespace PFBC\Element;
 class Date extends Textbox {
 	protected $_attributes = array(
 		"type" => "date",
-		"pattern" => "(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|20)\d\d$"
+		"pattern" => "(0[1-9]|1[012])[\/](0[1-9]|[12][0-9]|3[01])[\/](19|20)\d\d$"
 	);
 	protected $parentBind; // Attached event to parent
 	protected $childBind; // Attached event to child
