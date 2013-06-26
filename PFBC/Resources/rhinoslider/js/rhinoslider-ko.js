@@ -164,7 +164,7 @@ jQuery(document).ready(function($) {
 						if($.inArray(ext, FBUILDER.imgExt) === -1) {
 							field_error = true;
 							if (printError) {
-								error_message = field_name + ' is not a valid image extension.';
+								error_message = field_name + ' is not a valid image extension. (jpg, jpeg, png, gif)';
 								FBUILDER.printError(obj, error_message);
 							}
 						}
