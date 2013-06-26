@@ -458,7 +458,8 @@ class Form extends Base {
 		jQuery("#$id").bind("submit", function() {
 			jQuery(this).find("input[type=submit]").attr("disabled", "disabled");
 		});
-		if(jQuery.placeholder) { jQuery('input, textarea').placeholder(); }
+		if(jQuery().placeholder) { jQuery('input, textarea').placeholder(); };
+		if(jQuery().jQFilterInput) { jQuery('#$id').jQFilterInput(); };
 JS;
 
 		/*jQuery is used to set the focus of the form's initial element.*/
