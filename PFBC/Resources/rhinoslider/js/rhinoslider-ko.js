@@ -267,9 +267,8 @@ jQuery(document).ready(function($) {
 			return result;
 		},
 		showResponse : function(responseText, statusText, xhr, $form) {
-			var $submitBtn = $('a.form-submit', $form).removeAttr('data-submitted').show(),
-			target = document.getElementById('spin-loading'),
-			spinner = new Spinner().stop(target);
+			$('a.form-submit', $form).removeAttr('data-submitted').show();
+			$('div#spin-loading', $form).remove();
 
 			// for normal html responses, the first argument to the success callback
 			// is the XMLHttpRequest object's responseText property
