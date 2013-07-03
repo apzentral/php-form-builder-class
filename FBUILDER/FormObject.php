@@ -41,26 +41,29 @@ class FormObject {
 	public function formatAttributes()
 	{
 		$array = array();
-		foreach($this->formoptions as $k => $v)
+		if( ! is_null($this->formoptions) )
 		{
-			switch($k)
+			foreach($this->formoptions as $k => $v)
 			{
-				case 'CssClass':
-					$array['class'] = $v;
-					break;
+				switch($k)
+				{
+					case 'CssClass':
+						$array['class'] = $v;
+						break;
 
-				case 'Path':
-					$array['resourcesPath'] = $v;
-					break;
+					case 'Path':
+						$array['resourcesPath'] = $v;
+						break;
 
-				case 'SubmitButton':
-				case 'ResetButton':
-					$this->{strtolower($k)} = $v;
-					break;
+					case 'SubmitButton':
+					case 'ResetButton':
+						$this->{strtolower($k)} = $v;
+						break;
 
-				default:
-					$array[strtolower($k)] = $v;
-					break;
+					default:
+						$array[strtolower($k)] = $v;
+						break;
+				}
 			}
 		}
 		$this->formoptions = $array;
