@@ -158,6 +158,7 @@ class FormSchemaBuilder
 		//var_dump($data->formoptions);
 		//var_dump($this->config);
 		$this->config = array_merge($this->config, $data->formoptions);
+		$this->options = array_merge($this->options, $data->formoptions);
 		$form->configure($this->config);
 
 		// Create Title of this form
@@ -463,6 +464,8 @@ class FormSchemaBuilder
 				}
 
 				$html .= '<fieldset'.$opt.'>';
+
+				//var_dump($this->options);
 
 				if($this->options['fieldset_div'])
 				{

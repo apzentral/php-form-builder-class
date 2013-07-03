@@ -114,20 +114,12 @@ class FormWizard extends \PFBC\View {
 			{
 				// Render Each Step;
 				//print_r(htmlentities($element->getAttribute('value')));
+				//var_dump(stripos($element->getAttribute('value'), '<fieldset '));
 				// If found fieldset mean this is the new div
 
 				$last_fieldset = stripos($element->getAttribute('value'), '</fieldset>');
 
-				if( stripos($element->getAttribute('value'), '<fieldset ') !== FALSE )
-				{
-					//echo 'Start' . '<br>';
-					//echo htmlentities($element->getAttribute('value')) . '<br>';
-					$first_tab = ($step === 1) ? ' active': '';
-					echo '<div class="step-pane'.$first_tab.'" id="step'.$step.'">';
-
-					$element->render();
-				}
-				else if($last_fieldset !== FALSE)
+				if($last_fieldset !== FALSE)
 				{
 					$step++;
 					//echo 'Debug' . '<br>';
@@ -146,6 +138,15 @@ class FormWizard extends \PFBC\View {
 						echo '</div>';
 					}
 					//echo 'Done' . '<br>';
+				}
+				else if( stripos($element->getAttribute('value'), '<fieldset') !== FALSE )
+				{
+					//echo 'Start' . '<br>';
+					//echo htmlentities($element->getAttribute('value')) . '<br>';
+					$first_tab = ($step === 1) ? ' active': '';
+					echo '<div class="step-pane'.$first_tab.'" id="step'.$step.'">';
+
+					$element->render();
 				}
 				else
 				{

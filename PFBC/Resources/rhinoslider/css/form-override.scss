@@ -190,6 +190,14 @@ input[type="button"], button {
 		padding: 0;
 		border: 0;
 		height: 80px;
+
+		// Spin Loading Container
+		#spin-loading {
+			position: absolute;
+			right: 30px;
+			width: 100px;
+			height: 50px;
+		}
 	}
 }
 
