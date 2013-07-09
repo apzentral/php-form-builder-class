@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
 					if (obj.hasClass('form-submit')) {
 						$('#rhino-item'+(currentFieldset+1)+'-bullet', obj_parent).removeClass("step-success");
 						if (currentFieldset === (form_wizard.name.length-2)) {
-							obj.text('Send');
+							obj.text('Submit');
 						}
 					} else if(obj.hasClass('form-prev')) {
 						if (currentFieldset === 1) {
@@ -201,7 +201,7 @@ jQuery(document).ready(function($) {
 					var currentField = parseInt(current_bullet.attr('id').match(/\d+/g));
 					if (currentField === (form_wizard.name.length-1)) {
 						$('.form-prev', obj_parent).show('slow');
-						$('.form-submit', obj_parent).text('Send');
+						$('.form-submit', obj_parent).text('Submit');
 					} else if (currentField === 0) {
 						$('.form-prev', obj_parent).hide('slow');
 						$('.form-submit', obj_parent).text('Next');
