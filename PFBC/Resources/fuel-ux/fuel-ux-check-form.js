@@ -147,11 +147,41 @@ jQuery(document).ready(function($) {
 			// here we could return false to prevent the form from being submitted;
 			// returning anything other than false will allow the form submit to continue
 
+			if ($submitBtn.attr('data-submitted')) {
+				return false;
+			}
+			$submitBtn.attr('data-submitted', true).hide();
+
+			$submitBtn.parent().append('<div id="spin-loading"></div>');
+			var opts = {
+				lines: 11, // The number of lines to draw
+				length: 10, // The length of each line
+				width: 5, // The line thickness
+				radius: 15, // The radius of the inner circle
+				corners: 1, // Corner roundness (0..1)
+				rotate: 0, // The rotation offset
+				direction: 1, // 1: clockwise, -1: counterclockwise
+				color: '#000', // #rgb or #rrggbb
+				speed: 1, // Rounds per second
+				trail: 60, // Afterglow percentage
+				shadow: false, // Whether to render a shadow
+				hwaccel: false, // Whether to use hardware acceleration
+				className: 'spinner', // The CSS class to assign to the spinner
+				zIndex: 2e9, // The z-index (defaults to 2000000000)
+				top: 'auto', // Top position relative to parent in px
+				left: 'auto' // Left position relative to parent in px
+			},
+			target = document.getElementById('spin-loading'),
+			spinner = new Spinner(opts).spin(target);
+
 			// Fire Custom before Form Submit Event
 			result = jqForm.trigger('beforeSubmit.fbuilder', [queryString]);
 			return result;
 		},
 		showResponse : function(responseText, statusText, xhr, $form) {
+			$('a.form-submit', $form).removeAttr('data-submitted').show();
+			$('div#spin-loading', $form).remove();
+
 			// for normal html responses, the first argument to the success callback
 			// is the XMLHttpRequest object's responseText property
 
