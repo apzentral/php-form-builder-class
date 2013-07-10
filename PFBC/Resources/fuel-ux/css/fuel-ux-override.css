@@ -25,6 +25,8 @@
   margin-bottom: 0;
   padding: 30px;
   padding-bottom: 1px; }
+.fuelux .wizard .steps li {
+  font-size: 14px; }
 .fuelux .wizard ul li .chevron {
   display: none; }
 .fuelux .wizard .actions {
