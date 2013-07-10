@@ -9,6 +9,7 @@ jQuery(document).ready(function($) {
 	FUEL_UX_FORM.getjQCurrentPage = function() {
 		return $('#step'+FUEL_UX_FORM.checkCurrentPage(), FUEL_UX_FORM.$WIZARD_BOX);
 	};
+	FUEL_UX_FORM.maxSlides = $('ul.steps li', FUEL_UX_FORM.$WIZARD).length;
 
 	var FBUILDER = {
 		imgExt : ['gif','png','jpg','jpeg'],
@@ -136,7 +137,7 @@ jQuery(document).ready(function($) {
 			// formData is an array; here we use $.param to convert it to a string to display it
 			// but the form plugin does this for you automatically when it submits the data
 			var queryString = $.param(formData),
-			result = true;
+			result = true, $submitBtn = $('#wizard-next', jqForm);
 
 			// jqForm is a jQuery object encapsulating the form element.  To access the
 			// DOM element for the form do this:
@@ -209,10 +210,20 @@ jQuery(document).ready(function($) {
 		switch(FUEL_UX_FORM.checkCurrentPage()) {
 			case 1:
 				$('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX).attr('disabled', true);
+				$('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX).html('Next <i class="icon-arrow-right"></i>');
 				break;
 
 			case 2:
 				$('#wizard-prev', FUEL_UX_FORM.$WIZARD_BOX).removeAttr('disabled');
+				$('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX).html('Next <i class="icon-arrow-right"></i>');
+				break;
+
+			case FUEL_UX_FORM.maxSlides:
+				$('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX).html('Submit <i class="icon-arrow-right"></i>');
+				break;
+
+			default:
+				$('#wizard-next', FUEL_UX_FORM.$WIZARD_BOX).html('Next <i class="icon-arrow-right"></i>');
 				break;
 		}
 	});
