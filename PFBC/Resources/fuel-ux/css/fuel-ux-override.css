@@ -27,6 +27,10 @@
   padding-bottom: 1px; }
 .fuelux .wizard ul li .chevron {
   display: none; }
+.fuelux .wizard .actions {
+  display: none; }
+.fuelux .step-pane .btn-group button {
+  float: left; }
 .fuelux .wizard-actions {
   margin-top: 0;
   padding: 20px;

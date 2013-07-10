@@ -51,6 +51,17 @@
 				}
 			}
 		}
+		.actions {
+			display: none;
+		}
+	}
+
+	.step-pane {
+		.btn-group {
+			button {
+				float: left;
+			}
+		}
 	}
 
 	.wizard-actions {

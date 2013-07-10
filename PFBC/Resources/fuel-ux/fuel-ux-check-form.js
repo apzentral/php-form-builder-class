@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 	};
 
 	var FBUILDER = {
-		self: this,
+		imgExt : ['gif','png','jpg','jpeg'],
 		// Methods
 		setValidation : function(e) {
 			// Validate Current Fields
@@ -213,4 +213,6 @@ jQuery(document).ready(function($) {
 		$('.btn-prev', FUEL_UX_FORM.$WIZARD).trigger('click');
 	}).attr('disabled', true);
 
+	// Remove Unused Buttons
+	$('div.fuelux .step-content .step-pane :button').remove();
 });
