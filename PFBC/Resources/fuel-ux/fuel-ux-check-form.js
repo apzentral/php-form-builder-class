@@ -71,9 +71,10 @@ jQuery(document).ready(function($) {
 			field_name = obj.attr('data-validation-name') || '',
 			error_message = null,
 			regex = null;
-			obj.val($.trim(obj.val()));	// trim val
+			if (obj.attr('type') !== 'file') {
+				obj.val($.trim(obj.val()));	// trim val
+			}
 			obj.removeClass('field-error');
-
 			if ( (obj.attr('required') && ! obj.hasClass('not-required')) && (obj.val() === '' || ( obj.is(':checkbox') && ! obj.is(':checked') || obj.is(':radio'))) ) {
 				field_error = true;
 				if (printError) {
@@ -94,6 +95,19 @@ jQuery(document).ready(function($) {
 						error_message = field_name + ' is required.';
 					}
 					FBUILDER.printError(obj, error_message);
+				}
+			} else if (obj.is(':file') && obj.attr('accept')) {
+				var ext = obj.val().split('.').pop().toLowerCase();
+				switch (obj.attr('accept')) {
+					case 'image/*':
+						if($.inArray(ext, FBUILDER.imgExt) === -1) {
+							field_error = true;
+							if (printError) {
+								error_message = field_name + ' is not a valid image extension. (jpg, jpeg, png, gif)';
+								FBUILDER.printError(obj, error_message);
+							}
+						}
+						break;
 				}
 			}
 			if ( ! field_error && (obj.attr('required') || obj.val() !== '') && obj.attr('pattern')) {
