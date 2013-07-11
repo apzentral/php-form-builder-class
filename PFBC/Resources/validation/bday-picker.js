@@ -94,7 +94,10 @@
       var defYear = 2012,
         defMonth = defDate.getMonth() + 1,
         defDay = defDate.getDate();
-      hiddenDate = defYear + "-" + defMonth + "-" + defDay;
+      //hiddenDate = defYear + "-" + defMonth + "-" + defDay;
+      defMonth = (defMonth < 10) ? '0'+defMonth: defMonth;
+      defDay = (defDay < 10) ? '0'+defDay: defDay;
+      hiddenDate = defMonth + "/" + defDay + "/" + defYear;
 
       // Create the hidden date markup
       if (settings["hiddenDate"]) {
@@ -185,7 +188,10 @@
 
         // update the hidden date
         if ((selectedYear * selectedMonth * selectedDay) != 0) {
-          hiddenDate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+          //hiddenDate = selectedYear + "-" + selectedMonth + "-" + selectedDay;
+          selectedMonth = (selectedMonth < 10) ? '0' + selectedMonth: selectedMonth;
+          selectedDay = (selectedDay < 10) ? '0' + selectedDay: selectedDay;
+          hiddenDate = selectedMonth + "/" + selectedDay + "/" + selectedYear;
           $(this).find('#'+settings["fieldId"]).val(hiddenDate);
           if (settings["onChange"] != null) {
             settings["onChange"](hiddenDate);
