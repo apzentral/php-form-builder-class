@@ -47,9 +47,9 @@
       // Create the html picker skeleton
       var req_field = (settings['required']) ? ' required': '';
       var $fieldset = $("<fieldset class='birthday-picker'></fieldset>"),
-          $year = $("<select class='birth-year' name='birth[year]'"+req_field+" data-validation-name='"+settings['errorname']+"'s Birth Year'></select>"),
-          $month = $("<select class='birth-month' name='birth[month]'"+req_field+" data-validation-name='"+settings['errorname']+"'s Birth Month'></select>"),
-          $day = $("<select class='birth-day' name='birth[day]'"+req_field+" data-validation-name='"+settings['errorname']+"'s Birth Day'></select>");
+          $year = $("<select class='birth-year' name='birth[year]'"+req_field+" data-validation-name='"+settings['errorname']+"&#39;s Birth Year'></select>"),
+          $month = $("<select class='birth-month' name='birth[month]'"+req_field+" data-validation-name='"+settings['errorname']+"&#39;s Birth Month'></select>"),
+          $day = $("<select class='birth-day' name='birth[day]'"+req_field+" data-validation-name='"+settings['errorname']+"&#39;s Birth Day'></select>");
 
       if (settings["legend"]) { $("<legend>" + settings["legend"] + "</legend>").appendTo($fieldset); }
 
