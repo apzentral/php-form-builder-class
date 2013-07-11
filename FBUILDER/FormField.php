@@ -102,7 +102,7 @@ class FormField {
 								break;
 
 							case 'DateInput':
-								$this->type = 'Date';
+								$this->type = 'BDate';
 								break;
 
 						}

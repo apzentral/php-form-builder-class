@@ -35,6 +35,11 @@ class BDate extends Textbox {
 	}
 
 	function jQueryDocumentReady() {
-		echo 'jQuery("#', $this->_attributes["id"], '").birthdaypicker(', $this->jQueryOptions(), ');';
+		if( ! empty($this->jQueryOptions->minYear) )
+		{
+			$this->jQueryOptions->maxAge = date('Y') - $this->jQueryOptions->minYear;
+			unset($this->jQueryOptions->minYear);
+		}
+		echo 'jQuery("#', $this->_attributes["id"], '").birthdaypicker( ', $this->jQueryOptions(), ' );';
 	}
 }
